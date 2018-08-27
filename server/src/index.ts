@@ -1,53 +1,30 @@
-import 'reflect-metadata'
-import { Action, BadRequestError, useKoaServer } from 'routing-controllers'
-import setupDb from './db'
-import { verify } from './jwt'
-import MemberController from './controllers/MemberController'
-import Member from './entities/Member';
-import * as Koa from 'koa'
-import {Server} from 'http'
-
-const app = new Koa()
-const server = new Server(app.callback())
-const port = process.env.PORT || 4000
-
-useKoaServer(app, {
+export const app = createKoaServer({
   cors: true,
-  controllers: [
-    MemberController,
-  ],
-  authorizationChecker: (action: Action) => {
-    const header: string = action.request.headers.authorization
-    if (header && header.startsWith('Bearer ')) {
-      const [ , token ] = header.split(' ')
+  controllers: []
+  // authorizationChecker: (action: Action) => {
+  //     const token: string = action.request.headers.authorization
+  //     try {
+  //         return !!(token && verify(token))
+  //     } catch (e) {
+  //         throw new BadRequestError(e)
+  //     }
+  // },
+  // currentUserChecker: async (action: Action) => {
+  //     const token: string = action.request.headers.authorization
 
-      try {
-        return !!(token && verify(token))
-      }
-      catch (e) {
-        throw new BadRequestError(e)
-      }
-    }
+  //     if (token) {
+  //         const { id } = verify(token)
+  //         return User.findOne({ id })
+  //     }
 
-    return false
-  },
-  currentUserChecker: async (action: Action) => {
-    const header: string = action.request.headers.authorization
-    if (header && header.startsWith('Bearer ')) {
-      const [ , token ] = header.split(' ')
-      
-      if (token) {
-        const {id} = verify(token)
-        return Member.findOne(id)
-      }
-    }
-    return undefined
-  }
+  //     return undefined
+  // }
 })
 
-setupDb()
+connectDatabase()
   .then(_ => {
-    server.listen(port)
-    console.log(`Listening on port ${port}`)
+    app.listen(4000, () => {
+      console.log('Server is on 4000')
+    })
   })
   .catch(err => console.error(err))
