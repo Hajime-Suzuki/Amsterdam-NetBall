@@ -5,11 +5,11 @@ import { Redirect } from "react-router-dom"
 
 class LogoutPage extends PureComponent {
   componentWillMount() {
-    // this.props.logout()
+    this.props.logout()
   }
 
   render() {
-    // if (!this.props.currentUser) return <Redirect to="/" />
+    if (!this.props.currentUser) return <Redirect to="/" />
 
     return (
       <div>

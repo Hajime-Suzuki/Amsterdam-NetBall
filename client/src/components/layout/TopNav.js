@@ -15,12 +15,15 @@ class TopNav extends PureComponent {
     return (
       <AppBar
         position="absolute"
-        style={{ zIndex: 10, backgroundColor: "#f39c12" }}
+        style={{ zIndex: 10, backgroundColor: "#101010" }}
       >
         <Toolbar>
           <Typography variant="title" color="inherit" style={{ flex: 1 }}>
             <Link className="link" to="/home">
-              NETBALR.
+              <img
+                src={require(`../../lib/images/amsterdam-netball-logo.png`)}
+                className="header-logo"
+              />
             </Link>
           </Typography>
           {user && <Button color="inherit" />}
