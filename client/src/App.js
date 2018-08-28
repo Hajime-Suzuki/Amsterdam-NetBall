@@ -28,10 +28,7 @@ class App extends Component {
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/members" component={MemberLandingPage} />
             <Route exact path="/" render={() => <Redirect to="/home" />} />
-            <AdminRoute
-              path="/admin/members/:id"
-              component={MemberListComponent}
-            />
+            <AdminRoute path="/admin/members" component={MemberListComponent} />
           </main>
         </div>
       </Router>
