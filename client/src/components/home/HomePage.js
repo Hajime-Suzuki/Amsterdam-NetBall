@@ -46,9 +46,9 @@ class Homepage extends PureComponent {
     return (
       <Container>
         <Row className="justify-content-md-center">
-          <Col md="6">
+          <Col md="6" className="m-4">
             <form
-              className="text-center border border-light p-5 m-4"
+              className="text-center border border-light p-5"
               onSubmit={this.handleSubmit}
             >
               <p className="h4 mb-4">Sign in</p>
@@ -56,7 +56,7 @@ class Homepage extends PureComponent {
               <input
                 type="email"
                 id="defaultLoginFormEmail"
-                class="form-control mb-4"
+                className="form-control mb-4"
                 placeholder="E-mail"
                 name="email"
                 value={this.state.email || ""}
@@ -66,7 +66,7 @@ class Homepage extends PureComponent {
               <input
                 type="password"
                 id="defaultLoginFormPassword"
-                class="form-control mb-4"
+                className="form-control mb-4"
                 placeholder="Password"
                 name="password"
                 value={this.state.password || ""}
@@ -83,7 +83,7 @@ class Homepage extends PureComponent {
                     />
                     <label
                       className="custom-control-label"
-                      for="defaultLoginFormRemember"
+                      htmlFor="defaultLoginFormRemember"
                     >
                       Remember me
                     </label>
@@ -96,7 +96,7 @@ class Homepage extends PureComponent {
               </div>
               {/* <!-- Sign in button --> */}
               <Button
-                className="btn btn-info btn-blue-grey btn-block my-4"
+                className="btn btn-info btn-block  btn-blue-grey my-4"
                 type="submit"
                 disabled={this.state.submitButton}
               >
