@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react'
 
 import { connect } from 'react-redux'
+import { getUsers } from '../../actions/users'
 
 class MemberListComponent extends PureComponent {
+  componentDidMount() {
+    this.props.getUsers()
+  }
   render() {
-    console.log('memberlist', this.props)
     return (
       <table className="table">
         <thead>
@@ -44,4 +47,7 @@ const mapSateToProps = state => ({
   members: state.members
 })
 
-export default connect(mapSateToProps)(MemberListComponent)
+export default connect(
+  mapSateToProps,
+  { getUsers }
+)(MemberListComponent)
