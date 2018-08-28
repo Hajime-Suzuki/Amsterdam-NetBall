@@ -17,7 +17,7 @@ class TopNav extends PureComponent {
         position="absolute"
         style={{ zIndex: 10, backgroundColor: "#101010" }}
       >
-        <Toolbar>
+        <Toolbar className="media">
           <Typography variant="title" color="inherit" style={{ flex: 1 }}>
             <Link className="link" to="/home">
               <img
@@ -27,6 +27,8 @@ class TopNav extends PureComponent {
             </Link>
           </Typography>
           {user && <Button color="inherit" />}
+
+          {currentUser && <Button color="inherit">BALR. IS LOGGED IN!</Button>}
 
           {location.pathname.indexOf("signup") > 0 && (
             <Button color="inherit" onClick={() => history.push("/login")}>
@@ -55,7 +57,7 @@ const mapStateToProps = state => ({
   //   state.currentUser &&
   //   state.users &&
   //   state.users[userId(state.currentUser.jwt)],
-  // currentUser: state.currentUser
+  currentUser: state.currentUser
 })
 
 export default withRouter(

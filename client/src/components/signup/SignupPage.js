@@ -10,9 +10,18 @@ class SignupPage extends PureComponent {
     this.props.postSignup(
       data.firstName,
       data.lastName,
-      data.phoneNum,
+      data.streetAddress,
+      data.postalCode,
+      data.city,
+      data.dateOfBirth,
+      // data.isCurrentMember,
+      true,
       data.email,
-      data.password
+      // data.phoneNum, NEED TO ADD PHONE
+      data.password,
+      //START DATE
+      new Date().toLocaleDateString(),
+      new Date().toLocaleDateString()
     )
   }
 

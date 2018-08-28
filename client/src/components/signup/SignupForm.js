@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react"
 import { Container, Row, Col, Input, Button } from "mdbreact"
 import "./SignupForm.css"
-
 export default class SignupForm extends PureComponent {
   state = {
     firstName: "",
     lastName: "",
     streetAddress: "",
     postalCode: "",
+    dateOfBirth: "",
     city: "",
     phoneNum: "",
     occupation: "",
@@ -48,6 +48,15 @@ export default class SignupForm extends PureComponent {
         submitButton: false
       })
     }
+    console.log(this.state)
+  }
+
+  onFocus = e => {
+    e.currentTarget.type = "date"
+  }
+  onBlur = e => {
+    e.currentTarget.type = "text"
+    e.currentTarget.placeholder = "Enter a Date"
   }
 
   render() {
@@ -55,9 +64,9 @@ export default class SignupForm extends PureComponent {
       <Container>
         <Row className="justify-content-md-center">
           <Col md="6">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <p className="h2 text-center mb-4 mt-4">Setup your profile</p>
-              <div class="card card-body">
+              <div className="card card-body">
                 <div className="grey-text">
                   <Input
                     label="Your first name"
@@ -83,6 +92,22 @@ export default class SignupForm extends PureComponent {
                     value={this.state.lastName || ""}
                     onChange={this.handleChange}
                   />
+
+                  <Input
+                    label="Enter your date of birth"
+                    icon="calendar"
+                    group
+                    validate
+                    error="wrong"
+                    success="right"
+                    name="dateOfBirth"
+                    type="text"
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                    value={this.state.dateOfBirth || ""}
+                    onChange={this.handleChange}
+                  />
+
                   <Input
                     label="Your street address"
                     icon="address-card"
@@ -95,6 +120,7 @@ export default class SignupForm extends PureComponent {
                     value={this.state.streetAddress || ""}
                     onChange={this.handleChange}
                   />
+
                   <Input
                     label="Your postal code"
                     icon="address-card"
@@ -132,6 +158,18 @@ export default class SignupForm extends PureComponent {
                     onChange={this.handleChange}
                   />
                   <Input
+                    label="Your current occupation"
+                    icon="briefcase"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    name="occupation"
+                    value={this.state.occupation || ""}
+                    onChange={this.handleChange}
+                  />
+                  <Input
                     label="Your current employer"
                     icon="briefcase"
                     group
@@ -147,13 +185,14 @@ export default class SignupForm extends PureComponent {
                     type="textarea"
                     label="Other useful skills"
                     icon="archive"
+                    name="skills"
                     value={this.state.skills || ""}
                     onChange={this.handleChange}
                   />
                 </div>
               </div>
               <p className="h2 text-center mb-4 mt-4">Email and Password</p>
-              <div class="card card-body">
+              <div className="card card-body">
                 <Input
                   label="Your email"
                   icon="envelope"
@@ -174,7 +213,7 @@ export default class SignupForm extends PureComponent {
                   validate
                   error="wrong"
                   success="right"
-                  name="email"
+                  name="confirmEmail"
                   value={this.state.confirmEmail || ""}
                   onChange={this.handleChange}
                 />
@@ -202,7 +241,7 @@ export default class SignupForm extends PureComponent {
 
               <div className="text-center" id="submit-btn">
                 <Button
-                  type="button"
+                  type="submit"
                   className="btn btn-blue-grey m-4 btn-lg"
                   disabled={this.state.submitButton}
                 >
