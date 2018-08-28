@@ -24,7 +24,7 @@ import { UnauthorizedError } from "../../node_modules/routing-controllers"
 // @Unique(['email'])
 export class Member extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number
+  id?: number
 
   @IsString()
   @Column("varchar", { length: 100 })
@@ -35,6 +35,25 @@ export class Member extends BaseEntity {
   lastName: string
 
   @IsString()
+<<<<<<< HEAD
+  @Column('varchar', { length: 255, nullable: true })
+  streetAddress: string
+
+  @IsString()
+  @Column('char', { length: 6, nullable: true  })
+  postalCode: string
+
+  @IsString()
+  @Column('varchar', { length: 50, nullable: true })
+  city: string
+
+  // @IsDate()
+  @Column('date', { nullable: true })
+  dateOfBirth: Date
+
+  @IsBoolean()
+  @Column('boolean', { nullable: true })
+=======
   @Column("varchar", { length: 255 })
   streetAddress: string
 
@@ -52,6 +71,7 @@ export class Member extends BaseEntity {
 
   // @IsBoolean()
   @Column("boolean", { default: false })
+>>>>>>> master
   isCurrentMember: boolean
 
   @IsEmail()
@@ -64,11 +84,19 @@ export class Member extends BaseEntity {
   password: string
 
   // @IsDate()
+<<<<<<< HEAD
+  @Column('date', { nullable: true })
+  startDate: Date
+
+  // @IsDate()
+  @Column('date', { nullable: true })
+=======
   @Column("date", { nullable: true })
   startDate: Date
 
   // @IsDate()
   @Column("date", { nullable: true })
+>>>>>>> master
   endDate: Date
 
   @ManyToMany(() => Position, position => position.members)
