@@ -21,7 +21,8 @@ export default function(state = initialState, { type, payload }) {
     case USER_LOGIN_SUCCESS:
       return {
         token: payload,
-        id: userId(payload)
+        id: userId(payload.jwt),
+        role: userRole(payload.jwt)
       }
 
     case USER_LOGOUT:
