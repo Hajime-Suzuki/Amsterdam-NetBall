@@ -1,0 +1,10 @@
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.media {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
