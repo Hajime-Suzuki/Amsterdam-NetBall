@@ -28,10 +28,23 @@ class TopNav extends PureComponent {
           </Typography>
           {user && <Button color="inherit" />}
 
+          {currentUser &&
+            currentUser.role === 'admin' && (
+              <Link to="/admin/members">
+                <Button color="secondary">Members</Button>
+              </Link>
+            )}
+            
           {currentUser && <Button color="inherit">BALR. IS LOGGED IN!</Button>}
 
           {location.pathname.indexOf('signup') > 0 && (
             <Button color="inherit" onClick={() => history.push('/login')}>
+
+          {currentUser && <Button color="inherit">BALR. IS LOGGED IN!</Button>}
+
+          {location.pathname.indexOf("signup") > 0 && (
+            <Button color="inherit" onClick={() => history.push("/login")}>
+
               Login
             </Button>
           )}
