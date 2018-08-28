@@ -50,6 +50,8 @@ export const login = (email, password) => dispatch =>
     .catch(err => {
       if (err.status === 400) {
         dispatch(userLoginFailed(err.response.body.message))
+      } else if (err.status === 500) {
+        dispatch(userLoginFailed(err.response.body.message))
       } else {
         console.error(err)
       }
@@ -69,23 +71,6 @@ export const signup = (
   startDate,
   endDate
 ) => dispatch => {
-  console.log(
-    firstName,
-    lastName,
-    streetAddress,
-    postalCode,
-    city,
-    birtDay,
-    isCurrentMember,
-    email,
-    // phoneNum,
-    password,
-    startDate,
-    endDate
-  )
-
-  console.log(typeof birtDay)
-
   const dateOfBirth = new Date(birtDay)
 
   request
@@ -125,6 +110,23 @@ export const getUsers = () => (dispatch, getState) => {
 
   request
     .get(`${baseUrl}/users`)
+    .set("Authorization", `Bearer ${jwt}`)
+    .then(result => dispatch(updateUsers(result.body)))
+    .catch(err => console.error(err))
+}
+
+export const searchUsers = data => (dispatch, getState) => {
+  console.log("Search user action")
+  console.log(data)
+  const state = getState()
+  if (!state.currentUser) return null
+  const jwt = state.currentUser.jwt
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .get(`${baseUrl}/members`)
+    .query(data)
     .set("Authorization", `Bearer ${jwt}`)
     .then(result => dispatch(updateUsers(result.body)))
     .catch(err => console.error(err))

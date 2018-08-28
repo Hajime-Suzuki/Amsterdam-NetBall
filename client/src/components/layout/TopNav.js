@@ -7,6 +7,8 @@ import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import "./TopNav.css"
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core"
+import SearchBar from "../search/SearchBar"
+import { Container, Row, Col, Input } from "mdbreact"
 
 class TopNav extends PureComponent {
   componentDidMount() {}
@@ -27,6 +29,13 @@ class TopNav extends PureComponent {
             </Link>
           </Typography>
           {user && <Button color="inherit" />}
+          {/* <Container className="container-fluid">
+            <Row className="justify-content-md-center searchBar">
+              <Col md="10" sm="4">
+                <SearchBar />
+              </Col>
+            </Row>
+          </Container> */}
 
           {currentUser && <Button color="inherit">BALR. IS LOGGED IN!</Button>}
 
