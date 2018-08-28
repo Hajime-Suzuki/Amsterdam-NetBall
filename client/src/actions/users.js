@@ -61,7 +61,7 @@ export const signup = (
   streetAddress,
   postalCode,
   city,
-  dateOfBirth,
+  birtDay,
   isCurrentMember,
   email,
   // phoneNum,
@@ -75,7 +75,7 @@ export const signup = (
     streetAddress,
     postalCode,
     city,
-    dateOfBirth,
+    birtDay,
     isCurrentMember,
     email,
     // phoneNum,
@@ -83,6 +83,11 @@ export const signup = (
     startDate,
     endDate
   )
+
+  console.log(typeof birtDay)
+
+  const dateOfBirth = new Date(birtDay)
+
   request
     .post(`${baseUrl}/signup`)
     .send({
@@ -95,9 +100,9 @@ export const signup = (
       isCurrentMember,
       email,
       // phoneNum,
-      password,
-      startDate,
-      endDate
+      password
+      // startDate,
+      // endDate
     })
     .then(result => {
       dispatch(userSignupSuccess())
