@@ -55,10 +55,55 @@ export const login = (email, password) => dispatch =>
       }
     })
 
-export const signup = (email, password) => dispatch =>
+export const signup = (
+  firstName,
+  lastName,
+  streetAddress,
+  postalCode,
+  city,
+  birtDay,
+  isCurrentMember,
+  email,
+  // phoneNum,
+  password,
+  startDate,
+  endDate
+) => dispatch => {
+  console.log(
+    firstName,
+    lastName,
+    streetAddress,
+    postalCode,
+    city,
+    birtDay,
+    isCurrentMember,
+    email,
+    // phoneNum,
+    password,
+    startDate,
+    endDate
+  )
+
+  console.log(typeof birtDay)
+
+  const dateOfBirth = new Date(birtDay)
+
   request
-    .post(`${baseUrl}/users`)
-    .send({ firstName: email, lastName: email, email, password })
+    .post(`${baseUrl}/signup`)
+    .send({
+      firstName,
+      lastName,
+      streetAddress,
+      postalCode,
+      city,
+      dateOfBirth,
+      isCurrentMember,
+      email,
+      // phoneNum,
+      password
+      // startDate,
+      // endDate
+    })
     .then(result => {
       dispatch(userSignupSuccess())
     })
@@ -69,6 +114,7 @@ export const signup = (email, password) => dispatch =>
         console.error(err)
       }
     })
+}
 
 export const getUsers = () => (dispatch, getState) => {
   const state = getState()

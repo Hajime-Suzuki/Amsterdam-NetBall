@@ -17,7 +17,7 @@ class TopNav extends PureComponent {
         position="absolute"
         style={{ zIndex: 10, backgroundColor: '#101010' }}
       >
-        <Toolbar>
+        <Toolbar className="media">
           <Typography variant="title" color="inherit" style={{ flex: 1 }}>
             <Link className="link" to="/home">
               <img
@@ -28,6 +28,7 @@ class TopNav extends PureComponent {
           </Typography>
           {user && <Button color="inherit" />}
 
+
           {currentUser &&
             currentUser.role === 'admin' && (
               <Link to="/admin/members">
@@ -35,8 +36,12 @@ class TopNav extends PureComponent {
               </Link>
             )}
 
-          {location.pathname.indexOf('signup') > 0 && (
-            <Button color="inherit" onClick={() => history.push('/login')}>
+
+          {currentUser && <Button color="inherit">BALR. IS LOGGED IN!</Button>}
+
+          {location.pathname.indexOf("signup") > 0 && (
+            <Button color="inherit" onClick={() => history.push("/login")}>
+
               Login
             </Button>
           )}
