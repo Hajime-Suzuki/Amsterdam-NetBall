@@ -66,16 +66,13 @@ export const allMemberInfoSelector = createSelector(
   [memberSelector, memberIdSelector, currentUserIdSelector, positionSelector],
   (members, ids, currentUserId, positions) => {
     // if (!ids || !members || !currentUserId) return []
-    return (
-      // members &&
-      ids.filter(id => id !== currentUserId).map(id => {
-        return {
-          ...members[id],
-          positions: members[id].positions.map(
-            posId => positions[posId].positionName
-          )
-        }
-      })
-    )
+    return ids.filter(id => id !== currentUserId).map(id => {
+      return {
+        ...members[id],
+        positions: members[id].positions.map(
+          posId => positions[posId].positionName
+        )
+      }
+    })
   }
 )
