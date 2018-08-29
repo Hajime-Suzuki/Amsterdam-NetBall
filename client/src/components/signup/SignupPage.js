@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { signup } from "../../actions/users"
-import SignupForm from "./SignupForm"
-import { Redirect } from "react-router-dom"
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { signup } from '../../redux/actions/users'
+import SignupForm from './SignupForm'
+import { Redirect } from 'react-router-dom'
 
 class SignupPage extends PureComponent {
   handleSubmit = data => {
@@ -32,7 +32,7 @@ class SignupPage extends PureComponent {
       <div>
         <SignupForm onSubmit={this.handleSubmit} />
 
-        <p style={{ color: "red" }}>{this.props.signup.error}</p>
+        <p style={{ color: 'red' }}>{this.props.signup.error}</p>
       </div>
     )
   }

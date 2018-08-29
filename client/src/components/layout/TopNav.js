@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
 
 import { withRouter } from 'react-router'
-// import { userId } from "../../jwt"
 import { connect } from 'react-redux'
-// import { getUsers } from "../../actions/users"
 import { Link } from 'react-router-dom'
 import './TopNav.css'
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'

@@ -122,6 +122,8 @@ const member = new schema.Entity('users')
 const position = new schema.Entity('positions')
 const activity = new schema.Entity('activities')
 export const getUsers = () => (dispatch, getState) => {
+  console.log('getUser')
+
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
