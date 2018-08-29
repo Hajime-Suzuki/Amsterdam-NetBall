@@ -2,18 +2,15 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import { Container, Row, Col, Input, Button } from "mdbreact"
-import { login } from "../../actions/users"
+import { login } from "../../redux/actions/users"
 import { Redirect } from "react-router-dom"
-import { searchUsers } from "../../actions/users"
 import "./SearchBar.css"
 
 // import { userId } from "../../jwt"
 
 class SearchBar extends PureComponent {
   state = {
-    // select_search: "",
-    name: "",
-    searchBarDisabled: true
+    name: ""
   }
 
   handleSubmit = e => {
@@ -30,7 +27,7 @@ class SearchBar extends PureComponent {
     })
 
     console.log(this.state)
-    this.props.searchUsers({ [name]: value })
+    this.props.handleSearch({ [name]: value })
   }
 
   componentDidMount() {}
@@ -74,5 +71,5 @@ const mapStateToProps = function(state) {
 
 export default connect(
   mapStateToProps,
-  { searchUsers }
+  {}
 )(SearchBar)

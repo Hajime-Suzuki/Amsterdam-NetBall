@@ -11,6 +11,7 @@ import TopNav from "./components/layout/TopNav"
 import AdminRoute from "./private/Admin"
 import MemberListComponent from "./components/members/MembersListComponent"
 import { Switch } from "react-router-dom"
+import MemberLandingPage from "./components/MemberLanding/MemberLandingPage"
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/logout" component={LogoutPage} />
               <Route exact path="/signup" component={SignupPage} />
+              <Route exact path="/members" component={MemberLandingPage} />
               <Route exact path="/" render={() => <Redirect to="/home" />} />
             </Switch>
             <Switch>

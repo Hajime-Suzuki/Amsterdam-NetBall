@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from "react"
 
-import { connect } from 'react-redux'
-import { getUsers } from '../../actions/users'
+import { connect } from "react-redux"
+import { getUsers } from "../../redux/actions/users"
 
 class MemberListComponent extends PureComponent {
   componentDidMount() {
