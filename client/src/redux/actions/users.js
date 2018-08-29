@@ -99,38 +99,3 @@ export const signup = (
       }
     })
 }
-
-const position = new schema.Entity('positions')
-const acitivity = new schema.Entity('activities')
-const member = new schema.Entity('users', {
-  activities: [acitivity],
-  positions: [position]
-})
-export const getUsers = () => (dispatch, getState) => {
-  const state = getState()
-  if (!state.currentUser) return null
-  const jwt = state.currentUser.token
-
-  if (isExpired(jwt)) return dispatch(logout())
-
-  request
-    .get(`${baseUrl}/members`)
-    .set('Authorization', `${jwt}`)
-    .then(result => {
-      const data = normalize(result.body, [member])
-      dispatch(updateUsers(data))
-    })
-    .catch(err => console.error(err))
-}
-
-const memberSelector = state => state.users && state.users.users
-
-const memberIdSelector = state => state.users && state.users.ids
-
-const adminIdSelector = state => state.currentUser && state.currentUser.id
-
-export const getMemberArray = createSelector(
-  [memberSelector, memberIdSelector, adminIdSelector],
-  (members, ids, adminId) =>
-    members && ids.filter(id => id !== adminId).map(id => members[id])
-)
