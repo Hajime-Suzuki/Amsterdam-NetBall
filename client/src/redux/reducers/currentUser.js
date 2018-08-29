@@ -20,7 +20,7 @@ export default function(state = initialState, { type, payload }) {
   switch (type) {
     case USER_LOGIN_SUCCESS:
       return {
-        token: payload,
+        token: payload.jwt,
         id: userId(payload.jwt),
         role: userRole(payload.jwt)
       }
