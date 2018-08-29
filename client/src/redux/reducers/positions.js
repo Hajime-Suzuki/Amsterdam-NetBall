@@ -1,8 +1,8 @@
-import { UPDATE_USERS } from '../actions/users'
+import { GET_MEMBERS } from '../actions/members'
 
 export default (state = {}, { type, payload }) => {
   switch (type) {
-    case UPDATE_USERS:
+    case GET_MEMBERS:
       return payload.entities.positions
     default:
       return state

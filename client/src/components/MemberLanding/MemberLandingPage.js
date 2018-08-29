@@ -1,10 +1,11 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { login, getUsers } from "../../redux/actions/users"
-import { Redirect } from "react-router-dom"
-import Search from "../search/Search"
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Input, Button } from 'mdbreact'
+import { login } from '../../redux/actions/users'
+import { Redirect } from 'react-router-dom'
+import Search from '../search/Search'
+import { getMembers } from '../../redux/actions/members'
 
 // import { userId } from "../../jwt"
 
@@ -12,7 +13,7 @@ class MemberLandingPage extends PureComponent {
   state = {}
 
   componentDidMount() {
-    this.props.getUsers()
+    this.props.getMembers()
   }
 
   renderMembers = members => {
@@ -53,5 +54,5 @@ const mapStateToProps = function(state) {
 
 export default connect(
   mapStateToProps,
-  { getUsers }
+  { getMembers }
 )(MemberLandingPage)
