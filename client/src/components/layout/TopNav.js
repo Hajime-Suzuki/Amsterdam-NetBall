@@ -26,7 +26,6 @@ class TopNav extends PureComponent {
               />
             </Link>
           </Typography>
-          {user && <Button color="inherit" />}
 
           {currentUser &&
             currentUser.role === 'admin' && (
@@ -35,15 +34,22 @@ class TopNav extends PureComponent {
               </Link>
             )}
 
-          {currentUser && <Button color="inherit">BALR. IS LOGGED IN!</Button>}
-
-          {currentUser && <Button color="inherit">BALR. IS LOGGED IN!</Button>}
+          <Button color="inherit" onClick={() => history.push('/login')}>
+            Login
+          </Button>
 
           {location.pathname.indexOf('signup') > 0 && (
             <Button color="inherit" onClick={() => history.push('/login')}>
               Login
             </Button>
           )}
+
+          {location.pathname.indexOf('signup') > 0 && (
+            <Button color="inherit" onClick={() => history.push('/login')}>
+              Login
+            </Button>
+          )}
+
           {location.pathname.indexOf('login') > 0 && (
             <Button color="inherit" onClick={() => history.push('/signup')}>
               Sign up
