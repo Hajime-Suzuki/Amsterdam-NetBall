@@ -44,7 +44,7 @@ class MemberListComponent extends PureComponent {
 }
 
 const mapSateToProps = state => ({
-  members: state.members
+  members: state.users
 })
 
 export default connect(

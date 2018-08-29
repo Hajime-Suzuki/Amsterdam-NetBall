@@ -1,6 +1,8 @@
 import * as request from 'superagent'
-import { baseUrl } from '../constants'
-import { isExpired } from '../jwt'
+import { baseUrl } from '../../constants'
+import { isExpired } from '../../jwt'
+
+import { normalize, schema } from 'normalizr'
 
 export const ADD_USER = 'ADD_USER'
 export const UPDATE_USER = 'UPDATE_USER'
@@ -116,6 +118,9 @@ export const signup = (
     })
 }
 
+const member = new schema.Entity('users')
+const position = new schema.Entity('positions')
+const activity = new schema.Entity('activities')
 export const getUsers = () => (dispatch, getState) => {
   const state = getState()
   if (!state.currentUser) return null
@@ -126,6 +131,10 @@ export const getUsers = () => (dispatch, getState) => {
   request
     .get(`${baseUrl}/members`)
     .set('Authorization', `${jwt}`)
-    .then(result => dispatch(updateUsers(result.body)))
+    .then(result => {
+      console.log(result.body)
+
+      dispatch(updateUsers(result.body))
+    })
     .catch(err => console.error(err))
 }
