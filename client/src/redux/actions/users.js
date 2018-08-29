@@ -1,8 +1,9 @@
-import * as request from "superagent"
-import { baseUrl } from "../../constants"
-import { isExpired } from "../../jwt"
+import * as request from 'superagent'
+import { baseUrl } from '../../constants'
+import { isExpired } from '../../jwt'
+import { createSelector } from 'reselect'
+import { normalize, schema } from 'normalizr'
 
-import { normalize, schema } from "normalizr"
 
 export const ADD_USER = "ADD_USER"
 export const UPDATE_USER = "UPDATE_USER"
@@ -125,3 +126,15 @@ export const getUsers = () => (dispatch, getState) => {
     })
     .catch(err => console.error(err))
 }
+
+const memberSelector = state => state.users && state.users.users
+
+const memberIdSelector = state => state.users && state.users.ids
+
+const adminIdSelector = state => state.currentUser && state.currentUser.id
+
+export const getMemberArray = createSelector(
+  [memberSelector, memberIdSelector, adminIdSelector],
+  (members, ids, adminId) =>
+    members && ids.filter(id => id !== adminId).map(id => members[id])
+)
