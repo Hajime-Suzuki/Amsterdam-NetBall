@@ -14,7 +14,8 @@ import Filters from "./Filters"
 class Search extends PureComponent {
   state = {
     name: "",
-    positions: ""
+    positions: "",
+    roles: ""
   }
 
   handleSearch = async data => {
@@ -30,7 +31,11 @@ class Search extends PureComponent {
       })
     }
 
-    this.props.searchUsers(this.state)
+    if (data.roles) {
+      await this.setState({
+        roles: data.roles.join(",")
+      })
+    }
   }
 
   componentDidMount() {}
