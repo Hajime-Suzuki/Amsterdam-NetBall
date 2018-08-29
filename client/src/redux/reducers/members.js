@@ -10,12 +10,6 @@ export default (state = initialState, { type, payload }) => {
     case USER_LOGOUT:
       return null
 
-    // case ADD_USER:
-    //   return {
-    //     ...state,
-    //     [payload.id]: payload
-    //   }
-
     case UPDATE_USER:
       return {
         ...state,

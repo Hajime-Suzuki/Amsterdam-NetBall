@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 
 import { connect } from 'react-redux'
 import { getMembers } from '../../redux/actions/members'
-import { getMemberArray } from '../../redux/actions/members'
+import { allMemberInfoSelector } from '../../redux/actions/members'
 
 class MemberListComponent extends PureComponent {
   componentDidMount() {
@@ -11,12 +11,15 @@ class MemberListComponent extends PureComponent {
   render() {
     const { members } = this.props
     if (!members) return 'loading...'
+    console.log(members)
+
     return (
       <table className="table">
         <thead>
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Expiration</th>
+            <th scope="col">Something</th>
           </tr>
           {members.map(m => {
             return (
@@ -35,7 +38,7 @@ class MemberListComponent extends PureComponent {
 }
 
 const mapSateToProps = state => ({
-  members: getMemberArray(state)
+  members: allMemberInfoSelector(state)
 })
 
 export default connect(
