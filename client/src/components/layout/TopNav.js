@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from "react"
 
-import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import './TopNav.css'
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { withRouter } from "react-router"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import "./TopNav.css"
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core"
 
 class TopNav extends PureComponent {
   componentDidMount() {}
@@ -13,7 +13,7 @@ class TopNav extends PureComponent {
     return (
       <AppBar
         position="absolute"
-        style={{ zIndex: 10, backgroundColor: '#101010' }}
+        style={{ zIndex: 10, backgroundColor: "#101010" }}
       >
         <Toolbar className="media">
           <Typography variant="title" color="inherit" style={{ flex: 1 }}>
@@ -26,36 +26,36 @@ class TopNav extends PureComponent {
           </Typography>
 
           {currentUser &&
-            currentUser.role === 'admin' && (
+            currentUser.role === "admin" && (
               <Link to="/admin/members">
                 <Button color="secondary">Members</Button>
               </Link>
             )}
 
-          <Button color="inherit" onClick={() => history.push('/login')}>
+          <Button color="inherit" onClick={() => history.push("/login")}>
             Login
           </Button>
 
-          {location.pathname.indexOf('signup') > 0 && (
-            <Button color="inherit" onClick={() => history.push('/login')}>
+          {location.pathname.indexOf("signup") > 0 && (
+            <Button color="inherit" onClick={() => history.push("/login")}>
               Login
             </Button>
           )}
 
-          {location.pathname.indexOf('signup') > 0 && (
-            <Button color="inherit" onClick={() => history.push('/login')}>
+          {location.pathname.indexOf("signup") > 0 && (
+            <Button color="inherit" onClick={() => history.push("/login")}>
               Login
             </Button>
           )}
 
-          {location.pathname.indexOf('login') > 0 && (
-            <Button color="inherit" onClick={() => history.push('/signup')}>
+          {location.pathname.indexOf("login") > 0 && (
+            <Button color="inherit" onClick={() => history.push("/signup")}>
               Sign up
             </Button>
           )}
 
-          {(currentUser || location.pathname.indexOf('home') > 0) && (
-            <Button color="inherit" onClick={() => history.push('/logout')}>
+          {(currentUser || location.pathname.indexOf("home") > 0) && (
+            <Button color="inherit" onClick={() => history.push("/logout")}>
               Log out
             </Button>
           )}

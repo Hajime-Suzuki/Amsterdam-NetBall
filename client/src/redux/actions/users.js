@@ -1,20 +1,20 @@
-import * as request from 'superagent'
-import { baseUrl } from '../../constants'
-import { isExpired } from '../../jwt'
+import * as request from "superagent"
+import { baseUrl } from "../../constants"
+import { isExpired } from "../../jwt"
 
-import { normalize, schema } from 'normalizr'
+import { normalize, schema } from "normalizr"
 
-export const ADD_USER = 'ADD_USER'
-export const UPDATE_USER = 'UPDATE_USER'
-export const UPDATE_USERS = 'UPDATE_USERS'
+export const ADD_USER = "ADD_USER"
+export const UPDATE_USER = "UPDATE_USER"
+export const UPDATE_USERS = "UPDATE_USERS"
 
-export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
-export const USER_LOGIN_FAILED = 'USER_LOGIN_FAILED'
+export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS"
+export const USER_LOGIN_FAILED = "USER_LOGIN_FAILED"
 
-export const USER_LOGOUT = 'USER_LOGOUT'
+export const USER_LOGOUT = "USER_LOGOUT"
 
-export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS'
-export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED'
+export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS"
+export const USER_SIGNUP_FAILED = "USER_SIGNUP_FAILED"
 
 export const logout = () => ({
   type: USER_LOGOUT
@@ -27,12 +27,12 @@ const userLoginSuccess = login => ({
 
 const userLoginFailed = error => ({
   type: USER_LOGIN_FAILED,
-  payload: error || 'Unknown error'
+  payload: error || "Unknown error"
 })
 
 const userSignupFailed = error => ({
   type: USER_SIGNUP_FAILED,
-  payload: error || 'Unknown error'
+  payload: error || "Unknown error"
 })
 
 const userSignupSuccess = () => ({
@@ -51,6 +51,8 @@ export const login = (email, password) => dispatch =>
     .then(result => dispatch(userLoginSuccess(result.body)))
     .catch(err => {
       if (err.status === 400) {
+        dispatch(userLoginFailed(err.response.body.message))
+      } else if (err.status === 500) {
         dispatch(userLoginFailed(err.response.body.message))
       } else {
         console.error(err)
@@ -71,23 +73,6 @@ export const signup = (
   startDate,
   endDate
 ) => dispatch => {
-  console.log(
-    firstName,
-    lastName,
-    streetAddress,
-    postalCode,
-    city,
-    birtDay,
-    isCurrentMember,
-    email,
-    // phoneNum,
-    password,
-    startDate,
-    endDate
-  )
-
-  console.log(typeof birtDay)
-
   const dateOfBirth = new Date(birtDay)
 
   request
@@ -118,9 +103,9 @@ export const signup = (
     })
 }
 
-const position = new schema.Entity('positions')
-const acitivity = new schema.Entity('activities')
-const member = new schema.Entity('users', {
+const position = new schema.Entity("positions")
+const acitivity = new schema.Entity("activities")
+const member = new schema.Entity("users", {
   activities: [acitivity],
   positions: [position]
 })
@@ -133,7 +118,7 @@ export const getUsers = () => (dispatch, getState) => {
 
   request
     .get(`${baseUrl}/members`)
-    .set('Authorization', `${jwt}`)
+    .set("Authorization", `${jwt}`)
     .then(result => {
       const data = normalize(result.body, [member])
       dispatch(updateUsers(data))

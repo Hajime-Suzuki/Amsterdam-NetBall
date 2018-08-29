@@ -1,6 +1,6 @@
-import { USER_LOGIN_SUCCESS, USER_LOGOUT } from '../actions/users'
-import { localStorageJwtKey } from '../../constants'
-import { userId, userRole } from '../../jwt'
+import { USER_LOGIN_SUCCESS, USER_LOGOUT } from "../actions/users"
+import { localStorageJwtKey } from "../../constants"
+import { userId, userRole } from "../../jwt"
 
 let initialState = null
 try {

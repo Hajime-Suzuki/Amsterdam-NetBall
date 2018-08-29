@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Container, Row, Col, Input, Button } from 'mdbreact'
-import { login } from '../../redux/actions/users'
-import { Redirect } from 'react-router-dom'
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import { Container, Row, Col, Input, Button } from "mdbreact"
+import { login } from "../../redux/actions/users"
+import { Redirect } from "react-router-dom"
 
 // import { userId } from "../../jwt"
 
-import './HomePage.css'
+import "./HomePage.css"
 
 class Homepage extends PureComponent {
   state = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     submitButton: true
   }
 
@@ -34,7 +34,7 @@ class Homepage extends PureComponent {
       [name]: value
     })
 
-    if (this.state.password !== '' && this.state.email !== '') {
+    if (this.state.password !== "" && this.state.email !== "") {
       this.setState({
         submitButton: false
       })
@@ -59,7 +59,7 @@ class Homepage extends PureComponent {
                 className="form-control mb-4"
                 placeholder="E-mail"
                 name="email"
-                value={this.state.email || ''}
+                value={this.state.email || ""}
                 onChange={this.handleChange}
               />
               {/* <!-- Password --> */}
@@ -69,7 +69,7 @@ class Homepage extends PureComponent {
                 className="form-control mb-4"
                 placeholder="Password"
                 name="password"
-                value={this.state.password || ''}
+                value={this.state.password || ""}
                 onChange={this.handleChange}
               />
               <div className="d-flex justify-content-around">
