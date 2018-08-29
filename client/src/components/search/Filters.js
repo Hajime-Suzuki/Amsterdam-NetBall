@@ -1,12 +1,12 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { login } from "../../redux/actions/users"
-import { Redirect } from "react-router-dom"
-import "./SearchBar.css"
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Input, Button } from 'mdbreact'
+import { login } from '../../redux/actions/users'
+import { Redirect } from 'react-router-dom'
+import './SearchBar.css'
 
-import { clubRoles, teams, positions, roles } from "../../constants"
+import { clubRoles, teams, positions, roles } from '../../constants'
 
 class Filters extends PureComponent {
   state = {
@@ -51,6 +51,7 @@ class Filters extends PureComponent {
       this.state[type].splice(positionIndex, 1)
     }
   }
+  // this.props.handleChange({ positions: this.state.positions })
   renderClubRolesFilter = clubRoles => {
     return clubRoles.map(role => (
       <div class="custom-control custom-checkbox">
@@ -59,7 +60,7 @@ class Filters extends PureComponent {
           class="custom-control-input"
           id={role}
           name={role}
-          onChange={this.handleChange("clubRoles", role)}
+          onChange={this.handleChange('clubRoles', role)}
           checked={this.state[role]}
         />
         <label class="custom-control-label" htmlFor={role}>
@@ -77,7 +78,7 @@ class Filters extends PureComponent {
           class="custom-control-input"
           id={team}
           name={team}
-          onChange={this.handleChange("teams", team)}
+          onChange={this.handleChange('teams', team)}
           checked={this.state[team]}
         />
         <label class="custom-control-label" htmlFor={team}>
@@ -95,7 +96,7 @@ class Filters extends PureComponent {
           class="custom-control-input"
           id={position}
           name={position}
-          onChange={this.handleChange("positions", position)}
+          onChange={this.handleChange('positions', position)}
           checked={this.state[position]}
         />
         <label class="custom-control-label" htmlFor={position}>
@@ -113,7 +114,7 @@ class Filters extends PureComponent {
           class="custom-control-input"
           id={role}
           name={role}
-          onChange={this.handleChange("roles", role)}
+          onChange={this.handleChange('roles', role)}
           checked={this.state[role]}
         />
         <label class="custom-control-label" htmlFor={role}>
@@ -124,8 +125,31 @@ class Filters extends PureComponent {
   }
 
   render() {
+    const { positionNames: posName } = this.props
     return (
       <Row>
+        <Col>
+          <p>Positions</p>
+          {Object.keys(this.props.positionNames).map((key, i) => {
+            return (
+              <div className="custom-control custom-checkbox" key={i}>
+                <input
+                  type="checkbox"
+                  className="custom-control-input"
+                  id={key}
+                  value={key}
+                  name="positions"
+                  onChange={this.props.handleChange}
+                  checked={posName[key]}
+                />
+                <label className="custom-control-label" htmlFor={key}>
+                  {key}
+                </label>
+              </div>
+            )
+          })}
+        </Col>
+
         <Col>
           <p>
             <b>Positions</b>
