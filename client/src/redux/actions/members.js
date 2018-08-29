@@ -37,10 +37,23 @@ export const getMembers = () => (dispatch, getState) => {
 
 const memberSelector = state => state.members.members
 const memberIdSelector = state => state.members.ids
-const adminIdSelector = state => state.currentUser && state.currentUser.id
+const positionSelector = state => state.positions
+const currentUserIdSelector = state => state.currentUser && state.currentUser.id
 
-export const getMemberArray = createSelector(
-  [memberSelector, memberIdSelector, adminIdSelector],
-  (members, ids, adminId) =>
-    ids.filter(id => id !== adminId).map(id => members[id])
+export const allMemberInfoSelector = createSelector(
+  [memberSelector, memberIdSelector, currentUserIdSelector, positionSelector],
+  (members, ids, currentUserId, positions) => {
+    // if (!ids || !members || !currentUserId) return []
+    return (
+      // members &&
+      ids.filter(id => id !== currentUserId).map(id => {
+        return {
+          ...members[id],
+          positions: members[id].positions.map(
+            posId => positions[posId].positionName
+          )
+        }
+      })
+    )
+  }
 )

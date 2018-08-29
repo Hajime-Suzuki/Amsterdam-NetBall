@@ -13,7 +13,7 @@ class MemberLandingPage extends PureComponent {
   state = {}
 
   componentDidMount() {
-    this.props.getUsers()
+    this.props.getMembers()
   }
 
   renderMembers = members => {
