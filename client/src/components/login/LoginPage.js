@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { login } from '../../redux/actions/users'
-import LoginForm from './LoginForm'
-import { Redirect } from 'react-router-dom'
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { login } from "../../redux/actions/users"
+import LoginForm from "./LoginForm"
+import { Redirect } from "react-router-dom"
 
 class LoginPage extends PureComponent {
   handleSubmit = data => {
@@ -18,7 +18,7 @@ class LoginPage extends PureComponent {
         <LoginForm onSubmit={this.handleSubmit} />
 
         {this.props.error && (
-          <span style={{ color: 'red' }}>{this.props.error}</span>
+          <span style={{ color: "red" }}>{this.props.error}</span>
         )}
       </div>
     )
