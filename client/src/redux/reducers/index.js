@@ -1,11 +1,11 @@
-import users from './users'
+import members from './members'
 import login from './login'
 import currentUser from './currentUser'
 import signup from './signup'
 import positions from './positions'
 
 export default {
-  users,
+  members,
   login,
   currentUser,
   signup,

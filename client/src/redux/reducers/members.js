@@ -1,7 +1,11 @@
 import { ADD_USER, UPDATE_USER, UPDATE_USERS } from '../actions/users'
 import { USER_LOGOUT } from '../actions/users'
-
-export default (state = {}, { type, payload }) => {
+import { GET_MEMBERS } from '../actions/members'
+const initialState = {
+  ids: [],
+  members: {}
+}
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case USER_LOGOUT:
       return null
@@ -18,11 +22,11 @@ export default (state = {}, { type, payload }) => {
         [payload.id]: payload
       }
 
-    case UPDATE_USERS:
+    case GET_MEMBERS:
       return {
         ...state,
         ids: payload.result,
-        users: payload.entities.users
+        members: payload.entities.members
       }
 
     default:
