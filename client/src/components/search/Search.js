@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { Container, Row, Col, Input, Button } from "mdbreact"
 import { login } from "../../redux/actions/users"
 import { Redirect } from "react-router-dom"
-import { searchUsers } from "../../redux/actions/users"
+// import { searchUsers } from "../../redux/actions/users"
 import "./SearchBar.css"
 import SearchBar from "./SearchBar"
 import Filters from "./Filters"
@@ -53,6 +53,6 @@ const mapStateToProps = function(state) {
 }
 
 export default connect(
-  mapStateToProps,
-  { searchUsers }
+  mapStateToProps
+  // { searchUsers }
 )(Search)
