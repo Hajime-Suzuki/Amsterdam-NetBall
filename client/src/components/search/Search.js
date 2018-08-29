@@ -21,7 +21,8 @@ class Search extends PureComponent {
       GD: false,
       GK: false
     },
-    positions: []
+    positions: [],
+    roles: ''
   }
 
   handleChange = event => {
@@ -33,6 +34,12 @@ class Search extends PureComponent {
       updatedValue = Array.from(new Set([...this.state.positions, value]))
     }
 
+    //   if (data.roles) {
+    //     await this.setState({
+    //       roles: data.roles.join(",")
+    //     })
+    //   }
+    // }
     this.setState(
       ({ positionNames }) => ({
         [name]: updatedValue,
