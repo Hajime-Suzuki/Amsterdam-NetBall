@@ -120,14 +120,14 @@ export const searchUsers = data => (dispatch, getState) => {
   console.log(data)
   const state = getState()
   if (!state.currentUser) return null
-  const jwt = state.currentUser.jwt
+  const jwt = state.currentUser.token
 
   if (isExpired(jwt)) return dispatch(logout())
 
   request
     .get(`${baseUrl}/members`)
     .query(data)
-    .set("Authorization", `Bearer ${jwt}`)
+    .set("Authorization", `${jwt}`)
     .then(result => dispatch(updateUsers(result.body)))
     .catch(err => console.error(err))
 }
