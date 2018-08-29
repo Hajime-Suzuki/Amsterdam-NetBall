@@ -1,8 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from "react"
+
 
 import { connect } from 'react-redux'
 import { getMembers } from '../../redux/actions/members'
 import { getMemberArray } from '../../redux/actions/members'
+
 
 class MemberListComponent extends PureComponent {
   componentDidMount() {

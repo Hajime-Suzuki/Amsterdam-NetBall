@@ -8,3 +8,10 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.searchBar {
+  display: flex;
+  width: 600;
+  justify-content: center;
+  flex-wrap: wrap;
+}
