@@ -1,22 +1,13 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { login } from "../../redux/actions/users"
-import { Redirect } from "react-router-dom"
-import "./SearchBar.css"
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Input, Button } from 'mdbreact'
+import { login } from '../../redux/actions/users'
+import { Redirect } from 'react-router-dom'
+import './SearchBar.css'
 
 class Filters extends PureComponent {
-  state = {
-    GA: false,
-    GS: false,
-    WA: false,
-    WD: false,
-    C: false,
-    GD: false,
-    GK: false,
-    positions: []
-  }
+  state = {}
 
   handleChange = async event => {
     const { name } = event.target
@@ -31,153 +22,126 @@ class Filters extends PureComponent {
       const positionIndex = this.state.positions.indexOf(name)
       this.state.positions.splice(positionIndex, 1)
     }
-    this.props.handleSearch({ positions: this.state.positions })
+    this.props.handleChange({ positions: this.state.positions })
   }
 
   componentDidMount() {}
   render() {
+    const { positionNames: posName } = this.props
     return (
       <Row>
         <Col>
           <p>Positions</p>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="GA"
-              name="GA"
-              onChange={this.handleChange}
-              checked={this.state.GA}
-            />
-            <label class="custom-control-label" htmlFor="GA">
-              GA
-            </label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="GS"
-              name="GS"
-              onChange={this.handleChange}
-              checked={this.state.GS}
-            />
-            <label class="custom-control-label" htmlFor="GS">
-              GS
-            </label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="WA"
-              name="WA"
-              onChange={this.handleChange}
-              checked={this.state.WA}
-            />
-            <label class="custom-control-label" htmlFor="WA">
-              WA
-            </label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="WD"
-              name="WD"
-              onChange={this.handleChange}
-              checked={this.state.WD}
-            />
-            <label class="custom-control-label" htmlFor="WD">
-              WD
-            </label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="C"
-              name="C"
-              onChange={this.handleChange}
-              checked={this.state.C}
-            />
-            <label class="custom-control-label" htmlFor="C">
-              C
-            </label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="GD"
-              name="GD"
-              onChange={this.handleChange}
-              checked={this.state.GD}
-            />
-            <label class="custom-control-label" htmlFor="GD">
-              GD
-            </label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="GK"
-              name="GK"
-              onChange={this.handleChange}
-              checked={this.state.GK}
-            />
-            <label class="custom-control-label" htmlFor="GK">
-              GK
-            </label>
-          </div>
+          {Object.keys(this.props.positionNames).map((key, i) => {
+            return (
+              <div className="custom-control custom-checkbox" key={i}>
+                <input
+                  type="checkbox"
+                  className="custom-control-input"
+                  id={key}
+                  value={key}
+                  name="positions"
+                  onChange={this.props.handleChange}
+                  checked={posName[key]}
+                />
+                <label className="custom-control-label" htmlFor={key}>
+                  {key}
+                </label>
+              </div>
+            )
+          })}
         </Col>
-        {/* <Col>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="defaultChecked2"
-              checked
-            />
-            <label class="custom-control-label" htmlFor="defaultChecked2">
-              Default checked
+        {/* <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="GA"
+            name="GA"
+            onChange={this.props.handleChange}
+            checked={this.props.positionName.GA}
+          />
+          <label className="custom-control-label" htmlFor="GA">
+            GA
             </label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="defaultChecked2"
-              checked
-            />
-            <label class="custom-control-label" htmlFor="defaultChecked2">
-              Default checked
+        </div>
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="GS"
+            name="GS"
+            onChange={this.props.handleChange}
+            checked={this.props.positionName.GS}
+          />
+          <label className="custom-control-label" htmlFor="GS">
+            GS
             </label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="defaultChecked2"
-              checked
-            />
-            <label class="custom-control-label" htmlFor="defaultChecked2">
-              Default checked
+        </div>
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="WA"
+            name="WA"
+            onChange={this.props.handleChange}
+            checked={this.props.positionName.WA}
+          />
+          <label className="custom-control-label" htmlFor="WA">
+            WA
             </label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="defaultChecked2"
-              checked
-            />
-            <label class="custom-control-label" htmlFor="defaultChecked2">
-              Default checked
+        </div>
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="WD"
+            name="WD"
+            onChange={this.props.handleChange}
+            checked={this.props.positionName.WD}
+          />
+          <label className="custom-control-label" htmlFor="WD">
+            WD
             </label>
-          </div>
-        </Col> */}
+        </div>
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="C"
+            name="C"
+            onChange={this.props.handleChange}
+            checked={this.props.positionName.C}
+          />
+          <label className="custom-control-label" htmlFor="C">
+            C
+            </label>
+        </div>
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="GD"
+            name="GD"
+            onChange={this.props.handleChange}
+            checked={this.props.positionName.GD}
+          />
+          <label className="custom-control-label" htmlFor="GD">
+            GD
+            </label>
+        </div>
+        <div className="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="GK"
+            name="GK"
+            onChange={this.props.handleChange}
+            checked={this.props.positionName.GK}
+          />
+          <label className="custom-control-label" htmlFor="GK">
+            GK
+            </label>
+        </div> */}
       </Row>
     )
   }
