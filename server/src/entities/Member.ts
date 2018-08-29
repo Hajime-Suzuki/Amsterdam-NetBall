@@ -18,6 +18,7 @@ import { Team } from "./Team"
 import { IsEmail, IsString, IsDate, IsBoolean } from "class-validator"
 import { Exclude } from "class-transformer"
 import { Activity } from "./Activity"
+import { Committee } from "./Committee"
 import { UnauthorizedError } from "../../node_modules/routing-controllers"
 
 @Entity()
@@ -80,6 +81,10 @@ export class Member extends BaseEntity {
 
   @ManyToOne(() => Team, team => team.members, { eager: true })
   team: Team
+
+  @ManyToMany(() => Committee, committee => committee.members, { eager: true })
+  @JoinTable()
+  committees: Committee[]
 
   @ManyToMany(() => Activity, activity => activity.members, { eager: true })
   @JoinTable()
