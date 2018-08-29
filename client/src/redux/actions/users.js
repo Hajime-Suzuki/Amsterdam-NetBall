@@ -118,12 +118,13 @@ export const signup = (
     })
 }
 
-const member = new schema.Entity('users')
 const position = new schema.Entity('positions')
-const activity = new schema.Entity('activities')
+const acitivity = new schema.Entity('activities')
+const member = new schema.Entity('users', {
+  activities: [acitivity],
+  positions: [position]
+})
 export const getUsers = () => (dispatch, getState) => {
-  console.log('getUser')
-
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -134,9 +135,8 @@ export const getUsers = () => (dispatch, getState) => {
     .get(`${baseUrl}/members`)
     .set('Authorization', `${jwt}`)
     .then(result => {
-      console.log(result.body)
-
-      dispatch(updateUsers(result.body))
+      const data = normalize(result.body, [member])
+      dispatch(updateUsers(data))
     })
     .catch(err => console.error(err))
 }
