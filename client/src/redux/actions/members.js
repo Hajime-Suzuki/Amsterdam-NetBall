@@ -61,7 +61,7 @@ export const allMemberInfoSelector = createSelector(
   }
 )
 
-export const searchUsers = data => (dispatch, getState) => {
+export const searchMembers = data => (dispatch, getState) => {
   console.log('Search user action')
 
   const state = getState()

@@ -8,35 +8,38 @@ import './SearchBar.css'
 
 import { clubRoles, teams, positions, roles } from '../../constants'
 
+console.log(teams)
+
 class Filters extends PureComponent {
   state = {
-    teams: [],
-    positions: [],
-    clubRoles: [],
-    roles: []
+    teams: teams.map(t => ({ [t]: false })),
+    positions: positions.map(p => ({ [p]: false })),
+    clubRoles: clubRoles.map(c => ({ [c]: false })),
+    roles: roles.map(r => ({ [r]: false }))
   }
 
   componentDidMount() {
-    teams.map(team =>
-      this.setState({
-        [team]: false
-      })
-    )
-    clubRoles.map(clubRole =>
-      this.setState({
-        [clubRole]: false
-      })
-    )
-    positions.map(position =>
-      this.setState({
-        [position]: false
-      })
-    )
-    roles.map(roles =>
-      this.setState({
-        [roles]: false
-      })
-    )
+    // teams.map(team =>
+    //   this.setState({
+    //     [team]: false
+    //   })
+    // )
+    // clubRoles.map(clubRole =>
+    //   this.setState({
+    //     [clubRole]: false
+    //   })
+    // )
+    // positions.map(position =>
+    //   this.setState({
+    //     [position]: false
+    //   })
+    // )
+    // roles.map(roles =>
+    //   this.setState({
+    //     [roles]: false
+    //   })
+    // )
+    // console.log(this.state)
   }
 
   handleChange = (type, name) => async _ => {
@@ -50,7 +53,6 @@ class Filters extends PureComponent {
       const positionIndex = this.state[type].indexOf(name)
       this.state[type].splice(positionIndex, 1)
     }
-    console.log('bla')
   }
   // this.props.handleChange({ positions: this.state.positions })
   renderClubRolesFilter = clubRoles => {
