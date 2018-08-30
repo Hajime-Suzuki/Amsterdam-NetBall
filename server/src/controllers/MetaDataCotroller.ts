@@ -24,18 +24,13 @@ export default class MetaDataController {
       Team.find()
     ])
 
-    const output = {
+
+    return {
       positions,
       comittees,
       roles,
       teams
     }
 
-    return output
-
-    // const positions = await Position.find()
-    // const comittee = await Committee.find()
-    // const roles = await Role.find()
-    // const teams = await Team.find()
   }
 }

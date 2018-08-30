@@ -83,7 +83,6 @@ export const allMemberInfoSelector = createSelector(
   }
 )
 
-
 export const searchMembers = data => (dispatch, getState) => {
   console.log('Search user action')
 
