@@ -5,7 +5,7 @@ import { Container, Row, Col, Input, Button } from "mdbreact"
 import { login } from "../../redux/actions/users"
 import { Redirect } from "react-router-dom"
 import Search from "../search/Search"
-import { getMembers, getMember } from "../../redux/actions/members"
+import { getMembers } from "../../redux/actions/members"
 import "./MembersProfilePage.css"
 
 // import { userId } from "../../jwt"
@@ -14,7 +14,7 @@ class MemberProfilePage extends PureComponent {
   state = {}
 
   componentDidMount() {
-    this.props.getMember(this.props.match.params.id)
+    // this.props.getMember(this.props.match.params.id)
     // console.log(this.props.match.params.id)
   }
 
@@ -314,5 +314,5 @@ const mapStateToProps = function(state) {
 
 export default connect(
   mapStateToProps,
-  { getMembers, getMember }
+  { getMembers }
 )(MemberProfilePage)
