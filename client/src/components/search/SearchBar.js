@@ -15,37 +15,23 @@ class SearchBar extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault()
-
-    console.log(this.state)
   }
 
   handleChange = async event => {
     const { name, value } = event.target
 
-    await this.setState({
-      [name]: value
-    })
-
-    console.log(this.state)
-    this.props.handleSearch({ [name]: value })
+    this.setState(
+      {
+        [name]: value
+      },
+      () => this.props.handleSearch({ [name]: value })
+    )
   }
 
   componentDidMount() {}
   render() {
     return (
       <div className="input-group md-form form-sm form-2 pl-0">
-        {/* <select
-          className="mdb-select"
-          name="select_search"
-          onChange={this.handleChange}
-        >
-          <option value="" disabled selected>
-            Search by:
-          </option>
-          <option value="searchByFirstName">First Name</option>
-          <option value="searchByLastName">Last Name</option>
-        </select> */}
-
         <input
           className="form-control my-0 py-1 lime-border"
           type="text"
