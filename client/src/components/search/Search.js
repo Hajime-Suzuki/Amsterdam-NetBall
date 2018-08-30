@@ -20,6 +20,8 @@ class Search extends PureComponent {
   }
 
   handleSearch = async data => {
+    console.log(data)
+
     const updatedItems = {}
     const checkedItemToArray = (data, itemName) => {
       return Object.keys(data[itemName])
@@ -27,7 +29,7 @@ class Search extends PureComponent {
         .join(',')
     }
 
-    if (data.name) updatedItems.name = data.name
+    if (data.name !== undefined) updatedItems.name = data.name
 
     if (data.positions)
       updatedItems.positions = checkedItemToArray(data, 'positions')
@@ -40,6 +42,8 @@ class Search extends PureComponent {
       updatedItems.clubRoles = checkedItemToArray(data, 'clubRoles')
 
     this.setState(updatedItems, () => {
+      console.log(this.state)
+
       this.props.searchMembers(this.state)
     })
   }
