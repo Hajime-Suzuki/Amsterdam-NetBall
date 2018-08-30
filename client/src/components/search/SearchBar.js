@@ -13,10 +13,6 @@ class SearchBar extends PureComponent {
     name: ''
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
-  }
-
   handleChange = async event => {
     const { name, value } = event.target
 
@@ -24,7 +20,7 @@ class SearchBar extends PureComponent {
       {
         [name]: value
       },
-      () => this.props.handleSearch({ [name]: value })
+      () => this.props.handleSearch(this.state)
     )
   }
 
