@@ -1,17 +1,18 @@
-import { createSelector } from 'reselect'
-import { normalize, schema } from 'normalizr'
-import { isExpired } from '../../jwt'
-import { logout } from './users'
-import * as request from 'superagent'
-import { baseUrl } from '../../constants'
+import { createSelector } from "reselect"
+import { normalize, schema } from "normalizr"
+import { isExpired } from "../../jwt"
+import { logout } from "./users"
+import * as request from "superagent"
+import { baseUrl } from "../../constants"
 
-export const GET_MEMBERS = 'GET_MEMBERS'
-export const FETCHING_MEMBERS = 'FETCHING_MEMBERS'
-export const FILTER_MEMBERS = 'FILTER_MEMBERS'
+export const GET_MEMBERS = "GET_MEMBERS"
+export const GET_MEMBER = "GET_MEMBER"
+export const FETCHING_MEMBERS = "FETCHING_MEMBERS"
+export const FILTER_MEMBERS = "FILTER_MEMBERS"
 
-const position = new schema.Entity('positions')
-const acitivity = new schema.Entity('activities')
-const member = new schema.Entity('members', {
+const position = new schema.Entity("positions")
+const acitivity = new schema.Entity("activities")
+const member = new schema.Entity("members", {
   activities: [acitivity],
   positions: [position]
 })
@@ -25,6 +26,27 @@ const filterAndSetMembers = data => ({
   payload: normalize(data, [member])
 })
 
+const setMember = member => ({
+  type: GET_MEMBER,
+  payload: member
+})
+
+export const getMember = memberId => (dispatch, getState) => {
+  dispatch({ type: FETCHING_MEMBERS })
+
+  const state = getState()
+  if (!state.currentUser) return null
+  const jwt = state.currentUser.token
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .get(`${baseUrl}/members/${memberId}`)
+    .set("Authorization", `${jwt}`)
+    .then(result => dispatch(setMember(result.body)))
+    .catch(err => console.error(err))
+}
+
 export const getMembers = () => (dispatch, getState) => {
   dispatch({ type: FETCHING_MEMBERS })
 
@@ -36,7 +58,7 @@ export const getMembers = () => (dispatch, getState) => {
 
   request
     .get(`${baseUrl}/members`)
-    .set('Authorization', `${jwt}`)
+    .set("Authorization", `${jwt}`)
     .then(result => dispatch(setMembers(result.body)))
     .catch(err => console.error(err))
 }
@@ -61,8 +83,10 @@ export const allMemberInfoSelector = createSelector(
   }
 )
 
+
 export const searchMembers = data => (dispatch, getState) => {
   console.log('Search user action')
+
 
   const state = getState()
   if (!state.currentUser) return null
@@ -73,7 +97,7 @@ export const searchMembers = data => (dispatch, getState) => {
   request
     .get(`${baseUrl}/members`)
     .query(data)
-    .set('Authorization', `${jwt}`)
+    .set("Authorization", `${jwt}`)
     .then(result => {
       dispatch(filterAndSetMembers(result.body))
     })

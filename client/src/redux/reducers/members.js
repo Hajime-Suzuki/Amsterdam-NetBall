@@ -1,6 +1,6 @@
-import { ADD_USER, UPDATE_USER, UPDATE_USERS } from '../actions/users'
-import { USER_LOGOUT } from '../actions/users'
-import { GET_MEMBERS, FILTER_MEMBERS } from '../actions/members'
+import { ADD_USER, UPDATE_USER, UPDATE_USERS } from "../actions/users"
+import { USER_LOGOUT } from "../actions/users"
+import { GET_MEMBERS, FILTER_MEMBERS, GET_MEMBER } from "../actions/members"
 const initialState = {
   ids: [],
   members: {}
@@ -14,6 +14,11 @@ export default (state = initialState, { type, payload }) => {
       return {
         ids: payload.result,
         members: payload.entities.members
+      }
+
+    case GET_MEMBER:
+      return {
+        payload
       }
 
     case FILTER_MEMBERS:
