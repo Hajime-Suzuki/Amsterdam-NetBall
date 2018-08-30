@@ -1,7 +1,9 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { getCommittee } from "../../redux/actions/committees"
+
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Container, Row, Col, Input, Button } from 'mdbreact'
+import { getCommittee } from '../../redux/actions/committees'
+
 // import './CommitteePage.css'
 // import { userId } from "../../jwt"
 
@@ -14,7 +16,9 @@ class CommitteePage extends PureComponent {
 
   renderMessages = messages => {
     return messages.map(message => (
-      <div key={message.id} className={"committee-message"}>
+
+      <div key={message.id} className={'committee-message'}>
+
         <p>{message.body}</p>
       </div>
     ))
