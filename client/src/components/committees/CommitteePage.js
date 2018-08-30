@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { getCommittee } from "../../redux/actions/committees"
-import './CommitteePage.css'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Container, Row, Col, Input, Button } from 'mdbreact'
+import { getCommittee } from '../../redux/actions/committees'
+// import './CommitteePage.css'
 // import { userId } from "../../jwt"
 
 class CommitteePage extends PureComponent {
@@ -14,10 +14,8 @@ class CommitteePage extends PureComponent {
 
   renderMessages = messages => {
     return messages.map(message => (
-      <div key={message.id} className={ 'committee-message' }>
-        <p>
-          {message.body}
-        </p>
+      <div key={message.id} className={'committee-message'}>
+        <p>{message.body}</p>
       </div>
     ))
   }
@@ -30,8 +28,10 @@ class CommitteePage extends PureComponent {
     return (
       <Container>
         <div>
-          <h1>{ committee.name }</h1>
-          <div>{committee.messages && this.renderMessages(committee.messages)}</div>
+          <h1>{committee.name}</h1>
+          <div>
+            {committee.messages && this.renderMessages(committee.messages)}
+          </div>
         </div>
       </Container>
     )
