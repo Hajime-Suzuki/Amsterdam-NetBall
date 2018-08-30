@@ -110,17 +110,17 @@ class Homepage extends PureComponent {
               {/* <!-- Social login --> */}
               {/* <p>or sign in with:</p>
 
-              <a type="button" class="light-blue-text mx-2">
-                <i class="fa fa-facebook" />
+              <a type="button" className="light-blue-text mx-2">
+                <i className="fa fa-facebook" />
               </a>
-              <a type="button" class="light-blue-text mx-2">
-                <i class="fa fa-twitter" />
+              <a type="button" className="light-blue-text mx-2">
+                <i className="fa fa-twitter" />
               </a>
-              <a type="button" class="light-blue-text mx-2">
-                <i class="fa fa-linkedin" />
+              <a type="button" className="light-blue-text mx-2">
+                <i className="fa fa-linkedin" />
               </a>
-              <a type="button" class="light-blue-text mx-2">
-                <i class="fa fa-github" />
+              <a type="button" className="light-blue-text mx-2">
+                <i className="fa fa-github" />
               </a> */}
             </form>
           </Col>
