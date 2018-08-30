@@ -129,7 +129,7 @@ class Filters extends PureComponent {
     const { positionNames: posName } = this.props
     return (
       <Row>
-        <Col>
+        {/* <Col>
           <p>Positions</p>
           {Object.keys(this.props.positionNames).map((key, i) => {
             return (
@@ -149,7 +149,7 @@ class Filters extends PureComponent {
               </div>
             )
           })}
-        </Col>
+        </Col> */}
 
         <Col>
           <p>
