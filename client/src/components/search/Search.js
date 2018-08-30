@@ -1,84 +1,54 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Container, Row, Col, Input, Button } from 'mdbreact'
-import { Redirect } from 'react-router-dom'
-import './SearchBar.css'
-import SearchBar from './SearchBar'
-import Filters from './Filters'
-import { searchUsers } from '../../redux/actions/members'
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import { Container, Row, Col, Input, Button } from "mdbreact"
+import { login } from "../../redux/actions/users"
+import { Redirect } from "react-router-dom"
+// import { searchUsers } from "../../redux/actions/users"
+import "./SearchBar.css"
+import SearchBar from "./SearchBar"
+import Filters from "./Filters"
 
 // import { userId } from "../../jwt"
 
 class Search extends PureComponent {
   state = {
-    name: '',
-    positionNames: {
-      GA: false,
-      GS: false,
-      WA: false,
-      WD: false,
-      C: false,
-      GD: false,
-      GK: false
-    },
-    positions: [],
-    roles: ''
+    name: "",
+    positions: "",
+    roles: ""
   }
 
-  handleChange = event => {
-    const { name, value } = event.target
-
-    let updatedValue = value
-
-    if (name === 'positions') {
-      updatedValue = Array.from(new Set([...this.state.positions, value]))
+  handleSearch = async data => {
+    if (data.name) {
+      await this.setState({
+        name: data.name
+      })
     }
 
-    //   if (data.roles) {
-    //     await this.setState({
-    //       roles: data.roles.join(",")
-    //     })
-    //   }
-    // }
-    this.setState(
-      ({ positionNames }) => ({
-        [name]: updatedValue,
-        positionNames:
-          name === 'positions'
-            ? {
-                ...positionNames,
-                [value]: !positionNames[value]
-              }
-            : positionNames
-      }),
-      () =>
-        this.props.searchUsers({
-          ...this.state,
-          positions: this.state.positions.join(',')
-        })
-    )
+    console.log("bla")
 
-    // () => this.props.searchUsers(this.state)
+    if (data.positions) {
+      await this.setState({
+        positions: data.positions.join(",")
+      })
+    }
+
+    if (data.roles) {
+      await this.setState({
+        roles: data.roles.join(",")
+      })
+    }
   }
+
   componentDidMount() {}
   render() {
-    console.log(this.state)
-
     return (
       <Container>
         <Row>
-          <SearchBar
-            handleSearch={this.handleSearch}
-            name={this.state.name}
-            handleChange={this.handleChange}
-          />
+          <SearchBar handleSearch={this.handleSearch} />
         </Row>
         <Row>
-          <Filters
-            positions={this.state.positions}
-            handleChange={this.handleChange}
-            positionNames={this.state.positionNames}
-          />
+          <Filters handleSearch={this.handleSearch} />
         </Row>
       </Container>
     )
@@ -90,6 +60,6 @@ const mapStateToProps = function(state) {
 }
 
 export default connect(
-  mapStateToProps,
-  { searchUsers }
+  mapStateToProps
+  // { searchUsers }
 )(Search)
