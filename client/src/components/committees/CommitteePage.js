@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { Container, Row, Col, Input, Button } from "mdbreact"
 import { getCommittee } from "../../redux/actions/committees"
+import AddMessageForm from './AddMessageForm.js'
 import './CommitteePage.css'
 // import { userId } from "../../jwt"
 
@@ -33,6 +34,7 @@ class CommitteePage extends PureComponent {
           <h1>{ committee.name }</h1>
           <div>{committee.messages && this.renderMessages(committee.messages)}</div>
         </div>
+        <AddMessageForm committeeId={this.props.match.params.id} />
       </Container>
     )
   }
