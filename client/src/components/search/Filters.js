@@ -5,128 +5,120 @@ import { Container, Row, Col, Input, Button } from 'mdbreact'
 import { login } from '../../redux/actions/users'
 import { Redirect } from 'react-router-dom'
 import './SearchBar.css'
-
-import { clubRoles, teams, positions, roles } from '../../constants'
+import { baseUrl } from '../../constants'
+import { getFilterOption } from '../../redux/actions/filterOption'
 
 class Filters extends PureComponent {
   state = {
-    teams: [],
-    positions: [],
-    clubRoles: [],
-    roles: []
+    teams: null,
+    positions: null,
+    clubRoles: null,
+    roles: null
   }
 
   componentDidMount() {
-    teams.map(team =>
-      this.setState({
-        [team]: false
-      })
-    )
-    clubRoles.map(clubRole =>
-      this.setState({
-        [clubRole]: false
-      })
-    )
-    positions.map(position =>
-      this.setState({
-        [position]: false
-      })
-    )
-    roles.map(roles =>
-      this.setState({
-        [roles]: false
-      })
-    )
+    this.props.getFilterOption()
+    // fetch(`${baseUrl}/metadata`)
+    //   .then(res => res.json())
+    //   .then(({ teams, positions, comittees, roles }) => {
+    //     if (this.state.isMounted) {
+    //       this.setState({
+    //         teams,
+    //         positions,
+    //         clubRoles: comittees,
+    //         roles
+    //       })
+    //     }
+    //   })
   }
 
   handleChange = (type, name) => async _ => {
-    await this.setState({
-      [name]: !this.state[name]
-    })
-
-    if (this.state[name]) {
-      this.state[type].push(name)
-    } else if (!this.state[name]) {
-      const positionIndex = this.state[type].indexOf(name)
-      this.state[type].splice(positionIndex, 1)
-    }
-    console.log('bla')
-  }
-  // this.props.handleChange({ positions: this.state.positions })
-  renderClubRolesFilter = clubRoles => {
-    return clubRoles.map(role => (
-      <div className="custom-control custom-checkbox">
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id={role}
-          name={role}
-          onChange={this.handleChange('clubRoles', role)}
-          checked={this.state[role]}
-        />
-        <label className="custom-control-label" htmlFor={role}>
-          {role}
-        </label>
-      </div>
-    ))
+    // await this.setState({
+    //   [name]: !this.state[name]
+    // })
+    // if (this.state[name]) {
+    //   this.state[type].push(name)
+    // } else if (!this.state[name]) {
+    //   const positionIndex = this.state[type].indexOf(name)
+    //   this.state[type].splice(positionIndex, 1)
+    // }
   }
 
-  renderTeamsFilter = teams => {
-    return teams.map(team => (
-      <div className="custom-control custom-checkbox">
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id={team}
-          name={team}
-          onChange={this.handleChange('teams', team)}
-          checked={this.state[team]}
-        />
-        <label className="custom-control-label" htmlFor={team}>
-          {team}
-        </label>
-      </div>
-    ))
-  }
+  // renderClubRolesFilter = clubRoles => {
+  //   return clubRoles.map((role, i) => (
+  //     <div className="custom-control custom-checkbox" key={i}>
+  //       <input
+  //         type="checkbox"
+  //         className="custom-control-input"
+  //         id={role}
+  //         name={role}
+  //         onChange={this.handleChange('clubRoles', role)}
+  //         checked={this.state[role]}
+  //       />
+  //       <label className="custom-control-label" htmlFor={role}>
+  //         {role}
+  //       </label>
+  //     </div>
+  //   ))
+  // }
+
+  // renderTeamsFilter = teams => {
+  //   return teams.map((team, i) => (
+  //     <div className="custom-control custom-checkbox" key={i}>
+  //       <input
+  //         type="checkbox"
+  //         className="custom-control-input"
+  //         id={team}
+  //         name={team}
+  //         onChange={this.handleChange('teams', team)}
+  //         checked={this.state[team]}
+  //       />
+  //       <label className="custom-control-label" htmlFor={team}>
+  //         {team}
+  //       </label>
+  //     </div>
+  //   ))
+  // }
 
   renderPositionsFilter = positions => {
-    return positions.map(position => (
-      <div className="custom-control custom-checkbox">
+    return positions.map((position, i) => (
+      <div className="custom-control custom-checkbox" key={i}>
         <input
           type="checkbox"
           className="custom-control-input"
-          id={position}
+          id={position.positionName}
           name={position}
           onChange={this.handleChange('positions', position)}
           checked={this.state[position]}
         />
         <label className="custom-control-label" htmlFor={position}>
-          {position}
+          {position.positionName}
         </label>
       </div>
     ))
   }
 
-  renderRolesFilter = roles => {
-    return roles.map(role => (
-      <div className="custom-control custom-checkbox">
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id={role}
-          name={role}
-          onChange={this.handleChange('roles', role)}
-          checked={this.state[role]}
-        />
-        <label className="custom-control-label" htmlFor={role}>
-          {role}
-        </label>
-      </div>
-    ))
-  }
+  // renderRolesFilter = roles => {
+  //   return roles.map((role, i) => (
+  //     <div className="custom-control custom-checkbox" key={i}>
+  //       <input
+  //         type="checkbox"
+  //         className="custom-control-input"
+  //         id={role}
+  //         name={role}
+  //         onChange={this.handleChange('roles', role)}
+  //         checked={this.state[role]}
+  //       />
+  //       <label className="custom-control-label" htmlFor={role}>
+  //         {role}
+  //       </label>
+  //     </div>
+  //   ))
+  // }
 
   render() {
-    const { positionNames: posName } = this.props
+    if (!this.state.positions) return null
+    console.log(this.state.positions)
     return (
       <Row>
         {/* <Col>
@@ -155,36 +147,32 @@ class Filters extends PureComponent {
           <p>
             <b>Positions</b>
           </p>
-          {this.renderPositionsFilter(positions)}
+          {this.renderPositionsFilter(this.state.positions)}
         </Col>
-        <Col>
+        {/* <Col>
           <p>
             <b>Committee Roles</b>
           </p>
-          {this.renderClubRolesFilter(clubRoles)}
+          {this.renderClubRolesFilter(this.state.clubRoles)}
         </Col>
         <Col>
           <p>
             <b>Club Roles</b>
           </p>
-          {this.renderRolesFilter(roles)}
+          {this.renderRolesFilter(this.state.roles)}
         </Col>
         <Col>
           <p>
             <b>Teams</b>
           </p>
-          {this.renderTeamsFilter(teams)}
-        </Col>
+          {this.renderTeamsFilter(this.state.teams)}
+        </Col> */}
       </Row>
     )
   }
 }
 
-const mapStateToProps = function(state) {
-  return {}
-}
-
 export default connect(
-  mapStateToProps,
-  {}
+  null,
+  { getFilterOption }
 )(Filters)
