@@ -1,12 +1,12 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { login } from "../../redux/actions/users"
-import { Redirect } from "react-router-dom"
-import "./SearchBar.css"
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Input, Button } from 'mdbreact'
+import { login } from '../../redux/actions/users'
+import { Redirect } from 'react-router-dom'
+import './SearchBar.css'
 
-import { clubRoles, teams, positions, roles } from "../../constants"
+import { clubRoles, teams, positions, roles } from '../../constants'
 
 class Filters extends PureComponent {
   state = {
@@ -50,21 +50,21 @@ class Filters extends PureComponent {
       const positionIndex = this.state[type].indexOf(name)
       this.state[type].splice(positionIndex, 1)
     }
-    console.log("bla")
+    console.log('bla')
   }
   // this.props.handleChange({ positions: this.state.positions })
   renderClubRolesFilter = clubRoles => {
     return clubRoles.map(role => (
-      <div class="custom-control custom-checkbox">
+      <div className="custom-control custom-checkbox">
         <input
           type="checkbox"
-          class="custom-control-input"
+          className="custom-control-input"
           id={role}
           name={role}
-          onChange={this.handleChange("clubRoles", role)}
+          onChange={this.handleChange('clubRoles', role)}
           checked={this.state[role]}
         />
-        <label class="custom-control-label" htmlFor={role}>
+        <label className="custom-control-label" htmlFor={role}>
           {role}
         </label>
       </div>
@@ -73,16 +73,16 @@ class Filters extends PureComponent {
 
   renderTeamsFilter = teams => {
     return teams.map(team => (
-      <div class="custom-control custom-checkbox">
+      <div className="custom-control custom-checkbox">
         <input
           type="checkbox"
-          class="custom-control-input"
+          className="custom-control-input"
           id={team}
           name={team}
-          onChange={this.handleChange("teams", team)}
+          onChange={this.handleChange('teams', team)}
           checked={this.state[team]}
         />
-        <label class="custom-control-label" htmlFor={team}>
+        <label className="custom-control-label" htmlFor={team}>
           {team}
         </label>
       </div>
@@ -91,16 +91,16 @@ class Filters extends PureComponent {
 
   renderPositionsFilter = positions => {
     return positions.map(position => (
-      <div class="custom-control custom-checkbox">
+      <div className="custom-control custom-checkbox">
         <input
           type="checkbox"
-          class="custom-control-input"
+          className="custom-control-input"
           id={position}
           name={position}
-          onChange={this.handleChange("positions", position)}
+          onChange={this.handleChange('positions', position)}
           checked={this.state[position]}
         />
-        <label class="custom-control-label" htmlFor={position}>
+        <label className="custom-control-label" htmlFor={position}>
           {position}
         </label>
       </div>
@@ -109,16 +109,16 @@ class Filters extends PureComponent {
 
   renderRolesFilter = roles => {
     return roles.map(role => (
-      <div class="custom-control custom-checkbox">
+      <div className="custom-control custom-checkbox">
         <input
           type="checkbox"
-          class="custom-control-input"
+          className="custom-control-input"
           id={role}
           name={role}
-          onChange={this.handleChange("roles", role)}
+          onChange={this.handleChange('roles', role)}
           checked={this.state[role]}
         />
-        <label class="custom-control-label" htmlFor={role}>
+        <label className="custom-control-label" htmlFor={role}>
           {role}
         </label>
       </div>
