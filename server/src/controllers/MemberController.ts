@@ -81,13 +81,13 @@ export default class MemberController {
       })
     }
     if (params.positions) {
-      const allPositions = params.positions.split(',')
-      query = query.andWhere('positions.id IN (:...ids)', {
-        ids: allPositions
+      // const allPositions = params.positions.split(',')
+      query = query.andWhere('positions.positionName IN (:...names)', {
+        names: params.positions.split(',')
       })
     }
     if (params.committees) {
-      const allCommittees = params.committees.split(",")
+      const allCommittees = params.committees.split(',')
       query = query.andWhere('committees.id IN (:...ids)', {
         ids: allCommittees
       })
