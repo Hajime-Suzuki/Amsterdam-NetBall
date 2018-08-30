@@ -41,7 +41,6 @@ class Search extends PureComponent {
     this.props.searchMembers(data)
   }
 
-  componentDidMount() {}
   render() {
     return (
       <Container>
