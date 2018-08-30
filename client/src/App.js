@@ -13,6 +13,8 @@ import MemberListComponent from "./components/members/MembersListComponent"
 import { Switch } from "react-router-dom"
 import MemberLandingPage from "./components/MemberLanding/MemberLandingPage"
 import MembersProfilePage from "./components/members/MembersProfilePage"
+import EventsCalendar from "./components/calendar/calendar"
+import CommitteePage from "./components/committees/CommitteePage"
 
 class App extends Component {
   render() {
@@ -29,8 +31,10 @@ class App extends Component {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/logout" component={LogoutPage} />
               <Route exact path="/signup" component={SignupPage} />
+              <Route exact path="/events" component={EventsCalendar} />
               <Route exact path="/members/:id" component={MembersProfilePage} />
               <Route exact path="/members" component={MemberLandingPage} />
+              <Route exact path="/committees/:id" component={CommitteePage} />
               <Route exact path="/" render={() => <Redirect to="/home" />} />
             </Switch>
             <Switch>
