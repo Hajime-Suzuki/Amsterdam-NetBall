@@ -15,10 +15,10 @@ class CommitteePage extends PureComponent {
 
   renderMessages = messages => {
     return messages.map(message => (
-      <div key={message.id} className={ 'committee-message' }>
-        <p>
-          {message.body}
-        </p>
+
+      <div key={message.id} className={'committee-message'}>
+
+        <p>{message.body}</p>
       </div>
     ))
   }
@@ -26,13 +26,15 @@ class CommitteePage extends PureComponent {
   render() {
     const { committee } = this.props
 
-    if (committee === null) return 'Loading...'
+    if (committee === null) return "Loading..."
 
     return (
       <Container>
         <div>
-          <h1>{ committee.name }</h1>
-          <div>{committee.messages && this.renderMessages(committee.messages)}</div>
+          <h1>{committee.name}</h1>
+          <div>
+            {committee.messages && this.renderMessages(committee.messages)}
+          </div>
         </div>
         <AddMessageForm committeeId={this.props.match.params.id} />
       </Container>

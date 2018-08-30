@@ -20,25 +20,30 @@ class Search extends PureComponent {
   }
 
   handleSearch = async data => {
-    if (data.name) {
-      await this.setState({
-        name: data.name
-      })
+    console.log(data)
+
+    const updatedItems = {}
+    const checkedItemToArray = (data, itemName) => {
+      return Object.keys(data[itemName])
+        .filter(key => data[itemName][key])
+        .join(',')
     }
 
-    if (data.positions) {
-      await this.setState({
-        positions: data.positions.join(',')
-      })
-    }
+    if (data.name !== undefined) updatedItems.name = data.name
 
-    if (data.roles) {
-      await this.setState({
-        roles: data.roles.join(',')
-      })
-    }
+    if (data.positions)
+      updatedItems.positions = checkedItemToArray(data, 'positions')
 
-    this.props.searchMembers(data)
+    if (data.roles) updatedItems.roles = checkedItemToArray(data, 'roles')
+
+    if (data.teams) updatedItems.teams = checkedItemToArray(data, 'teams')
+
+    if (data.clubRoles)
+      updatedItems.clubRoles = checkedItemToArray(data, 'clubRoles')
+
+    this.setState(updatedItems, () => {
+      this.props.searchMembers(this.state)
+    })
   }
 
   render() {
