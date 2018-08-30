@@ -42,8 +42,6 @@ class Search extends PureComponent {
       updatedItems.clubRoles = checkedItemToArray(data, 'clubRoles')
 
     this.setState(updatedItems, () => {
-      console.log(this.state)
-
       this.props.searchMembers(this.state)
     })
   }

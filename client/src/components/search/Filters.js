@@ -45,9 +45,9 @@ class Filters extends PureComponent {
           className="custom-control-input"
           id={item[keyName]}
           name={sectionName}
-          value={item[keyName]}
+          value={item.id}
           onChange={this.handleChange}
-          checked={this.state[sectionName][item[keyName]] || false}
+          checked={this.state[sectionName][item.id] || false}
         />
         <label className="custom-control-label" htmlFor={item[keyName]}>
           {item[keyName]}
