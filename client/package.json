@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "@material-ui/core": "^1.5.1",
-    "css-loader": "^1.0.0",
     "mdbreact": "^4.7.0",
     "normalizr": "^3.2.4",
     "react": "^16.4.2",
