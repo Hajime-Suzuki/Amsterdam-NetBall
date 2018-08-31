@@ -1,4 +1,10 @@
 .committee-message {
-  /*flex: 1 1 auto;*/
   display: block;
+  background-color: lightYellow;
 }
+
+.committee-message-member {
+  font-size: 80%;
+  font-weight: bold;
+}
+
