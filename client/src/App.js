@@ -15,18 +15,22 @@ import MemberLandingPage from "./components/MemberLanding/MemberLandingPage"
 import MembersProfilePage from "./components/members/MembersProfilePage"
 import EventsCalendar from "./components/calendar/calendar"
 import CommitteePage from "./components/committees/CommitteePage"
+import PersistentDrawer from "./components/layout/PersistentDrawer"
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <nav>
+          {/* <nav>
             <TopNav />
+          </nav> */}
+          <nav>
+            <PersistentDrawer props={this.props} />
           </nav>
 
           <main style={{ marginTop: 75 }}>
-            <Switch>
+            {/* <Switch>
               <Route exact path="/home" component={HomePage} />
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/logout" component={LogoutPage} />
@@ -42,7 +46,7 @@ class App extends Component {
                 path="/admin/members"
                 component={MemberListComponent}
               />
-            </Switch>
+            </Switch> */}
           </main>
         </div>
       </Router>

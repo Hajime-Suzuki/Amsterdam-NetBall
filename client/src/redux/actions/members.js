@@ -34,6 +34,8 @@ const setMember = member => ({
 export const getMember = memberId => (dispatch, getState) => {
   dispatch({ type: FETCHING_MEMBERS })
 
+  console.log(memberId, "memberid")
+
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -43,7 +45,11 @@ export const getMember = memberId => (dispatch, getState) => {
   request
     .get(`${baseUrl}/members/${memberId}`)
     .set("Authorization", `${jwt}`)
-    .then(result => dispatch(setMember(result.body)))
+    .then(result => {
+      console.log(result.body)
+      dispatch(setMember(result.body))
+    })
+
     .catch(err => console.error(err))
 }
 
@@ -84,8 +90,7 @@ export const allMemberInfoSelector = createSelector(
 )
 
 export const searchMembers = data => (dispatch, getState) => {
-  console.log('Search user action')
-
+  console.log("Search user action")
 
   const state = getState()
   if (!state.currentUser) return null

@@ -1,11 +1,12 @@
-import members from './members'
-import login from './login'
-import currentUser from './currentUser'
-import signup from './signup'
-import positions from './positions'
-import fetching from './fetching'
-import committee from './committee'
-import filterOption from './filterOption'
+import members from "./members"
+import login from "./login"
+import currentUser from "./currentUser"
+import signup from "./signup"
+import positions from "./positions"
+import fetching from "./fetching"
+import committee from "./committee"
+import filterOption from "./filterOption"
+import singleMember from "./singleMember"
 
 export default {
   members,
@@ -15,5 +16,6 @@ export default {
   positions,
   fetching,
   committee,
-  filterOption
+  filterOption,
+  singleMember
 }

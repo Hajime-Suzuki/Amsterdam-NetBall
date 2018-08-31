@@ -24,12 +24,6 @@ export function getEvents(callback) {
         if (event.originalStartTime) {
           console.log("cancelled")
         }
-
-        // events.push({
-        //   start: new Date(event.ori.date) || new Date(event.start.dateTime),
-        //   end: new Date(event.end.date) || new Date(event.end.dateTime),
-        //   title: event.summary
-        // })
       })
       callback(events)
     }

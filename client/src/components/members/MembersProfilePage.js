@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Container, Row, Col, Input, Button } from 'mdbreact'
-import { login } from '../../redux/actions/users'
-import { Redirect } from 'react-router-dom'
-import Search from '../search/Search'
-import { getMember } from '../../redux/actions/members'
-import './MembersProfilePage.css'
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import { Container, Row, Col, Input, Button } from "mdbreact"
+import { login } from "../../redux/actions/users"
+import { Redirect } from "react-router-dom"
+import Search from "../search/Search"
+import { getMember } from "../../redux/actions/members"
+import "./MembersProfilePage.css"
 
 // import { userId } from "../../jwt"
 
@@ -21,10 +21,12 @@ class MemberProfilePage extends PureComponent {
   render() {
     const { member, currentUser } = this.props
 
+    console.log(member)
+
     return (
       <Container>
         <Row className="justify-content-md-center">
-          {member && (
+          {member.id && (
             <div className="jumbotron text-center m-4">
               <h4 className="card-title font-bold pb-2">
                 <strong>
@@ -50,7 +52,7 @@ class MemberProfilePage extends PureComponent {
                   <span
                     className="input-group-text"
                     id="inputGroup-sizing-default1"
-                    style={{ backgroundColor: '#fff' }}
+                    style={{ backgroundColor: "#fff" }}
                   >
                     Plays in team:
                   </span>
@@ -61,7 +63,7 @@ class MemberProfilePage extends PureComponent {
                   aria-label="Default"
                   aria-describedby="inputGroup-sizing-default1"
                   disabled
-                  style={{ textAlign: 'right' }}
+                  style={{ textAlign: "right" }}
                   value={member.team}
                 />
               </div>
@@ -71,7 +73,7 @@ class MemberProfilePage extends PureComponent {
                   <span
                     className="input-group-text"
                     id="inputGroup-sizing-default1"
-                    style={{ backgroundColor: '#fff' }}
+                    style={{ backgroundColor: "#fff" }}
                   >
                     Plays at positions:
                   </span>
@@ -82,9 +84,9 @@ class MemberProfilePage extends PureComponent {
                   aria-label="Default"
                   aria-describedby="inputGroup-sizing-default1"
                   disabled
-                  style={{ textAlign: 'right' }}
+                  style={{ textAlign: "right" }}
                   value={member.positions.map(position => {
-                    return position.positionName + ' '
+                    return position.positionName + " "
                   })}
                 />
               </div>
@@ -94,7 +96,7 @@ class MemberProfilePage extends PureComponent {
                   <span
                     className="input-group-text"
                     id="inputGroup-sizing-default1"
-                    style={{ backgroundColor: '#fff' }}
+                    style={{ backgroundColor: "#fff" }}
                   >
                     Email address:
                   </span>
@@ -105,7 +107,7 @@ class MemberProfilePage extends PureComponent {
                   aria-label="Default"
                   aria-describedby="inputGroup-sizing-default1"
                   disabled
-                  style={{ textAlign: 'right' }}
+                  style={{ textAlign: "right" }}
                   value={member.email}
                 />
               </div>
@@ -115,7 +117,7 @@ class MemberProfilePage extends PureComponent {
                   <span
                     className="input-group-text"
                     id="inputGroup-sizing-default1"
-                    style={{ backgroundColor: '#fff' }}
+                    style={{ backgroundColor: "#fff" }}
                   >
                     Lives in:
                   </span>
@@ -126,13 +128,13 @@ class MemberProfilePage extends PureComponent {
                   aria-label="Default"
                   aria-describedby="inputGroup-sizing-default1"
                   disabled
-                  style={{ textAlign: 'right' }}
+                  style={{ textAlign: "right" }}
                   value={member.city}
                 />
               </div>
               <div />
 
-              {currentUser.role === 'admin' && (
+              {currentUser.role === "admin" && (
                 <div>
                   <h5 className="indigo-text font-bold mb-4">
                     Extra information
@@ -143,7 +145,7 @@ class MemberProfilePage extends PureComponent {
                       <span
                         className="input-group-text"
                         id="inputGroup-sizing-default1"
-                        style={{ backgroundColor: '#fff' }}
+                        style={{ backgroundColor: "#fff" }}
                       >
                         Street address:
                       </span>
@@ -154,7 +156,7 @@ class MemberProfilePage extends PureComponent {
                       aria-label="Default"
                       aria-describedby="inputGroup-sizing-default1"
                       disabled
-                      style={{ textAlign: 'right' }}
+                      style={{ textAlign: "right" }}
                       value={member.streetAddress}
                     />
                   </div>
@@ -163,7 +165,7 @@ class MemberProfilePage extends PureComponent {
                       <span
                         className="input-group-text"
                         id="inputGroup-sizing-default1"
-                        style={{ backgroundColor: '#fff' }}
+                        style={{ backgroundColor: "#fff" }}
                       >
                         Postal code:
                       </span>
@@ -174,7 +176,7 @@ class MemberProfilePage extends PureComponent {
                       aria-label="Default"
                       aria-describedby="inputGroup-sizing-default1"
                       disabled
-                      style={{ textAlign: 'right' }}
+                      style={{ textAlign: "right" }}
                       value={member.postalCode}
                     />
                   </div>
@@ -184,7 +186,7 @@ class MemberProfilePage extends PureComponent {
                       <span
                         className="input-group-text"
                         id="inputGroup-sizing-default1"
-                        style={{ backgroundColor: '#fff' }}
+                        style={{ backgroundColor: "#fff" }}
                       >
                         Date of birth
                       </span>
@@ -195,7 +197,7 @@ class MemberProfilePage extends PureComponent {
                       aria-label="Default"
                       aria-describedby="inputGroup-sizing-default1"
                       disabled
-                      style={{ textAlign: 'right' }}
+                      style={{ textAlign: "right" }}
                       value={new Date(member.dateOfBirth).toLocaleDateString()}
                     />
                   </div>
@@ -205,7 +207,7 @@ class MemberProfilePage extends PureComponent {
                       <span
                         className="input-group-text"
                         id="inputGroup-sizing-default1"
-                        style={{ backgroundColor: '#fff' }}
+                        style={{ backgroundColor: "#fff" }}
                       >
                         Membership start date:
                       </span>
@@ -216,7 +218,7 @@ class MemberProfilePage extends PureComponent {
                       aria-label="Default"
                       aria-describedby="inputGroup-sizing-default1"
                       disabled
-                      style={{ textAlign: 'right' }}
+                      style={{ textAlign: "right" }}
                       value={new Date(member.startDate).toLocaleDateString()}
                     />
                   </div>
@@ -225,7 +227,7 @@ class MemberProfilePage extends PureComponent {
                       <span
                         className="input-group-text"
                         id="inputGroup-sizing-default1"
-                        style={{ backgroundColor: '#fff' }}
+                        style={{ backgroundColor: "#fff" }}
                       >
                         Membership end date:
                       </span>
@@ -236,7 +238,7 @@ class MemberProfilePage extends PureComponent {
                       aria-label="Default"
                       aria-describedby="inputGroup-sizing-default1"
                       disabled
-                      style={{ textAlign: 'right' }}
+                      style={{ textAlign: "right" }}
                       value={new Date(member.endDate).toLocaleDateString()}
                     />
                   </div>
@@ -245,7 +247,7 @@ class MemberProfilePage extends PureComponent {
                       <span
                         className="input-group-text"
                         id="inputGroup-sizing-default1"
-                        style={{ backgroundColor: '#fff' }}
+                        style={{ backgroundColor: "#fff" }}
                       >
                         Is currently an active member:
                       </span>
@@ -256,8 +258,8 @@ class MemberProfilePage extends PureComponent {
                       aria-label="Default"
                       aria-describedby="inputGroup-sizing-default1"
                       disabled
-                      style={{ textAlign: 'right' }}
-                      value={member.isCurrentMember ? 'Yes' : 'No'}
+                      style={{ textAlign: "right" }}
+                      value={member.isCurrentMember ? "Yes" : "No"}
                     />
                   </div>
                 </div>
@@ -296,7 +298,7 @@ class MemberProfilePage extends PureComponent {
         </Row>
         <Row className="justify-content-md-center">
           <Link to="/members">
-            {' '}
+            {" "}
             <Button className="btn btn-info btn-block  btn-blue-grey my-4">
               Back to the members list
             </Button>
@@ -309,7 +311,7 @@ class MemberProfilePage extends PureComponent {
 
 const mapStateToProps = function(state) {
   return {
-    member: state.members.payload === null ? null : state.members.payload,
+    member: state.singleMember,
     currentUser: state.currentUser
   }
 }
