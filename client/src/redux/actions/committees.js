@@ -51,7 +51,7 @@ export const addMessage = (messageBody, committeeId) => (dispatch, getState) => 
 
 }
 
-export const editMessage = (updates, committeeId) => (dispatch, getState) => {
+export const editMessage = (updates, committeeId, messageId) => (dispatch, getState) => {
 
   const state = getState()
   if (!state.currentUser) return null
@@ -59,9 +59,11 @@ export const editMessage = (updates, committeeId) => (dispatch, getState) => {
 
   if (isExpired(jwt)) return dispatch(logout())
 
+  console.log('updates', updates, 'committeeId', committeeId, 'messageId', messageId, 'jwt', jwt)
+
   request
-    .put(`${baseUrl}/committees/${committeeId}`)
-    .set('Authorization', `Bearer ${jwt}`)
+    .put(`${baseUrl}/messages/${committeeId}/${messageId}`)
+    .set('Authorization', `${jwt}`)
     .send(updates)
     .then(response => {
       dispatch({
@@ -72,7 +74,6 @@ export const editMessage = (updates, committeeId) => (dispatch, getState) => {
     .catch(err => alert(err))
 
 }
-
 
 export const deleteMessage = (committeeId, messageId) => (dispatch, getState) => {
 

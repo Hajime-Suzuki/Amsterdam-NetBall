@@ -1,4 +1,4 @@
-import { GET_COMMITTEE, ADD_MESSAGE, DELETE_MESSAGE } from "../actions/committees"
+import { GET_COMMITTEE, ADD_MESSAGE, DELETE_MESSAGE, EDIT_MESSAGE } from "../actions/committees"
 
 export default (state = {}, { type, payload }) => {
   switch (type) {
@@ -10,6 +10,18 @@ export default (state = {}, { type, payload }) => {
       const {committee, ...message} = payload;
       const newMessages = [...state.messages, message]
       return {...state, messages: newMessages }
+
+    case EDIT_MESSAGE:
+      console.log('payload', payload)
+      const editedMessages = state.messages.map(
+        message => {
+          if (message.id === payload.id) {
+            return payload
+          }
+          return message
+        }
+      )
+      return {...state, messages: editedMessages }
 
     case DELETE_MESSAGE:
       const remainingMessages = state.messages.filter(
