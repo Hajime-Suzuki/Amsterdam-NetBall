@@ -11,6 +11,7 @@ import Modal from "@material-ui/core/Modal"
 import { withStyles } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import { getActivities } from "../../redux/actions/activities"
+import { Divider } from "@material-ui/core"
 
 function rand() {
   return Math.round(Math.random() * 20) - 10
@@ -90,15 +91,40 @@ class MemberProfilePage extends PureComponent {
       )
     } else {
       return activities.map(activity => (
-        <button
-          className="list-group-item list-group-item-action waves-effect"
-          key={activity.id}
-        >
-          {activity.name}
-        </button>
+        <div>
+          <button
+            className="list-group-item list-group-item-action waves-effect"
+            key={activity.id}
+          >
+            <p className="list-group-item list-group-item-action waves-effect">
+              {" "}
+              Activity name: {activity.name}
+            </p>
+            <p className="list-group-item list-group-item-action waves-effect">
+              {" "}
+              Activity starts at:{" "}
+              {new Date(activity.startTime).toLocaleDateString()} |{" "}
+              {new Date(activity.startTime).toLocaleTimeString()}
+            </p>
+            <p className="list-group-item list-group-item-action waves-effect">
+              {" "}
+              Activity ends at:{" "}
+              {new Date(activity.endTime).toLocaleDateString()} |{" "}
+              {new Date(activity.endTime).toLocaleTimeString()}
+            </p>
+          </button>
+          <Divider />
+        </div>
       ))
     }
   }
+
+  filterOldActivities = activities =>
+    activities.filter(activity => {
+      const endTime = new Date(activity.endTime)
+      const now = new Date()
+      if (now < endTime) return activity
+    })
 
   renderModalActivities = activites => {
     return activites.map(activity => (
@@ -235,7 +261,9 @@ class MemberProfilePage extends PureComponent {
                 <h5 className="indigo-text font-bold mb-4">Your activities</h5>
 
                 <div className="list-group mb-4">
-                  {this.renderActivities(member.activities)}
+                  {this.renderActivities(
+                    this.filterOldActivities(member.activities)
+                  )}
 
                   <Button
                     className="btn btn-info btn-block  btn-blue-grey my-4 "
@@ -266,7 +294,9 @@ class MemberProfilePage extends PureComponent {
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          {this.renderModalActivities(activities)}
+                          {this.renderModalActivities(
+                            this.filterOldActivities(activities)
+                          )}
 
                           <div class="modal-footer">
                             <Button
