@@ -104,7 +104,6 @@ class MemberListComponent extends PureComponent {
                       }}
                     >
                       {m.firstName} {m.lastName}
-                      {console.log(m)}
                     </span>
                   </th>
                   {isAdmin() && (
