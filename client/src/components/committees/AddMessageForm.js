@@ -1,14 +1,15 @@
 import React, {PureComponent} from 'react'
-import {addMessage} from '../../redux/actions/committees'
 import {connect} from 'react-redux'
 
 class AddMessageForm extends PureComponent {
-
   state = {}
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.addMessage(this.state, this.props.committeeId)
+    console.log('this.state', this.state, 'this.props.committeeId', this.props.committeeId)
+    const messageId = this.props.messageId ? this.props.messageId : 0
+    console.log('messageId', messageId)
+    this.props.submitFunction(this.state, this.props.committeeId, messageId)
     this.setState({ body: '' })
   }
 
@@ -37,4 +38,4 @@ class AddMessageForm extends PureComponent {
 
 }
 
-export default connect(null, { addMessage })( AddMessageForm )
+export default connect()( AddMessageForm )

@@ -63,7 +63,7 @@ class MemberLandingPage extends PureComponent {
                     Personal profile
                   </Button>
                 </Link>
-                <Link to="/members">
+                <Link to="/members/list">
                   <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
                     Check all members
                   </Button>
