@@ -9,7 +9,6 @@ import './SearchBar.css'
 import SearchBar from './SearchBar'
 import Filters from './Filters'
 import { searchMembers } from '../../redux/actions/members'
-import FilterOrderDropDown from './FilterOrderDropDown'
 
 // import { userId } from "../../jwt"
 
@@ -17,7 +16,8 @@ class Search extends PureComponent {
   state = {
     name: '',
     positions: '',
-    roles: ''
+    roles: '',
+    currentMemberOption: ''
   }
 
   handleSearch = async data => {
@@ -40,14 +40,29 @@ class Search extends PureComponent {
     if (data.clubRoles)
       updatedItems.clubRoles = checkedItemToQueryString(data, 'clubRoles')
 
+    if (data.currentMemberOption) {
+      updatedItems.currentMemberOption = data.currentMemberOption
+    }
+
     this.setState(updatedItems, () => {
-      this.props.searchMembers({ ...this.state, order: data.order })
+      this.props.searchMembers({
+        ...this.state,
+        orderType: this.props.order.orderType,
+        order: this.props.order.order
+      })
     })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.order !== this.props.order) {
-      this.handleSearch({ order: this.props.order })
+    const prevOrder = JSON.stringify(prevProps.order)
+    const currentOrder = JSON.stringify(this.props.order)
+
+    if (prevOrder !== currentOrder) {
+      console.log(prevProps.order, this.props.order)
+      this.handleSearch({
+        orderType: this.props.order.orderType,
+        order: this.props.order.order
+      })
     }
   }
 
@@ -60,7 +75,6 @@ class Search extends PureComponent {
         <Row>
           <Filters handleSearch={this.handleSearch} />
         </Row>
-        <FilterOrderDropDown />
       </Container>
     )
   }

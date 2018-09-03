@@ -43,10 +43,12 @@ class Homepage extends PureComponent {
 
   componentDidMount() {}
   render() {
+    if (this.props.currentUser) return <Redirect to="/members" />
+
     return (
-      <Container>
+      <Container className="mt-5">
         <Row className="justify-content-md-center">
-          <Col md="6" className="m-4">
+          <Col md="6" className="mt-5 mb-5">
             <form
               className="text-center border border-light p-5"
               onSubmit={this.handleSubmit}
@@ -98,7 +100,7 @@ class Homepage extends PureComponent {
               <Button
                 className="btn btn-info btn-block  btn-blue-grey my-4"
                 type="submit"
-                disabled={this.state.submitButton}
+                // disabled={this.state.submitButton}
               >
                 Sign in
               </Button>
