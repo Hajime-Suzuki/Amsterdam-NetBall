@@ -55,7 +55,15 @@ class PersistentDrawer extends PureComponent {
     let before = null
     let after = null
 
-    const drawer = drawerItems({ anchor, open, classes, theme, history })
+    const drawer = drawerItems({
+      anchor,
+      open,
+      classes,
+      theme,
+      history,
+      handleDrawerClose: this.handleDrawerClose,
+      handleDrawerOpen: this.handleDrawerOpen
+    })
 
     if (anchor === "left") {
       before = drawer
