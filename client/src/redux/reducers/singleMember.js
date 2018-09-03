@@ -5,7 +5,6 @@ import { GET_MEMBERS, FILTER_MEMBERS, GET_MEMBER } from "../actions/members"
 export default (state = {}, { type, payload }) => {
   switch (type) {
     case GET_MEMBER:
-      console.log(payload)
       return {
         member: payload
       }
