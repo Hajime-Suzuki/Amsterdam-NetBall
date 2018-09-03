@@ -6,6 +6,7 @@ import { login } from "../../redux/actions/users"
 import { Redirect } from "react-router-dom"
 import Search from "../search/Search"
 import { getMembers } from "../../redux/actions/members"
+import { getActivities } from "../../redux/actions/activities"
 import { Icon } from "@material-ui/core"
 import Divider from "@material-ui/core/Divider"
 
@@ -15,6 +16,7 @@ class MemberLandingPage extends PureComponent {
   state = {}
 
   componentDidMount() {
+    console.log(this.props)
     this.props.getMembers()
   }
 
@@ -93,5 +95,5 @@ const mapStateToProps = function(state) {
 
 export default connect(
   mapStateToProps,
-  { getMembers }
+  { getMembers, getActivities }
 )(MemberLandingPage)

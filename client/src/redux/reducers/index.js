@@ -7,6 +7,7 @@ import fetching from "./fetching"
 import committee from "./committee"
 import filterOption from "./filterOption"
 import singleMember from "./singleMember"
+import activities from "./activities"
 
 export default {
   members,
@@ -17,5 +18,6 @@ export default {
   fetching,
   committee,
   filterOption,
-  singleMember
+  singleMember,
+  activities
 }
