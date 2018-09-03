@@ -23,13 +23,13 @@ class AddMessageForm extends PureComponent {
     const initialValues = this.props.initialValues || {}
     return (
       <form onSubmit={this.handleSubmit}>
-        <div>
+        <div className="text-center p-5">
           <label htmlFor="body" style={{ textAlign: "left" }}>Add a message:</label><br/>
-          <textarea id="body" name="body" rows="4" columns="50" maxLength="200" wrap="hard" value={
+          <textarea id="body" className="form-control rounded-0" name="body" rows="4" columns="50" maxLength="200" wrap="hard" value={
             this.state.body !== undefined ? this.state.body : initialValues.body
           } onChange={ this.handleChange } />
         </div>
-        <button type="submit">Send</button>
+        <button className="btn" style={{ color: 'red', margin: '0 auto', display: 'block' }} type="submit">Send</button>
       </form>
     )
 
