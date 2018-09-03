@@ -34,15 +34,18 @@ class CommitteePage extends PureComponent {
         return <AddMessageForm key={message.id} committeeId={this.props.match.params.id} submitFunction={this.editTheMessage} initialValues={message} messageId={message.id} />
       }
       else {
-        return (<div key={message.id} className={'committee-message mt-1 mb-1 p-3 rounded'}>
-          <p className="committee-message-member mb-1">{`${message.member.firstName} ${message.member.lastName}`}</p>
-          <p className="committee-message-body mb-1">{message.body}</p>
+        return (
+          <div key={message.id} className={'committee-message mt-0 p-3 border border-light rounded'}>
+          <p className="committee-message-member mb-1">{`${message.member.firstName} ${message.member.lastName}`}
           { this.props.currentUser.id === message.member.id &&
-            <div>
-              <button onClick={ ()=>this.editInPlace(message.id) } className="edit-message">Edit</button><button onClick={ ()=>this.props.deleteMessage(this.props.match.params.id, message.id) } className="delete-message">Delete</button>
-            </div>
+            <span>
+              <button onClick={ ()=>this.editInPlace(message.id) } className="edit-message">&#9998;</button><button onClick={ ()=>this.props.deleteMessage(this.props.match.params.id, message.id) } className="delete-message">&#10060;</button>
+            </span>
           }
-        </div>)
+          </p>
+          <p className="committee-message-body mb-1">{message.body}</p>
+          </div>
+        )
       }
     })
   }
@@ -58,7 +61,7 @@ class CommitteePage extends PureComponent {
 
     return (
       <Container>
-        <div>
+        <div id={'committee-container'}>
           <h1>{committee.name}</h1>
           <div>
             {committee.messages && this.renderMessages(committee.messages, this.state.pendingEdit) }
