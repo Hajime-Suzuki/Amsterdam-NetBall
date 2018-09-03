@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
-import MemberListComponent from '../components/members/MembersListComponent'
-import { connect } from 'react-redux'
+import React, { Component } from "react"
+import { Route, Switch, Redirect } from "react-router-dom"
+import MemberListComponent from "../components/members/MembersListComponent"
+import { connect } from "react-redux"
 class AdminRoute extends Component {
   render() {
     const { component: Component, path, userRole } = this.props
@@ -10,16 +10,16 @@ class AdminRoute extends Component {
       <Route
         path={path}
         render={props => {
-          if (userRole !== 'admin') return <Redirect to="/" />
+          if (userRole !== "admin") return <Redirect to="/" />
           return <Component {...props} />
         }}
       />
     )
   }
 }
-const mapSateToProps = state => ({
+const mapStateToProps = state => ({
   currentUserId: state.currentUser && state.currentUser.id,
   userRole: state.currentUser && state.currentUser.role
 })
 
-export default connect(mapSateToProps)(AdminRoute)
+export default connect(mapStateToProps)(AdminRoute)

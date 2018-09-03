@@ -7,43 +7,115 @@ import Search from '../search/Search'
 
 class MemberListComponent extends PureComponent {
   state = {
-    order: null
+    order: {
+      orderType: null,
+      order: null
+    }
   }
 
   componentDidMount() {
     this.props.getMembers()
   }
 
-  sortByMembers = type => {
+  changeSortCondition = (orderType, ascOrDesc) => {
     this.setState({
-      order: this.state.order ? null : type
+      order: {
+        orderType,
+        order: ascOrDesc
+      }
     })
   }
 
+  renderIcons = type => {
+    return (
+      <span>
+        <i
+          className="fa fa-arrow-up"
+          aria-hidden="true"
+          onClick={() => this.changeSortCondition(type, 'ASC')}
+        />
+        <i
+          className="fa fa-arrow-down"
+          aria-hidden="true"
+          onClick={() => this.changeSortCondition(type, 'DESC')}
+        />
+      </span>
+    )
+  }
+
   render() {
-    const { members, fetching } = this.props
+    const { members, fetching, currentUserRole } = this.props
     if (fetching.members) return 'loading...'
+
+    const isAdmin = () => currentUserRole === 'admin'
+    const ifSelected = type => {
+      if (type === this.state.order.orderType) {
+        return {
+          backgroundColor: 'rgba(255, 213, 249, 0.3)'
+        }
+      }
+      return {}
+    }
 
     return (
       <div>
         <Search order={this.state.order} />
+
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Expiration</th>
-              <th scope="col" onClick={() => this.sortByMembers('points')}>
-                Activity Points
+              <th scope="col" style={ifSelected('name')}>
+                Name
+                {this.renderIcons('name')}
               </th>
+              {isAdmin() && (
+                <th scope="col" style={ifSelected('expiration')}>
+                  Expiration
+                  {this.renderIcons('expiration')}
+                </th>
+              )}
+              {isAdmin() && (
+                <th scope="col" style={ifSelected('points')}>
+                  Activity Points
+                  {this.renderIcons('points')}
+                </th>
+              )}
+              {isAdmin() && (
+                <th scope="col" style={ifSelected('activityRate')}>
+                  Attendance Rate
+                  {this.renderIcons('activityRate')}
+                </th>
+              )}
+              {<th scope="col">Team</th>}
             </tr>
             {members.map(m => {
+              const attendanceRate =
+                m.attendanceRate === null ? '-' : `${m.attendanceRate * 100}%`
+              const activityPoints =
+                m.activityPoints === null ? '-' : m.activityPoints
               return (
                 <tr key={m.id}>
-                  <th scope="row">
-                    {m.firstName} {m.lastName}
+                  <th scope="row" style={ifSelected('name')}>
+                    <span
+                      style={{
+                        color: m.isCurrentMember
+                          ? 'inherit'
+                          : '	rgb(128,128,128)'
+                      }}
+                    >
+                      {m.firstName} {m.lastName}
+                    </span>
                   </th>
-                  <th>{m.endDate}</th>
-                  <th>{m.activityPoints}</th>
+                  {isAdmin() && (
+                    <th style={ifSelected('expiration')}>{m.endDate}</th>
+                  )}
+                  {isAdmin() && (
+                    <th style={ifSelected('points')}>{activityPoints}</th>
+                  )}
+                  {isAdmin() && (
+                    <th style={ifSelected('activityRate')}>{attendanceRate}</th>
+                  )}
+                  {<th>{m.team ? m.team.name : '-'}</th>}
                 </tr>
               )
             })}
@@ -57,7 +129,8 @@ class MemberListComponent extends PureComponent {
 
 const mapSateToProps = state => ({
   members: allMemberInfoSelector(state),
-  fetching: state.fetching
+  fetching: state.fetching,
+  currentUserRole: state.currentUser && state.currentUser.role
 })
 
 export default connect(

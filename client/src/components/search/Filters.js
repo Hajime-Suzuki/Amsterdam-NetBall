@@ -13,7 +13,8 @@ class Filters extends PureComponent {
     positions: {},
     clubRoles: {},
     roles: {},
-    teams: {}
+    teams: {},
+    currentMemberOption: 'currentMemberOnly'
   }
   componentDidMount() {
     this.props.getFilterOption()
@@ -31,7 +32,21 @@ class Filters extends PureComponent {
           }
         }
       },
-      () => this.props.handleSearch(this.state)
+      () => {
+        console.log(this.state)
+        this.props.handleSearch(this.state)
+      }
+    )
+  }
+
+  handleRadioButtonChange = e => {
+    this.setState(
+      {
+        currentMemberOption: e.target.name
+      },
+      () => {
+        this.props.handleSearch(this.state)
+      }
     )
   }
 
@@ -54,6 +69,24 @@ class Filters extends PureComponent {
         </label>
       </div>
     ))
+  }
+
+  renderCurrentMemberCheckboxes = (name, label) => {
+    return (
+      <div className="custom-control custom-radio">
+        <input
+          type="radio"
+          className="custom-control-input"
+          id={name}
+          name={name}
+          checked={this.state.currentMemberOption === name}
+          onChange={this.handleRadioButtonChange}
+        />
+        <label className="custom-control-label" htmlFor={name}>
+          {label}
+        </label>
+      </div>
+    )
   }
 
   render() {
@@ -91,6 +124,21 @@ class Filters extends PureComponent {
             <b>Teams</b>
           </p>
           {this.renderCheckboxes(filterOption.teams, 'teams', 'name')}
+        </Col>
+
+        <Col>
+          <p>
+            <b>Current Member</b>
+          </p>
+          {this.renderCurrentMemberCheckboxes(
+            'currentMemberOnly',
+            'Current Member Only'
+          )}
+          {this.renderCurrentMemberCheckboxes(
+            'expiredMemberOnly',
+            'Expired Member Only'
+          )}
+          {this.renderCurrentMemberCheckboxes('All', 'All')}
         </Col>
       </Row>
     )
