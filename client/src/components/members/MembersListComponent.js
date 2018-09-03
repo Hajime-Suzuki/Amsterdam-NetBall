@@ -14,9 +14,12 @@ class MemberListComponent extends PureComponent {
     this.props.getMembers()
   }
 
-  sortByMembers = type => {
+  changeSortCondition = (orderType, ascOrDesc) => {
     this.setState({
-      order: this.state.order ? null : type
+      order: {
+        orderType,
+        order: ascOrDesc
+      }
     })
   }
 
@@ -32,18 +35,52 @@ class MemberListComponent extends PureComponent {
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Expiration</th>
-              <th scope="col" onClick={() => this.sortByMembers('points')}>
+              <th scope="col">
                 Activity Points
+                <span onClick={() => this.changeSortCondition('points', 'ASC')}>
+                  {' '}
+                  ↑{' '}
+                </span>
+                <span
+                  onClick={() => this.changeSortCondition('points', 'DESC')}
+                >
+                  {' '}
+                  ↓{' '}
+                </span>
+              </th>
+              <th scope="col">
+                Attendance Rate
+                <span
+                  onClick={() =>
+                    this.changeSortCondition('activityRate', 'ASC')
+                  }
+                >
+                  {' '}
+                  ↑{' '}
+                </span>
+                <span
+                  onClick={() =>
+                    this.changeSortCondition('activityRate', 'DESC')
+                  }
+                >
+                  {' '}
+                  ↓{' '}
+                </span>
               </th>
             </tr>
             {members.map(m => {
+              const attendanceRate =
+                m.attendanceRate === null ? '-' : `${m.attendanceRate * 100}%`
+              const activityPoints =
+                m.activityPoints === null ? '-' : m.activityPoints
               return (
                 <tr key={m.id}>
                   <th scope="row">
                     {m.firstName} {m.lastName}
                   </th>
                   <th>{m.endDate}</th>
-                  <th>{m.activityPoints}</th>
+                  <th>{activityPoints}</th>
+                  <th>{attendanceRate}</th>
                 </tr>
               )
             })}
