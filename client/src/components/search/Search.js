@@ -9,7 +9,6 @@ import './SearchBar.css'
 import SearchBar from './SearchBar'
 import Filters from './Filters'
 import { searchMembers } from '../../redux/actions/members'
-import FilterOrderDropDown from './FilterOrderDropDown'
 
 // import { userId } from "../../jwt"
 
@@ -76,7 +75,6 @@ class Search extends PureComponent {
         <Row>
           <Filters handleSearch={this.handleSearch} />
         </Row>
-        <FilterOrderDropDown />
       </Container>
     )
   }
