@@ -15,7 +15,6 @@ export const getCommittee = committeeId => (dispatch, getState) => {
   const jwt = state.currentUser.token
 
   if (isExpired(jwt)) return dispatch(logout())
-
   request
     .get(`${baseUrl}/committees/${committeeId}`)
     .set("Authorization", `${jwt}`)
