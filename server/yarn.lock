@@ -929,6 +929,10 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+moment@^2.22.2:
+  version "2.22.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -1482,9 +1486,13 @@ typeorm@^0.2.7:
     yargonaut "^1.1.2"
     yargs "^11.1.0"
 
-typescript@2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.5.2.tgz#038a95f7d9bbb420b1bf35ba31d4c5c1dd3ffe34"
+types@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/types/-/types-0.1.1.tgz#860c6859d11366293f835d8c95aebcf95029838e"
+
+typescript@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.3.tgz#4853b3e275ecdaa27f78fda46dc273a7eb7fc1c8"
 
 unpipe@1.0.0:
   version "1.0.0"

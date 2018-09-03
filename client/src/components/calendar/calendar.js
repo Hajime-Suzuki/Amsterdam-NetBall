@@ -5,26 +5,32 @@ import moment from "moment"
 import "../../../node_modules/react-big-calendar-like-google/lib/css/react-big-calendar.css"
 import BigCalendar from "react-big-calendar-like-google"
 import { Container, Row, Col } from "mdbreact"
+<<<<<<< HEAD
 
+=======
+>>>>>>> b78a6b770953843defa217b89f85ba7004febe80
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
-
 // a localizer for BigCalendar
 BigCalendar.momentLocalizer(moment)
+<<<<<<< HEAD
 
+=======
+>>>>>>> b78a6b770953843defa217b89f85ba7004febe80
 class EventsCalendar extends PureComponent {
   state = {
     date: new Date(),
     events: []
   }
-
   componentDidMount() {
     getEvents(events => {
       this.setState({ events })
     })
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b78a6b770953843defa217b89f85ba7004febe80
   onChange = date => this.setState({ date })
-
   render() {
     return (
       <Container className="mt-5">
@@ -48,5 +54,4 @@ class EventsCalendar extends PureComponent {
     )
   }
 }
-
 export default EventsCalendar

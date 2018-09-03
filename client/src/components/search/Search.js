@@ -9,6 +9,7 @@ import './SearchBar.css'
 import SearchBar from './SearchBar'
 import Filters from './Filters'
 import { searchMembers } from '../../redux/actions/members'
+import FilterOrderDropDown from './FilterOrderDropDown'
 
 // import { userId } from "../../jwt"
 
@@ -21,27 +22,33 @@ class Search extends PureComponent {
 
   handleSearch = async data => {
     const updatedItems = {}
-    const checkedItemToArray = (data, itemName) => {
+    const checkedItemToQueryString = (data, itemName) => {
       return Object.keys(data[itemName])
         .filter(key => data[itemName][key])
         .join(',')
     }
 
-    if (data.name) updatedItems.name = data.name
+    if (data.name !== undefined) updatedItems.name = data.name
 
     if (data.positions)
-      updatedItems.positions = checkedItemToArray(data, 'positions')
+      updatedItems.positions = checkedItemToQueryString(data, 'positions')
 
-    if (data.roles) updatedItems.roles = checkedItemToArray(data, 'roles')
+    if (data.roles) updatedItems.roles = checkedItemToQueryString(data, 'roles')
 
-    if (data.teams) updatedItems.teams = checkedItemToArray(data, 'teams')
+    if (data.teams) updatedItems.teams = checkedItemToQueryString(data, 'teams')
 
     if (data.clubRoles)
-      updatedItems.clubRoles = checkedItemToArray(data, 'clubRoles')
+      updatedItems.clubRoles = checkedItemToQueryString(data, 'clubRoles')
 
     this.setState(updatedItems, () => {
-      this.props.searchMembers(this.state)
+      this.props.searchMembers({ ...this.state, order: data.order })
     })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.order !== this.props.order) {
+      this.handleSearch({ order: this.props.order })
+    }
   }
 
   render() {
@@ -53,6 +60,7 @@ class Search extends PureComponent {
         <Row>
           <Filters handleSearch={this.handleSearch} />
         </Row>
+        <FilterOrderDropDown />
       </Container>
     )
   }
