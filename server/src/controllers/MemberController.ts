@@ -10,12 +10,15 @@ import {
   QueryParams,
   Patch,
   BadRequestError
-} from "routing-controllers"
-import { getRepository, Brackets } from "typeorm"
-import { Member } from "../entities/Member"
-import { Position } from "../entities/Position"
-import * as moment from "moment"
-import { ifError } from "assert"
+
+} from 'routing-controllers'
+import { getRepository, Brackets } from 'typeorm'
+import { Member } from '../entities/Member'
+import { Position } from '../entities/Position'
+import * as moment from 'moment'
+import { ifError } from 'assert'
+import { setMemberOrder } from '../libs/setMemberOrder'
+
 
 @JsonController()
 export default class MemberController {
@@ -120,33 +123,17 @@ export default class MemberController {
       query = query.andWhere("member.role.id = :role", { role: params.role })
     }
 
-    if (params.currentMember) {
-      query = query.andWhere(
-        "member.endDate > :date AND member.isCurrentMember = :membership",
-        { date: new Date(), membership: true }
-      )
+
+    if (params.currentMemberOption) {
+      const option = params.currentMemberOption
+      if (option !== 'All') {
+        query = query.andWhere('member.isCurrentMember = :membership', {
+          membership: option === 'currentMemberOnly'
+        })
+      }
     }
 
-    const setDescAsc = params => {
-      return params.order === "DESC" ? "DESC" : "ASC"
-    }
-
-    //default: order by name
-    if (!params.orderType && !params.order) {
-      query.orderBy("member.firstName")
-    }
-
-    if (params.orderType === "name") {
-      query.orderBy("member.firstName", setDescAsc(params))
-    }
-
-    if (params.orderType === "points") {
-      query.orderBy("member.activityPoints", setDescAsc(params), "NULLS LAST")
-    }
-
-    if (params.orderType === "activityRate") {
-      query.orderBy("member.attendanceRate", setDescAsc(params), "NULLS LAST")
-    }
+    setMemberOrder(query, params)
 
     const result = await query.getMany()
     const count = result.length

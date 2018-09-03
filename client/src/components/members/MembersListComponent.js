@@ -7,7 +7,10 @@ import Search from '../search/Search'
 
 class MemberListComponent extends PureComponent {
   state = {
-    order: null
+    order: {
+      orderType: null,
+      order: null
+    }
   }
 
   componentDidMount() {
@@ -44,29 +47,38 @@ class MemberListComponent extends PureComponent {
     const { members, fetching } = this.props
     if (fetching.members) return 'loading...'
 
+    const ifSelected = type => {
+      if (type === this.state.order.orderType) {
+        return {
+          backgroundColor: 'rgba(255, 213, 249, 0.3)'
+        }
+      }
+      return {}
+    }
     return (
       <div>
         <Search order={this.state.order} />
+
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">
+              <th scope="col" style={ifSelected('name')}>
                 Name
                 {this.renderIcons('name')}
               </th>
-              <th scope="col">Expiration</th>
-              <th scope="col">
+              <th scope="col" style={ifSelected('expiration')}>
+                Expiration
+                {this.renderIcons('expiration')}
+              </th>
+              <th scope="col" style={ifSelected('points')}>
                 Activity Points
                 {this.renderIcons('points')}
               </th>
-              <th scope="col">
+              <th scope="col" style={ifSelected('activityRate')}>
                 Attendance Rate
                 {this.renderIcons('activityRate')}
               </th>
-              <th scope="col">
-                Member
-                {this.renderIcons('isCurrentMember')}
-              </th>
+              <th scope="col">Member</th>
             </tr>
             {members.map(m => {
               const attendanceRate =
@@ -75,12 +87,12 @@ class MemberListComponent extends PureComponent {
                 m.activityPoints === null ? '-' : m.activityPoints
               return (
                 <tr key={m.id}>
-                  <th scope="row">
+                  <th scope="row" style={ifSelected('name')}>
                     {m.firstName} {m.lastName}
                   </th>
-                  <th>{m.endDate}</th>
-                  <th>{activityPoints}</th>
-                  <th>{attendanceRate}</th>
+                  <th style={ifSelected('expiration')}>{m.endDate}</th>
+                  <th style={ifSelected('points')}>{activityPoints}</th>
+                  <th style={ifSelected('activityRate')}>{attendanceRate}</th>
                   <th>{m.isCurrentMember ? 'o' : 'x'}</th>
                 </tr>
               )
