@@ -14,10 +14,30 @@ class MemberListComponent extends PureComponent {
     this.props.getMembers()
   }
 
-  sortByMembers = type => {
+  changeSortCondition = (orderType, ascOrDesc) => {
     this.setState({
-      order: this.state.order ? null : type
+      order: {
+        orderType,
+        order: ascOrDesc
+      }
     })
+  }
+
+  renderIcons = type => {
+    return (
+      <span>
+        <i
+          className="fa fa-arrow-up"
+          aria-hidden="true"
+          onClick={() => this.changeSortCondition(type, 'ASC')}
+        />
+        <i
+          className="fa fa-arrow-down"
+          aria-hidden="true"
+          onClick={() => this.changeSortCondition(type, 'DESC')}
+        />
+      </span>
+    )
   }
 
   render() {
@@ -30,20 +50,38 @@ class MemberListComponent extends PureComponent {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
+              <th scope="col">
+                Name
+                {this.renderIcons('name')}
+              </th>
               <th scope="col">Expiration</th>
-              <th scope="col" onClick={() => this.sortByMembers('points')}>
+              <th scope="col">
                 Activity Points
+                {this.renderIcons('points')}
+              </th>
+              <th scope="col">
+                Attendance Rate
+                {this.renderIcons('activityRate')}
+              </th>
+              <th scope="col">
+                Member
+                {this.renderIcons('isCurrentMember')}
               </th>
             </tr>
             {members.map(m => {
+              const attendanceRate =
+                m.attendanceRate === null ? '-' : `${m.attendanceRate * 100}%`
+              const activityPoints =
+                m.activityPoints === null ? '-' : m.activityPoints
               return (
                 <tr key={m.id}>
                   <th scope="row">
                     {m.firstName} {m.lastName}
                   </th>
                   <th>{m.endDate}</th>
-                  <th>{m.activityPoints}</th>
+                  <th>{activityPoints}</th>
+                  <th>{attendanceRate}</th>
+                  <th>{m.isCurrentMember ? 'o' : 'x'}</th>
                 </tr>
               )
             })}

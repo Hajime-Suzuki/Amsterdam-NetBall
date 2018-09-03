@@ -41,13 +41,24 @@ class Search extends PureComponent {
       updatedItems.clubRoles = checkedItemToQueryString(data, 'clubRoles')
 
     this.setState(updatedItems, () => {
-      this.props.searchMembers({ ...this.state, order: data.order })
+      this.props.searchMembers({
+        ...this.state,
+        orderType: this.props.order.orderType,
+        order: this.props.order.order
+      })
     })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.order !== this.props.order) {
-      this.handleSearch({ order: this.props.order })
+    const prevOrder = JSON.stringify(prevProps.order)
+    const currentOrder = JSON.stringify(this.props.order)
+
+    if (prevOrder !== currentOrder) {
+      console.log(prevProps.order, this.props.order)
+      this.handleSearch({
+        orderType: this.props.order.orderType,
+        order: this.props.order.order
+      })
     }
   }
 
