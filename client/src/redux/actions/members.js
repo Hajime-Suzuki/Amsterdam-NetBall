@@ -50,10 +50,27 @@ export const addActivityToMember = (memberId, activityId) => (
     .catch(err => console.error(err))
 }
 
+export const removeActivityFromMember = (memberId, activityId) => (
+  dispatch,
+  getState
+) => {
+  const state = getState()
+  if (!state.currentUser) return null
+  const jwt = state.currentUser.token
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  console.log(memberId, activityId)
+
+  request
+    .patch(`${baseUrl}/members/unsubscribe/${memberId}/${activityId}`)
+    .set("Authorization", `${jwt}`)
+    .then(result => dispatch(setMember(result.body)))
+    .catch(err => console.error(err))
+}
+
 export const getMember = memberId => (dispatch, getState) => {
   dispatch({ type: FETCHING_MEMBERS })
-
-  console.log(memberId, "memberid")
 
   const state = getState()
   if (!state.currentUser) return null
@@ -105,8 +122,6 @@ export const allMemberInfoSelector = createSelector(
 )
 
 export const searchMembers = data => (dispatch, getState) => {
-  console.log("Search user action", data)
-
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token

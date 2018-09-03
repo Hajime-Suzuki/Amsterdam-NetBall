@@ -1,5 +1,4 @@
 import request from "superagent"
-// const CALENDAR_ID = "iofehqekskfumq1r5asir9gs7g@group.calendar.google.com"
 const CALENDAR_ID = "info@amsterdamnetball.com"
 
 const API_KEY = "AIzaSyDJlOidCp3Nc1RFl1Y8M1JczUpBKi8X0so"
@@ -12,8 +11,6 @@ export function getEvents(callback) {
       console.log(resp)
       JSON.parse(resp.text).items.map(event => {
         if (event.start) {
-          console.log("Active")
-          console.log(event)
           events.push({
             start: event.start.date || new Date(event.start.dateTime),
             end: event.end.date || new Date(event.end.dateTime),
