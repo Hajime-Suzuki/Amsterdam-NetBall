@@ -53,8 +53,6 @@ export const addActivityToMember = (memberId, activityId) => (
 export const getMember = memberId => (dispatch, getState) => {
   dispatch({ type: FETCHING_MEMBERS })
 
-  console.log(memberId, "memberid")
-
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -105,8 +103,6 @@ export const allMemberInfoSelector = createSelector(
 )
 
 export const searchMembers = data => (dispatch, getState) => {
-  console.log("Search user action", data)
-
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token

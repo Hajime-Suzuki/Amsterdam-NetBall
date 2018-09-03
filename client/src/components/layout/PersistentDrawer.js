@@ -7,9 +7,7 @@ import Drawer from "@material-ui/core/Drawer"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import List from "@material-ui/core/List"
-import MenuItem from "@material-ui/core/MenuItem"
 import Typography from "@material-ui/core/Typography"
-import TextField from "@material-ui/core/TextField"
 import Divider from "@material-ui/core/Divider"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
@@ -32,7 +30,6 @@ import AdminRoute from "../../private/Admin"
 import MemberListComponent from "../members/MembersListComponent"
 import { withRouter } from "react-router"
 import Icon from "@material-ui/core/Icon"
-import { Link } from "react-router-dom"
 
 import MemberLandingPage from "../MemberLanding/MemberLandingPage"
 
@@ -140,8 +137,6 @@ class PersistentDrawer extends PureComponent {
   render() {
     const { classes, theme, history, currentUser } = this.props
     const { anchor, open } = this.state
-
-    console.log(history)
 
     const drawer = (
       <Drawer

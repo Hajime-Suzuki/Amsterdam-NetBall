@@ -90,7 +90,10 @@ class MemberProfilePage extends PureComponent {
       )
     } else {
       return activities.map(activity => (
-        <button className="list-group-item list-group-item-action waves-effect">
+        <button
+          className="list-group-item list-group-item-action waves-effect"
+          key={activity.id}
+        >
           {activity.name}
         </button>
       ))
@@ -99,7 +102,7 @@ class MemberProfilePage extends PureComponent {
 
   renderModalActivities = activites => {
     return activites.map(activity => (
-      <div className="modal-body">
+      <div className="modal-body" key={activites.id}>
         <button
           onClick={() => this.handleInnerOpen(activity)}
           className="list-group-item list-group-item-action waves-effect"
@@ -231,7 +234,7 @@ class MemberProfilePage extends PureComponent {
 
                 <h5 className="indigo-text font-bold mb-4">Your activities</h5>
 
-                <div class="list-group mb-4">
+                <div className="list-group mb-4">
                   {this.renderActivities(member.activities)}
 
                   <Button
@@ -248,14 +251,14 @@ class MemberProfilePage extends PureComponent {
                       onClose={this.handleClose}
                     >
                       <div style={getModalStyle()} className={classes.paper}>
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
                               Select an activity you want to do
                             </h5>
                             <button
                               type="button"
-                              class="close"
+                              className="close"
                               data-dismiss="modal"
                               aria-label="Close"
                               onClick={this.handleClose}
@@ -285,14 +288,14 @@ class MemberProfilePage extends PureComponent {
                       onClose={this.handleInnerClose}
                     >
                       <div style={getModalStyle()} className={classes.paper}>
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
                               Activity name: {this.state.currentActivity.name}
                             </h5>
                             <button
                               type="button"
-                              class="close"
+                              className="close"
                               data-dismiss="modal"
                               aria-label="Close"
                               onClick={this.handleInnerClose}
@@ -333,13 +336,13 @@ class MemberProfilePage extends PureComponent {
                               )
                             }
                             className="btn btn-success btn-block my-4 "
-                            disabled={
-                              !activities.includes(
-                                this.state.currentActivity.id
-                              )
-                            }
+                            disabled={member.activities.some(act => {
+                              return act.id === this.state.currentActivity.id
+                            })}
                           >
-                            {!activities.includes(this.state.currentActivity.id)
+                            {member.activities.some(act => {
+                              return act.id === this.state.currentActivity.id
+                            })
                               ? `You have already joined this activity`
                               : `Join this activity!`}
                           </button>
@@ -357,7 +360,8 @@ class MemberProfilePage extends PureComponent {
                   </div>
                 </div>
 
-                {currentUser.role === "admin" && (
+                {(currentUser.role === "admin" ||
+                  currentUser.role === "member") && (
                   <div>
                     <h5 className="indigo-text font-bold mb-4">
                       Extra information
@@ -467,26 +471,29 @@ class MemberProfilePage extends PureComponent {
                         value={new Date(member.endDate).toLocaleDateString()}
                       />
                     </div>
-                    <div className="md-form input-group mt-0 mb-3">
-                      <div className="input-group-prepend">
-                        <span
-                          className="input-group-text"
-                          id="inputGroup-sizing-default1"
-                          style={{ backgroundColor: "#fff" }}
-                        >
-                          Is currently an active member:
-                        </span>
+
+                    {currentUser.role === "admin" && (
+                      <div className="md-form input-group mt-0 mb-3">
+                        <div className="input-group-prepend">
+                          <span
+                            className="input-group-text"
+                            id="inputGroup-sizing-default1"
+                            style={{ backgroundColor: "#fff" }}
+                          >
+                            Is currently an active member:
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          className="form-control"
+                          aria-label="Default"
+                          aria-describedby="inputGroup-sizing-default1"
+                          disabled
+                          style={{ textAlign: "right" }}
+                          value={member.isCurrentMember ? "Yes" : "No"}
+                        />
                       </div>
-                      <input
-                        type="text"
-                        className="form-control"
-                        aria-label="Default"
-                        aria-describedby="inputGroup-sizing-default1"
-                        disabled
-                        style={{ textAlign: "right" }}
-                        value={member.isCurrentMember ? "Yes" : "No"}
-                      />
-                    </div>
+                    )}
                   </div>
                 )}
                 <a className="fa-lg p-2 m-2 li-ic">
