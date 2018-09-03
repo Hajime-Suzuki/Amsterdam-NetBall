@@ -41,7 +41,6 @@ class Homepage extends PureComponent {
     }
   }
 
-  componentDidMount() {}
   render() {
     if (this.props.currentUser) return <Redirect to="/members" />
 
@@ -54,7 +53,6 @@ class Homepage extends PureComponent {
               onSubmit={this.handleSubmit}
             >
               <p className="h4 mb-4">Sign in</p>
-              {/* <!-- Email --> */}
               <input
                 type="email"
                 id="defaultLoginFormEmail"
@@ -64,7 +62,6 @@ class Homepage extends PureComponent {
                 value={this.state.email || ""}
                 onChange={this.handleChange}
               />
-              {/* <!-- Password --> */}
               <input
                 type="password"
                 id="defaultLoginFormPassword"
@@ -100,12 +97,9 @@ class Homepage extends PureComponent {
               <Button
                 className="btn btn-info btn-block  btn-blue-grey my-4"
                 type="submit"
-                // disabled={this.state.submitButton}
               >
                 Sign in
               </Button>
-
-              {/* <!-- Register --> */}
               <p>
                 Not a member? <Link to="/signup">Register</Link>
               </p>

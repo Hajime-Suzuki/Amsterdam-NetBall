@@ -11,6 +11,7 @@ import Modal from "@material-ui/core/Modal"
 import { withStyles } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import { getActivities } from "../../redux/actions/activities"
+import { Divider } from "@material-ui/core"
 
 function rand() {
   return Math.round(Math.random() * 20) - 10
@@ -90,16 +91,44 @@ class MemberProfilePage extends PureComponent {
       )
     } else {
       return activities.map(activity => (
-        <button className="list-group-item list-group-item-action waves-effect">
-          {activity.name}
-        </button>
+        <div>
+          <button
+            className="list-group-item list-group-item-action waves-effect"
+            key={activity.id}
+          >
+            <p className="list-group-item list-group-item-action waves-effect">
+              {" "}
+              Activity name: {activity.name}
+            </p>
+            <p className="list-group-item list-group-item-action waves-effect">
+              {" "}
+              Activity starts at:{" "}
+              {new Date(activity.startTime).toLocaleDateString()} |{" "}
+              {new Date(activity.startTime).toLocaleTimeString()}
+            </p>
+            <p className="list-group-item list-group-item-action waves-effect">
+              {" "}
+              Activity ends at:{" "}
+              {new Date(activity.endTime).toLocaleDateString()} |{" "}
+              {new Date(activity.endTime).toLocaleTimeString()}
+            </p>
+          </button>
+          <Divider />
+        </div>
       ))
     }
   }
 
+  filterOldActivities = activities =>
+    activities.filter(activity => {
+      const endTime = new Date(activity.endTime)
+      const now = new Date()
+      if (now < endTime) return activity
+    })
+
   renderModalActivities = activites => {
     return activites.map(activity => (
-      <div className="modal-body">
+      <div className="modal-body" key={activites.id}>
         <button
           onClick={() => this.handleInnerOpen(activity)}
           className="list-group-item list-group-item-action waves-effect"
@@ -231,8 +260,10 @@ class MemberProfilePage extends PureComponent {
 
                 <h5 className="indigo-text font-bold mb-4">Your activities</h5>
 
-                <div class="list-group mb-4">
-                  {this.renderActivities(member.activities)}
+                <div className="list-group mb-4">
+                  {this.renderActivities(
+                    this.filterOldActivities(member.activities)
+                  )}
 
                   <Button
                     className="btn btn-info btn-block  btn-blue-grey my-4 "
@@ -248,14 +279,14 @@ class MemberProfilePage extends PureComponent {
                       onClose={this.handleClose}
                     >
                       <div style={getModalStyle()} className={classes.paper}>
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
                               Select an activity you want to do
                             </h5>
                             <button
                               type="button"
-                              class="close"
+                              className="close"
                               data-dismiss="modal"
                               aria-label="Close"
                               onClick={this.handleClose}
@@ -263,7 +294,9 @@ class MemberProfilePage extends PureComponent {
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          {this.renderModalActivities(activities)}
+                          {this.renderModalActivities(
+                            this.filterOldActivities(activities)
+                          )}
 
                           <div class="modal-footer">
                             <Button
@@ -285,14 +318,14 @@ class MemberProfilePage extends PureComponent {
                       onClose={this.handleInnerClose}
                     >
                       <div style={getModalStyle()} className={classes.paper}>
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
                               Activity name: {this.state.currentActivity.name}
                             </h5>
                             <button
                               type="button"
-                              class="close"
+                              className="close"
                               data-dismiss="modal"
                               aria-label="Close"
                               onClick={this.handleInnerClose}
@@ -333,13 +366,13 @@ class MemberProfilePage extends PureComponent {
                               )
                             }
                             className="btn btn-success btn-block my-4 "
-                            disabled={
-                              !activities.includes(
-                                this.state.currentActivity.id
-                              )
-                            }
+                            disabled={member.activities.some(act => {
+                              return act.id === this.state.currentActivity.id
+                            })}
                           >
-                            {!activities.includes(this.state.currentActivity.id)
+                            {member.activities.some(act => {
+                              return act.id === this.state.currentActivity.id
+                            })
                               ? `You have already joined this activity`
                               : `Join this activity!`}
                           </button>
@@ -357,7 +390,8 @@ class MemberProfilePage extends PureComponent {
                   </div>
                 </div>
 
-                {currentUser.role === "admin" && (
+                {(currentUser.role === "admin" ||
+                  currentUser.role === "member") && (
                   <div>
                     <h5 className="indigo-text font-bold mb-4">
                       Extra information
@@ -467,26 +501,29 @@ class MemberProfilePage extends PureComponent {
                         value={new Date(member.endDate).toLocaleDateString()}
                       />
                     </div>
-                    <div className="md-form input-group mt-0 mb-3">
-                      <div className="input-group-prepend">
-                        <span
-                          className="input-group-text"
-                          id="inputGroup-sizing-default1"
-                          style={{ backgroundColor: "#fff" }}
-                        >
-                          Is currently an active member:
-                        </span>
+
+                    {currentUser.role === "admin" && (
+                      <div className="md-form input-group mt-0 mb-3">
+                        <div className="input-group-prepend">
+                          <span
+                            className="input-group-text"
+                            id="inputGroup-sizing-default1"
+                            style={{ backgroundColor: "#fff" }}
+                          >
+                            Is currently an active member:
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          className="form-control"
+                          aria-label="Default"
+                          aria-describedby="inputGroup-sizing-default1"
+                          disabled
+                          style={{ textAlign: "right" }}
+                          value={member.isCurrentMember ? "Yes" : "No"}
+                        />
                       </div>
-                      <input
-                        type="text"
-                        className="form-control"
-                        aria-label="Default"
-                        aria-describedby="inputGroup-sizing-default1"
-                        disabled
-                        style={{ textAlign: "right" }}
-                        value={member.isCurrentMember ? "Yes" : "No"}
-                      />
-                    </div>
+                    )}
                   </div>
                 )}
                 <a className="fa-lg p-2 m-2 li-ic">
