@@ -1,14 +1,14 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { login } from "../../redux/actions/users"
-import { Redirect } from "react-router-dom"
-import Search from "../search/Search"
-import { getMembers } from "../../redux/actions/members"
-import { getActivities } from "../../redux/actions/activities"
-import { Icon } from "@material-ui/core"
-import Divider from "@material-ui/core/Divider"
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Input, Button } from 'mdbreact'
+import { login } from '../../redux/actions/users'
+import { Redirect } from 'react-router-dom'
+import Search from '../search/Search'
+import { getMembers } from '../../redux/actions/members'
+import { getActivities } from '../../redux/actions/activities'
+import { Icon } from '@material-ui/core'
+import Divider from '@material-ui/core/Divider'
 
 // import { userId } from "../../jwt"
 
@@ -39,7 +39,7 @@ class MemberLandingPage extends PureComponent {
 
     if (!currentUser) return <Redirect to="/" />
 
-    if (!members) return "Loading"
+    if (!members) return 'Loading'
 
     return (
       <Container className="container-fluid mt-1">
@@ -59,7 +59,7 @@ class MemberLandingPage extends PureComponent {
                   Personal profile
                 </Button>
               </Link>
-              <Link to="/members">
+              <Link to="/members/list">
                 <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
                   Check all members
                 </Button>
