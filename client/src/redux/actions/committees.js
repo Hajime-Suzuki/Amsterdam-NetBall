@@ -20,7 +20,6 @@ export const getCommittee = committeeId => (dispatch, getState) => {
     .get(`${baseUrl}/committees/${committeeId}`)
     .set("Authorization", `${jwt}`)
     .then(result => {
-      console.log(result)
       dispatch({
         type: GET_COMMITTEE,
         payload: result.body
@@ -52,7 +51,7 @@ export const addMessage = (messageBody, committeeId) => (dispatch, getState) => 
 
 }
 
-export const editMessage = (updates, committeeId) => (dispatch, getState) => {
+export const editMessage = (updates, committeeId, messageId) => (dispatch, getState) => {
 
   const state = getState()
   if (!state.currentUser) return null
@@ -60,9 +59,11 @@ export const editMessage = (updates, committeeId) => (dispatch, getState) => {
 
   if (isExpired(jwt)) return dispatch(logout())
 
+  console.log('updates', updates, 'committeeId', committeeId, 'messageId', messageId, 'jwt', jwt)
+
   request
-    .put(`${baseUrl}/committees/${committeeId}`)
-    .set('Authorization', `Bearer ${jwt}`)
+    .put(`${baseUrl}/messages/${committeeId}/${messageId}`)
+    .set('Authorization', `${jwt}`)
     .send(updates)
     .then(response => {
       dispatch({
@@ -74,8 +75,7 @@ export const editMessage = (updates, committeeId) => (dispatch, getState) => {
 
 }
 
-
-export const deleteMessage = (messageId, committeeId) => (dispatch, getState) => {
+export const deleteMessage = (committeeId, messageId) => (dispatch, getState) => {
 
   const state = getState()
   if (!state.currentUser) return null
@@ -84,13 +84,13 @@ export const deleteMessage = (messageId, committeeId) => (dispatch, getState) =>
   if (isExpired(jwt)) return dispatch(logout())
 
   request
-    .delete(`${baseUrl}/committees/${committeeId}`)
+    .delete(`${baseUrl}/committees/${committeeId}/${messageId}`)
     .set("Authorization", `${jwt}`)
     .then(result => {
       console.log('result', result)
       dispatch({
         type: DELETE_MESSAGE,
-        payload: result.body
+        payload: messageId
       })
     })
     .catch(err => alert(err))
