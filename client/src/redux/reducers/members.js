@@ -16,11 +16,6 @@ export default (state = initialState, { type, payload }) => {
         members: payload.entities.members
       }
 
-    case GET_MEMBER:
-      return {
-        payload
-      }
-
     case FILTER_MEMBERS:
       return {
         ids: payload.result || initialState.ids,
