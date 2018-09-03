@@ -27,16 +27,21 @@ class EventsCalendar extends PureComponent {
 
   render() {
     return (
-      <Container className="container-fluid">
+      <Container className="mt-5">
         <Row className="justify-content-md-center mt-2">
           <h2>Netball matches and activities overview</h2>
         </Row>
-        <Col className=" col-md-auto">
+        <Col
+        // className=" col-md-auto"
+        >
           <BigCalendar
             events={this.state.events}
             defaultDate={new Date()}
-            defaultView="month"
-            style={{ height: "100vh" }}
+            defaultView="agenda"
+            style={{
+              height: "100vh",
+              width: "auto"
+            }}
           />
         </Col>
       </Container>

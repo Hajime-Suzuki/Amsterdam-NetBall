@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom"
 import Search from "../search/Search"
 import { getMembers } from "../../redux/actions/members"
 import { Icon } from "@material-ui/core"
+import Divider from "@material-ui/core/Divider"
 
 // import { userId } from "../../jwt"
 
@@ -39,55 +40,41 @@ class MemberLandingPage extends PureComponent {
     if (!members) return "Loading"
 
     return (
-      <Container className="container-fluid mt-5">
+      <Container className="container-fluid mt-1">
         <Row className="justify-content-md-center">
           <Col md="6" className="mt-5 mb-5">
             <div className="jumbotron text-center">
-              <h4 className="card-title font-bold pb-2">
-                <strong>Welcome to the Netball Amsterdam App.</strong>
-              </h4>
+              <img
+                src={require(`../../lib/images/amsterdam-netball-logo.png`)}
+                className="header-logo"
+                style={{ marginBottom: 50 }}
+              />
+              <h5 className=" font-bold mb-4">Profile and members</h5>
+              <Divider />
 
-              <Row className="justify-content-center">
-                <Link to="/events">
-                  <button className="btn btn-primary" style={{ width: "100%" }}>
-                    <i className="fa fa-arrow-circle-o-right mr-1" />
-                    Upcoming events and matches
-                  </button>
-                </Link>
-              </Row>
-              <Row className="justify-content-center ">
-                <Link to="/events">
-                  <button
-                    className="btn btn-primary "
-                    style={{ width: "100%" }}
-                  >
-                    <i className="fa fa-arrow-circle-o-right mr-1" />
-                    Upcoming events and matches
-                  </button>
-                </Link>
-              </Row>
-              <Row className="justify-content-center">
-                <Link to="/events">
-                  <button
-                    className="btn btn-primary "
-                    style={{ width: "100%" }}
-                  >
-                    <i className="fa fa-arrow-circle-o-right mr-1" />
-                    Upcoming events and matches
-                  </button>
-                </Link>
-              </Row>
-              <Row className="justify-content-center">
-                <Link to="/events">
-                  <button
-                    className="btn btn-primary "
-                    style={{ width: "100%" }}
-                  >
-                    <i className="fa fa-arrow-circle-o-right mr-1" />
-                    Upcoming events and matches
-                  </button>
-                </Link>
-              </Row>
+              <Link to={`/members/${currentUser.id}`}>
+                <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
+                  Personal profile
+                </Button>
+              </Link>
+              <Link to="/members">
+                <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
+                  Check all members
+                </Button>
+              </Link>
+              <h5 className=" font-bold mb-4">Events</h5>
+              <Divider />
+              <Link to="/events">
+                <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
+                  Games and events
+                </Button>
+              </Link>
+
+              <Link to="/events">
+                <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
+                  Volunteer activities
+                </Button>
+              </Link>
             </div>
           </Col>
         </Row>

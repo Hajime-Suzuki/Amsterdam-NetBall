@@ -16,6 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import ListItem from "@material-ui/core/ListItem"
+import Button from "@material-ui/core/Button"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import { Switch } from "react-router-dom"
@@ -137,7 +138,7 @@ class PersistentDrawer extends PureComponent {
   }
 
   render() {
-    const { classes, theme, history } = this.props
+    const { classes, theme, history, currentUser } = this.props
     const { anchor, open } = this.state
 
     console.log(history)
@@ -236,6 +237,12 @@ class PersistentDrawer extends PureComponent {
               <Typography variant="title" color="inherit" noWrap>
                 Netball App
               </Typography>
+              {currentUser && (
+                <Button color="inherit">
+                  {/* <AccountIcon /> */}
+                  Logged In
+                </Button>
+              )}
             </Toolbar>
           </AppBar>
           {before}{" "}
@@ -285,7 +292,7 @@ PersistentDrawer.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    // currentUser: state.currentUser
+    currentUser: state.currentUser
   }
 }
 

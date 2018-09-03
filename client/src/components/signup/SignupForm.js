@@ -61,7 +61,7 @@ export default class SignupForm extends PureComponent {
 
   render() {
     return (
-      <Container>
+      <Container className="mt-5">
         <Row className="justify-content-md-center">
           <Col md="6">
             <form onSubmit={this.handleSubmit}>
