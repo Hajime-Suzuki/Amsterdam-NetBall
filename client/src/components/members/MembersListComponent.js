@@ -44,9 +44,10 @@ class MemberListComponent extends PureComponent {
   }
 
   render() {
-    const { members, fetching } = this.props
+    const { members, fetching, currentUserRole } = this.props
     if (fetching.members) return 'loading...'
 
+    const isAdmin = () => currentUserRole === 'admin'
     const ifSelected = type => {
       if (type === this.state.order.orderType) {
         return {
@@ -55,6 +56,7 @@ class MemberListComponent extends PureComponent {
       }
       return {}
     }
+
     return (
       <div>
         <Search order={this.state.order} />
@@ -66,19 +68,25 @@ class MemberListComponent extends PureComponent {
                 Name
                 {this.renderIcons('name')}
               </th>
-              <th scope="col" style={ifSelected('expiration')}>
-                Expiration
-                {this.renderIcons('expiration')}
-              </th>
-              <th scope="col" style={ifSelected('points')}>
-                Activity Points
-                {this.renderIcons('points')}
-              </th>
-              <th scope="col" style={ifSelected('activityRate')}>
-                Attendance Rate
-                {this.renderIcons('activityRate')}
-              </th>
-              <th scope="col">Member</th>
+              {isAdmin() && (
+                <th scope="col" style={ifSelected('expiration')}>
+                  Expiration
+                  {this.renderIcons('expiration')}
+                </th>
+              )}
+              {isAdmin() && (
+                <th scope="col" style={ifSelected('points')}>
+                  Activity Points
+                  {this.renderIcons('points')}
+                </th>
+              )}
+              {isAdmin() && (
+                <th scope="col" style={ifSelected('activityRate')}>
+                  Attendance Rate
+                  {this.renderIcons('activityRate')}
+                </th>
+              )}
+              {<th scope="col">Team</th>}
             </tr>
             {members.map(m => {
               const attendanceRate =
@@ -88,12 +96,27 @@ class MemberListComponent extends PureComponent {
               return (
                 <tr key={m.id}>
                   <th scope="row" style={ifSelected('name')}>
-                    {m.firstName} {m.lastName}
+                    <span
+                      style={{
+                        color: m.isCurrentMember
+                          ? 'inherit'
+                          : '	rgb(128,128,128)'
+                      }}
+                    >
+                      {m.firstName} {m.lastName}
+                      {console.log(m)}
+                    </span>
                   </th>
-                  <th style={ifSelected('expiration')}>{m.endDate}</th>
-                  <th style={ifSelected('points')}>{activityPoints}</th>
-                  <th style={ifSelected('activityRate')}>{attendanceRate}</th>
-                  <th>{m.isCurrentMember ? 'o' : 'x'}</th>
+                  {isAdmin() && (
+                    <th style={ifSelected('expiration')}>{m.endDate}</th>
+                  )}
+                  {isAdmin() && (
+                    <th style={ifSelected('points')}>{activityPoints}</th>
+                  )}
+                  {isAdmin() && (
+                    <th style={ifSelected('activityRate')}>{attendanceRate}</th>
+                  )}
+                  {<th>{m.team ? m.team.name : '-'}</th>}
                 </tr>
               )
             })}
@@ -107,7 +130,8 @@ class MemberListComponent extends PureComponent {
 
 const mapSateToProps = state => ({
   members: allMemberInfoSelector(state),
-  fetching: state.fetching
+  fetching: state.fetching,
+  currentUserRole: state.currentUser && state.currentUser.role
 })
 
 export default connect(
