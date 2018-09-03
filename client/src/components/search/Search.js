@@ -17,7 +17,8 @@ class Search extends PureComponent {
   state = {
     name: '',
     positions: '',
-    roles: ''
+    roles: '',
+    currentMemberOption: ''
   }
 
   handleSearch = async data => {
@@ -39,6 +40,10 @@ class Search extends PureComponent {
 
     if (data.clubRoles)
       updatedItems.clubRoles = checkedItemToQueryString(data, 'clubRoles')
+
+    if (data.currentMemberOption) {
+      updatedItems.currentMemberOption = data.currentMemberOption
+    }
 
     this.setState(updatedItems, () => {
       this.props.searchMembers({

@@ -7,7 +7,10 @@ import Search from '../search/Search'
 
 class MemberListComponent extends PureComponent {
   state = {
-    order: null
+    order: {
+      orderType: null,
+      order: null
+    }
   }
 
   componentDidMount() {
@@ -63,10 +66,7 @@ class MemberListComponent extends PureComponent {
                 Attendance Rate
                 {this.renderIcons('activityRate')}
               </th>
-              <th scope="col">
-                Member
-                {this.renderIcons('isCurrentMember')}
-              </th>
+              <th scope="col">Member</th>
             </tr>
             {members.map(m => {
               const attendanceRate =
