@@ -23,6 +23,23 @@ class MemberListComponent extends PureComponent {
     })
   }
 
+  renderIcons = type => {
+    return (
+      <span>
+        <i
+          className="fa fa-arrow-up"
+          aria-hidden="true"
+          onClick={() => this.changeSortCondition(type, 'ASC')}
+        />
+        <i
+          className="fa fa-arrow-down"
+          aria-hidden="true"
+          onClick={() => this.changeSortCondition(type, 'DESC')}
+        />
+      </span>
+    )
+  }
+
   render() {
     const { members, fetching } = this.props
     if (fetching.members) return 'loading...'
@@ -33,39 +50,22 @@ class MemberListComponent extends PureComponent {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
+              <th scope="col">
+                Name
+                {this.renderIcons('name')}
+              </th>
               <th scope="col">Expiration</th>
               <th scope="col">
                 Activity Points
-                <span onClick={() => this.changeSortCondition('points', 'ASC')}>
-                  {' '}
-                  ↑{' '}
-                </span>
-                <span
-                  onClick={() => this.changeSortCondition('points', 'DESC')}
-                >
-                  {' '}
-                  ↓{' '}
-                </span>
+                {this.renderIcons('points')}
               </th>
               <th scope="col">
                 Attendance Rate
-                <span
-                  onClick={() =>
-                    this.changeSortCondition('activityRate', 'ASC')
-                  }
-                >
-                  {' '}
-                  ↑{' '}
-                </span>
-                <span
-                  onClick={() =>
-                    this.changeSortCondition('activityRate', 'DESC')
-                  }
-                >
-                  {' '}
-                  ↓{' '}
-                </span>
+                {this.renderIcons('activityRate')}
+              </th>
+              <th scope="col">
+                Member
+                {this.renderIcons('isCurrentMember')}
               </th>
             </tr>
             {members.map(m => {
@@ -81,6 +81,7 @@ class MemberListComponent extends PureComponent {
                   <th>{m.endDate}</th>
                   <th>{activityPoints}</th>
                   <th>{attendanceRate}</th>
+                  <th>{m.isCurrentMember ? 'o' : 'x'}</th>
                 </tr>
               )
             })}
