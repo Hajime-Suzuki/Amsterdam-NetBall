@@ -1,24 +1,32 @@
-import React from 'react'
-import Drawer from '@material-ui/core/Drawer'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import List from '@material-ui/core/List'
-import MenuItem from '@material-ui/core/MenuItem'
-import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import ListItem from '@material-ui/core/ListItem'
-import Button from '@material-ui/core/Button'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
+import React from "react"
+import Drawer from "@material-ui/core/Drawer"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import List from "@material-ui/core/List"
+import MenuItem from "@material-ui/core/MenuItem"
+import Typography from "@material-ui/core/Typography"
+import TextField from "@material-ui/core/TextField"
+import Divider from "@material-ui/core/Divider"
+import IconButton from "@material-ui/core/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
+import ChevronRightIcon from "@material-ui/icons/ChevronRight"
+import ListItem from "@material-ui/core/ListItem"
+import Button from "@material-ui/core/Button"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
 
-import Icon from '@material-ui/core/Icon'
+import Icon from "@material-ui/core/Icon"
 
-const drawerItems = ({ anchor, open, classes, theme, history }) => {
+const drawerItems = ({
+  anchor,
+  open,
+  classes,
+  theme,
+  history,
+  handleDrawerClose,
+  handleDrawerOpen
+}) => {
   return (
     <Drawer
       variant="persistent"
@@ -28,9 +36,10 @@ const drawerItems = ({ anchor, open, classes, theme, history }) => {
         paper: classes.drawerPaper
       }}
     >
+      {console.log(handleDrawerClose)}
       <div className={classes.drawerHeader}>
-        <IconButton onClick={this.handleDrawerClose}>
-          {theme.direction === 'rtl' ? (
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === "rtl" ? (
             <ChevronRightIcon />
           ) : (
             <ChevronLeftIcon />
@@ -42,8 +51,8 @@ const drawerItems = ({ anchor, open, classes, theme, history }) => {
         <ListItem
           button
           onClick={() => {
-            history.push('/members')
-            this.handleDrawerClose()
+            history.push("/members")
+            handleDrawerClose()
           }}
         >
           <ListItemIcon>
@@ -54,8 +63,8 @@ const drawerItems = ({ anchor, open, classes, theme, history }) => {
         <ListItem
           button
           onClick={() => {
-            history.push('/events')
-            this.handleDrawerClose()
+            history.push("/events")
+            handleDrawerClose()
           }}
         >
           <ListItemIcon>
@@ -68,8 +77,8 @@ const drawerItems = ({ anchor, open, classes, theme, history }) => {
         <ListItem
           button
           onClick={() => {
-            history.push('/logout')
-            this.handleDrawerClose()
+            history.push("/logout")
+            handleDrawerClose()
           }}
         >
           <ListItemIcon>
