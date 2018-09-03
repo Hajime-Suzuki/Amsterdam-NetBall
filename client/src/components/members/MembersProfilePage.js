@@ -5,7 +5,11 @@ import { Container, Row, Col, Input, Button } from "mdbreact"
 import { login } from "../../redux/actions/users"
 import { Redirect } from "react-router-dom"
 import Search from "../search/Search"
-import { getMember, addActivityToMember } from "../../redux/actions/members"
+import {
+  getMember,
+  addActivityToMember,
+  removeActivityFromMember
+} from "../../redux/actions/members"
 import "./MembersProfilePage.css"
 import Modal from "@material-ui/core/Modal"
 import { withStyles } from "@material-ui/core/styles"
@@ -82,6 +86,11 @@ class MemberProfilePage extends PureComponent {
     this.handleClose()
   }
 
+  handleUnsubscribe = (memberId, activityId) => {
+    this.props.removeActivityFromMember(memberId, activityId)
+    this.props.getMember(this.props.match.params.id)
+  }
+
   renderActivities = activities => {
     if (activities.length === 0) {
       return (
@@ -98,22 +107,38 @@ class MemberProfilePage extends PureComponent {
           >
             <p className="list-group-item list-group-item-action waves-effect">
               {" "}
-              Activity name: {activity.name}
+              <b>Activity name: </b> {activity.name}
             </p>
+
             <p className="list-group-item list-group-item-action waves-effect">
               {" "}
-              Activity starts at:{" "}
+              <b> Activity address: </b> {activity.address} |{" "}
+              {activity.location}
+            </p>
+
+            <p className="list-group-item list-group-item-action waves-effect">
+              {" "}
+              <b> Activity starts at: </b>{" "}
               {new Date(activity.startTime).toLocaleDateString()} |{" "}
               {new Date(activity.startTime).toLocaleTimeString()}
             </p>
+
             <p className="list-group-item list-group-item-action waves-effect">
               {" "}
-              Activity ends at:{" "}
+              <b>Activity ends at: </b>{" "}
               {new Date(activity.endTime).toLocaleDateString()} |{" "}
               {new Date(activity.endTime).toLocaleTimeString()}
             </p>
+
+            <button
+              className="btn btn-warning my-4"
+              onClick={() =>
+                this.handleUnsubscribe(this.props.currentUser.id, activity.id)
+              }
+            >
+              Unsubscribe from activity
+            </button>
           </button>
-          <Divider />
         </div>
       ))
     }
@@ -560,6 +585,6 @@ const mapStateToProps = function(state) {
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { getMember, getActivities, addActivityToMember }
+    { getMember, getActivities, addActivityToMember, removeActivityFromMember }
   )(MemberProfilePage)
 )
