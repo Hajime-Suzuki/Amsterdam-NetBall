@@ -5,6 +5,7 @@ import signup from "./signup"
 import positions from "./positions"
 import fetching from "./fetching"
 import committee from "./committee"
+import committeeAdmin from "./committeeAdmin"
 import filterOption from "./filterOption"
 import singleMember from "./singleMember"
 import activities from "./activities"
@@ -17,6 +18,7 @@ export default {
   positions,
   fetching,
   committee,
+  committeeAdmin,
   filterOption,
   singleMember,
   activities

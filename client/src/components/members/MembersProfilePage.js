@@ -45,12 +45,28 @@ const styles = theme => ({
 class MemberProfilePage extends PureComponent {
   state = {
     open: false,
+    editProfileModalOpen: false,
     innerModalOpen: false,
-    currentActivity: ""
+    currentActivity: "",
+    firstName: "",
+    lastName: "",
+    streetAddress: "",
+    postalCode: "",
+    dateOfBirth: "",
+    city: "",
+    phoneNum: "",
+    occupation: "",
+    employer: "",
+    skills: "",
+    email: ""
   }
 
   handleOpen = () => {
     this.setState({ open: true })
+  }
+
+  handleEditProfileOpen = () => {
+    this.setState({ editProfileModalOpen: true })
   }
 
   handleInnerOpen = activity => {
@@ -65,6 +81,11 @@ class MemberProfilePage extends PureComponent {
     this.props.getMember(this.props.match.params.id)
   }
 
+  handleEditProfileClose = () => {
+    this.setState({ editProfileModalOpen: false })
+    // this.handleUpdateProfile(this.props.currentUser.id, activity.id)
+  }
+
   handleInnerClose = () => {
     this.setState({ innerModalOpen: false })
   }
@@ -72,6 +93,14 @@ class MemberProfilePage extends PureComponent {
   componentDidMount() {
     this.props.getMember(this.props.match.params.id)
     this.props.getActivities()
+  }
+
+  handleChange = async event => {
+    const { name, value } = event.target
+
+    await this.setState({
+      [name]: value
+    })
   }
 
   handleClick = activity => {
@@ -89,6 +118,84 @@ class MemberProfilePage extends PureComponent {
   handleUnsubscribe = (memberId, activityId) => {
     this.props.removeActivityFromMember(memberId, activityId)
     this.props.getMember(this.props.match.params.id)
+  }
+
+  renderProfileFields = () => {
+    return (
+      <div>
+        <button className="list-group-item list-group-item-action waves-effect">
+          <Input
+            label="Your first name"
+            icon="user"
+            group
+            type="text"
+            validate
+            error="wrong"
+            success="right"
+            name="firstName"
+            value={this.state.firstName || ""}
+            onChange={this.handleChange}
+          />
+
+          <Input
+            label="Your last name"
+            icon="user"
+            group
+            type="text"
+            validate
+            error="wrong"
+            success="right"
+            name="lastName"
+            value={this.state.lastName || ""}
+            onChange={this.handleChange}
+          />
+          <Input
+            label="Your street address"
+            icon="user"
+            group
+            type="text"
+            validate
+            error="wrong"
+            success="right"
+            name="streetAddress"
+            value={this.state.streetAddress || ""}
+            onChange={this.handleChange}
+          />
+
+          <Input
+            label="Your city"
+            icon="user"
+            group
+            type="text"
+            validate
+            error="wrong"
+            success="right"
+            name="city"
+            value={this.state.city || ""}
+            onChange={this.handleChange}
+          />
+          <Input
+            label="Your email"
+            icon="user"
+            group
+            type="text"
+            validate
+            error="wrong"
+            success="right"
+            name="email"
+            value={this.state.email || ""}
+            onChange={this.handleChange}
+          />
+
+          <button
+            className="btn btn-warning my-4"
+            onClick={this.handleEditProfileClose}
+          >
+            Save updates
+          </button>
+        </button>
+      </div>
+    )
   }
 
   renderActivities = activities => {
@@ -281,6 +388,7 @@ class MemberProfilePage extends PureComponent {
                     value={member.city}
                   />
                 </div>
+
                 <div />
 
                 <h5 className="indigo-text font-bold mb-4">Your activities</h5>
@@ -560,6 +668,49 @@ class MemberProfilePage extends PureComponent {
                 <a className="fa-lg p-2 m-2 fb-ic">
                   <i className="fa fa-facebook grey-text"> </i>
                 </a>
+                <Button
+                  className="btn btn-info btn-block  btn-blue-grey my-4 "
+                  onClick={this.handleEditProfileOpen}
+                >
+                  Edit your profile
+                </Button>
+                <div>
+                  <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.editProfileModalOpen}
+                    onClose={this.handleEditProfileClose}
+                  >
+                    <div style={getModalStyle()} className={classes.paper}>
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title" id="exampleModalLabel">
+                            Update your info
+                          </h5>
+                          <button
+                            type="button"
+                            className="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                            onClick={this.handleEditProfileClose}
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        {this.renderProfileFields()}
+                        <div class="modal-footer">
+                          <Button
+                            className="btn btn-info btn-block  btn-blue-grey my-4 "
+                            onClick={this.handleEditProfileClose}
+                          >
+                            Close
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </Modal>
+                </div>
                 <Link to="/members">
                   <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
                     Back to all members
