@@ -8,7 +8,25 @@ export function getEvents(callback) {
   request.get(url).end((err, resp) => {
     if (!err) {
       const events = []
-      console.log(resp)
+      const dateEvents = []
+      const dateTimeEvents = []
+      const remainingEvents = []
+      JSON.parse(resp.text).items.map(event => {
+        if (event.status === "confirmed") {
+          if (event.start.date) {
+            dateEvents.push(event)
+            console.log(new Date(event.start.date))
+          } else if (event.start.dateTime) {
+            dateTimeEvents.push(event)
+            console.log(new Date(event.start.dateTime))
+          } else {
+            remainingEvents.push(event)
+          }
+        }
+      })
+      console.log(dateEvents)
+      console.log(dateTimeEvents)
+      console.log(remainingEvents)
       JSON.parse(resp.text).items.map(event => {
         if (event.start) {
           events.push({

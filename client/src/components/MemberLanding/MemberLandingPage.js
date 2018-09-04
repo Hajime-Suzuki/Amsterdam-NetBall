@@ -37,6 +37,10 @@ class MemberLandingPage extends PureComponent {
     ))
   }
 
+  handleSubmit = data => {
+    this.props.createActivity(data)
+  }
+
   render() {
     const { members, currentUser } = this.props
 
