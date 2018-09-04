@@ -1,4 +1,4 @@
-import { GET_ALL_COMMITTEES, ADD_COMMITTEE } from "../actions/committees"
+import { GET_ALL_COMMITTEES, ADD_COMMITTEE, DELETE_COMMITTEE } from "../actions/committees"
 
 export default (state = [], { type, payload }) => {
   switch (type) {
@@ -9,6 +9,12 @@ export default (state = [], { type, payload }) => {
 
     case ADD_COMMITTEE:
       return [...state, payload ]
+
+    case DELETE_COMMITTEE:
+      const remainingCommittees = state.filter(
+        committee => committee.id !== payload
+      )
+      return remainingCommittees
 
     default:
       return state

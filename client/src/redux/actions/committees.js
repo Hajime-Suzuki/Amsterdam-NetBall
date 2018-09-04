@@ -5,6 +5,7 @@ import { baseUrl } from "../../constants"
 
 export const GET_ALL_COMMITTEES = "GET_ALL_COMMITTEES"
 export const ADD_COMMITTEE = "ADD_COMMITTEE"
+export const DELETE_COMMITTEE = "DELETE_COMMITTEE"
 export const GET_COMMITTEE = "GET_COMMITTEE"
 export const ADD_MESSAGE = "ADD_MESSAGE"
 export const EDIT_MESSAGE = "EDIT_MESSAGE"
@@ -50,6 +51,28 @@ export const addCommittee = (committeeData) => (dispatch, getState) => {
       })
     })
     .catch(err => alert(err))
+
+}
+
+export const deleteCommittee = committeeId => (dispatch, getState) => {
+
+  const state = getState()
+  if (!state.currentUser) return null
+  const jwt = state.currentUser.token
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .delete(`${baseUrl}/committees/${committeeId}/`)
+    .set("Authorization", `${jwt}`)
+    .then(result => {
+      dispatch({
+        type: DELETE_COMMITTEE,
+        payload: committeeId
+      })
+    })
+    .catch(err => alert(err))
+
 
 }
 
@@ -132,7 +155,6 @@ export const deleteMessage = (committeeId, messageId) => (dispatch, getState) =>
     .delete(`${baseUrl}/committees/${committeeId}/${messageId}`)
     .set("Authorization", `${jwt}`)
     .then(result => {
-      console.log('result', result)
       dispatch({
         type: DELETE_MESSAGE,
         payload: messageId

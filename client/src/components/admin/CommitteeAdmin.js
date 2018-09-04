@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
-import { getAllCommittees, addCommittee } from "../../redux/actions/committees"
+import { getAllCommittees, addCommittee, deleteCommittee } from "../../redux/actions/committees"
 import './Dashboard.css'
 
 class CommitteeAdmin extends PureComponent {
@@ -25,7 +25,7 @@ class CommitteeAdmin extends PureComponent {
   }
 
   render() {
-    const { committees } = this.props
+    const { committees, deleteCommittee } = this.props
     if (this.props.committees === null) return ""
     return (
       <div className="dashboard-component border-light border rounded-2 p-3" >
@@ -36,6 +36,7 @@ class CommitteeAdmin extends PureComponent {
               <li>
               <Link  to={`/committees/${committee.id}`}><span className="committee-name">{ committee.name }</span></Link>
               <span className="committee-description">{ committee.description }</span>
+              <button className="committee-delete" onClick={ ()=>deleteCommittee(committee.id) }>&#10060;</button>
               </li>
             )
           }
@@ -61,4 +62,4 @@ const mapStateToProps = function(state) {
   }
 }
 
-export default connect(mapStateToProps, { getAllCommittees, addCommittee })(CommitteeAdmin)
+export default connect(mapStateToProps, { getAllCommittees, addCommittee, deleteCommittee })(CommitteeAdmin)
