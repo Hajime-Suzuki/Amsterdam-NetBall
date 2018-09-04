@@ -1,10 +1,44 @@
-.committee-message {
+#committee-container h1 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+#committee-form button.btn {
+  box-shadow: none !important;
+  width: 100%;
+}
+
+#committee-form textarea {
+  margin-top: -1px;
+}
+
+#root .committee-message {
   display: block;
-  background-color: lightYellow;
+  background-color: #F6F6F6;
+  margin-top: -1px !important;
 }
 
 .committee-message-member {
   font-size: 80%;
   font-weight: bold;
+  line-height: 1em;
 }
 
+.committee-message button {
+  text-align: right;
+  border: none;
+  background-color: transparent;
+  margin-left: 0.5em;
+  margin-right: 0;
+  box-shadow: none !important;
+}
+
+.committee-message button.edit-message {
+  font-size: 125%;
+}
+
+.committee-message button.delete-message {
+  margin-left: 0em;
+  padding-left: 0;
+}

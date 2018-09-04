@@ -117,6 +117,11 @@ class PersistentDrawer extends PureComponent {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/logout" component={LogoutPage} />
               <Route exact path="/signup" component={SignupPage} />
+              <Route
+                exact
+                path="/members/list"
+                component={MemberListComponent}
+              />
               <Route exact path="/events" component={EventsCalendar} />
               <Route exact path="/members/:id" component={MembersProfilePage} />
               <Route exact path="/members" component={MemberLandingPage} />
