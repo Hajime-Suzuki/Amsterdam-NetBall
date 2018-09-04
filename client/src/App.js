@@ -4,7 +4,6 @@ import LoginPage from './components/login/LoginPage'
 import SignupPage from './components/signup/SignupPage'
 import LogoutPage from './components/logout/LogoutPage'
 import HomePage from './components/home/HomePage'
-import logo from './logo.svg'
 // import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 // import "../node_modules/mdbreact/docs/css/mdb.min.css"
 import TopNav from './components/layout/TopNav'
