@@ -4,7 +4,6 @@ export default (state = {}, { type, payload }) => {
   switch (type) {
 
     case GET_COMMITTEE:
-      console.log('payload', payload)
       return payload
 
     case ADD_MESSAGE:
@@ -13,7 +12,6 @@ export default (state = {}, { type, payload }) => {
       return {...state, messages: newMessages }
 
     case EDIT_MESSAGE:
-      console.log('payload', payload)
       const editedMessages = state.messages.map(
         message => {
           if (message.id === payload.id) {

@@ -2,11 +2,10 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 
 class AddMessageForm extends PureComponent {
-  state = {}
+  state = { body: '' }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('this.state', this.state, 'this.props.committeeId', this.props.committeeId)
     const messageId = this.props.messageId ? this.props.messageId : 0
     this.props.submitFunction(this.state, this.props.committeeId, messageId)
     this.setState({ body: '' })

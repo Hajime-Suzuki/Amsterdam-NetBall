@@ -51,13 +51,9 @@ class CommitteePage extends PureComponent {
   }
 
   render() {
-    const { committee } = this.props
+    const { committee, addMessage } = this.props
 
     if (committee === null) return "Loading..."
-
-    console.log('rendering')
-    // console.log('committee.messages', committee.messages)
-    // console.log('this.props.currentUser', this.props.currentUser)
 
     return (
       <Container>
@@ -67,7 +63,7 @@ class CommitteePage extends PureComponent {
             {committee.messages && this.renderMessages(committee.messages, this.state.pendingEdit) }
           </div>
         </div>
-        <AddMessageForm committeeId={this.props.match.params.id} submitFunction={this.props.addMessage} />
+        <AddMessageForm committeeId={this.props.match.params.id} submitFunction={addMessage} />
       </Container>
     )
   }
