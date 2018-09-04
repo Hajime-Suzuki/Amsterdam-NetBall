@@ -60,8 +60,6 @@ export const removeActivityFromMember = (memberId, activityId) => (
 
   if (isExpired(jwt)) return dispatch(logout())
 
-  console.log(memberId, activityId)
-
   request
     .patch(`${baseUrl}/members/unsubscribe/${memberId}/${activityId}`)
     .set("Authorization", `${jwt}`)
