@@ -1,9 +1,22 @@
 import React, { PureComponent } from 'react'
-
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getMembers } from '../../redux/actions/members'
 import { allMemberInfoSelector } from '../../redux/actions/members'
 import Search from '../search/Search'
+import styled from 'styled-components'
+
+const StyledNameLink = styled(Link)`
+  && {
+    color: ${({ ismember }) => (ismember ? 'teal' : 'rgb(128,128,128)')};
+    text-decoration: ${({ ismember }) =>
+      ismember ? 'inherit' : 'line-through'};
+    transition: 0.5s;
+    &:hover {
+      color: lightgreen;
+    }
+  }
+`
 
 class MemberListComponent extends PureComponent {
   state = {
@@ -33,11 +46,13 @@ class MemberListComponent extends PureComponent {
           className="fa fa-arrow-up"
           aria-hidden="true"
           onClick={() => this.changeSortCondition(type, 'ASC')}
+          style={{ margin: '0 0.5em', cursor: 'pointer' }}
         />
         <i
           className="fa fa-arrow-down"
           aria-hidden="true"
           onClick={() => this.changeSortCondition(type, 'DESC')}
+          style={{ cursor: 'pointer' }}
         />
       </span>
     )
@@ -88,6 +103,7 @@ class MemberListComponent extends PureComponent {
               )}
               {<th scope="col">Team</th>}
             </tr>
+
             {members.map(m => {
               const attendanceRate =
                 m.attendanceRate === null ? '-' : `${m.attendanceRate * 100}%`
@@ -96,15 +112,12 @@ class MemberListComponent extends PureComponent {
               return (
                 <tr key={m.id}>
                   <th scope="row" style={ifSelected('name')}>
-                    <span
-                      style={{
-                        color: m.isCurrentMember
-                          ? 'inherit'
-                          : '	rgb(128,128,128)'
-                      }}
+                    <StyledNameLink
+                      to={`/members/${m.id}`}
+                      ismember={m.isCurrentMember}
                     >
                       {m.firstName} {m.lastName}
-                    </span>
+                    </StyledNameLink>
                   </th>
                   {isAdmin() && (
                     <th style={ifSelected('expiration')}>{m.endDate}</th>
