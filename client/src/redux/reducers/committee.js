@@ -27,6 +27,7 @@ export default (state = {}, { type, payload }) => {
         message => message.id !== payload
       )
       return {...state, messages: remainingMessages }
+
     default:
       return state
 

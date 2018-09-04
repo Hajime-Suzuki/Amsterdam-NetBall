@@ -37,6 +37,16 @@ export default class CommitteeController {
     return Committee.create(data).save()
   }
 
+  // @Authorized()
+  @Delete('/committees/:committeeId([0-9]+)')
+  async deleteCommittee(
+    @Param("committeeId") committeeId: number
+  ) {
+     console.log('committeeId', committeeId)
+     const message = await Message.findOne(committeeId)
+     return Message.delete(committeeId);
+  }
+
   @Authorized()
   @Get('/committees/:id([0-9]+)')
   async getCommittee(
