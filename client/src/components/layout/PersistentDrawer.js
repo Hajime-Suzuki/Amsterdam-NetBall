@@ -21,6 +21,7 @@ import MemberLandingPage from "../MemberLanding/MemberLandingPage"
 import MemberListComponent from "../members/MembersListComponent"
 import MembersProfilePage from "../members/MembersProfilePage"
 import SignupPage from "../signup/SignupPage"
+import Dashboard from "../admin/Dashboard"
 import drawerItems from "./drawerItems"
 import drawerStyle from "./styles/drawerStyle"
 
@@ -45,7 +46,6 @@ class PersistentDrawer extends PureComponent {
   }
 
   componentDidMount() {
-    console.log("things")
   }
 
   render() {
@@ -126,6 +126,7 @@ class PersistentDrawer extends PureComponent {
               <Route exact path="/members/:id" component={MembersProfilePage} />
               <Route exact path="/members" component={MemberLandingPage} />
               <Route exact path="/committees/:id" component={CommitteePage} />
+              <Route exact path="/admin" component={Dashboard} />
               <Route exact path="/" render={() => <Redirect to="/home" />} />
             </Switch>
             <Switch>
