@@ -25,9 +25,7 @@ class EventsCalendar extends PureComponent {
         <Row className="justify-content-md-center mt-2">
           <h2>Netball matches and activities overview</h2>
         </Row>
-        <Col
-        // className=" col-md-auto"
-        >
+        <Col>
           <BigCalendar
             events={this.state.events}
             defaultDate={new Date()}

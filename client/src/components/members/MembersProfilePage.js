@@ -10,12 +10,19 @@ import {
   addActivityToMember,
   removeActivityFromMember
 } from "../../redux/actions/members"
+import { getTeams } from "../../redux/actions/teams"
 import "./MembersProfilePage.css"
 import Modal from "@material-ui/core/Modal"
 import { withStyles } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import { getActivities } from "../../redux/actions/activities"
-import { Divider } from "@material-ui/core"
+import {
+  Divider,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
+} from "@material-ui/core"
 
 function rand() {
   return Math.round(Math.random() * 20) - 10
@@ -35,7 +42,8 @@ function getModalStyle() {
 const styles = theme => ({
   paper: {
     position: "absolute",
-    width: theme.spacing.unit * 50,
+    height: "100vh",
+    overflowY: "scroll",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4
@@ -93,6 +101,7 @@ class MemberProfilePage extends PureComponent {
   componentDidMount() {
     this.props.getMember(this.props.match.params.id)
     this.props.getActivities()
+    this.props.getTeams()
   }
 
   handleChange = async event => {
@@ -186,6 +195,25 @@ class MemberProfilePage extends PureComponent {
             value={this.state.email || ""}
             onChange={this.handleChange}
           />
+
+          {this.props.currentUser.role === "admin" && (
+            <div>
+              <select
+                id="sort"
+                onChange={this.handleChange}
+                name="team"
+                value={this.state.team}
+              >
+                <option value="select">Select team</option>
+                <option value="newest-first">Newest first</option>
+                <option value="oldest-first">Oldest first</option>
+                <option value="high-to-low">High to low</option>
+                <option value="low-to-high">Low to high</option>
+              </select>
+              <p />
+              <p>{this.state.value}</p>
+            </div>
+          )}
 
           <button
             className="btn btn-warning my-4"
@@ -729,13 +757,20 @@ const mapStateToProps = function(state) {
   return {
     member: state.singleMember.member,
     currentUser: state.currentUser,
-    activities: Object.values(state.activities.activities)
+    activities: Object.values(state.activities.activities),
+    teams: Object.values(state.teams.teams)
   }
 }
 
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { getMember, getActivities, addActivityToMember, removeActivityFromMember }
+    {
+      getMember,
+      getActivities,
+      addActivityToMember,
+      removeActivityFromMember,
+      getTeams
+    }
   )(MemberProfilePage)
 )

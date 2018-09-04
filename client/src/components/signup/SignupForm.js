@@ -48,7 +48,6 @@ export default class SignupForm extends PureComponent {
         submitButton: false
       })
     }
-    console.log(this.state)
   }
 
   onFocus = e => {
