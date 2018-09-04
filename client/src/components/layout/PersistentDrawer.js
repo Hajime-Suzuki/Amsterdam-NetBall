@@ -45,8 +45,7 @@ class PersistentDrawer extends PureComponent {
     })
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     const { classes, theme, history, currentUser } = this.props
@@ -62,7 +61,8 @@ class PersistentDrawer extends PureComponent {
       theme,
       history,
       handleDrawerClose: this.handleDrawerClose,
-      handleDrawerOpen: this.handleDrawerOpen
+      handleDrawerOpen: this.handleDrawerOpen,
+      currentUser
     })
 
     if (anchor === "left") {

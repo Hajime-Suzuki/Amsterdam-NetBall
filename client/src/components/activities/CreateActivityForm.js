@@ -7,6 +7,7 @@ export default class CreateActivityForm extends PureComponent {
     name: "",
     location: "",
     address: "",
+    description: "",
     startTime: "",
     endTime: "",
     submitButton: true
@@ -18,8 +19,18 @@ export default class CreateActivityForm extends PureComponent {
       name: this.state.name,
       location: this.state.location,
       address: this.state.address,
+      description: this.state.description,
       startTime: this.state.startTime,
       endTime: this.state.endTime
+    })
+    this.setState({
+      name: "",
+      location: "",
+      address: "",
+      description: "",
+      startTime: "",
+      endTime: "",
+      submitButton: true
     })
   }
 
@@ -41,7 +52,6 @@ export default class CreateActivityForm extends PureComponent {
         submitButton: false
       })
     }
-    console.log(this.state)
   }
 
   onFocus = e => {
@@ -58,7 +68,7 @@ export default class CreateActivityForm extends PureComponent {
         <Row className="justify-content-md-center">
           <Col md="6">
             <form onSubmit={this.handleSubmit}>
-              <p className="h2 text-center mb-4 mt-4">Create an activity</p>
+              <h1 className=" text-center mb-4 mt-4">Create an activity</h1>
               <div className="card card-body">
                 <div className="grey-text">
                   <Input
@@ -75,7 +85,7 @@ export default class CreateActivityForm extends PureComponent {
                   />
                   <Input
                     label="Activity location (city)"
-                    icon="address-card"
+                    icon="map-marker"
                     group
                     type="text"
                     validate
@@ -87,8 +97,8 @@ export default class CreateActivityForm extends PureComponent {
                   />
 
                   <Input
-                    label="Your street address"
-                    icon="address-card"
+                    label="Activity street address"
+                    icon="map-marker"
                     group
                     type="text"
                     validate
@@ -98,6 +108,19 @@ export default class CreateActivityForm extends PureComponent {
                     value={this.state.address || ""}
                     onChange={this.handleChange}
                   />
+
+                  <div class="form-group">
+                    <label htmlFor="exampleFormControlTextarea2">
+                      Provide a description of the activity
+                    </label>
+                    <textarea
+                      name="description"
+                      value={this.state.description || ""}
+                      onChange={this.handleChange}
+                      className="form-control rounded-0"
+                      rows="3"
+                    />
+                  </div>
 
                   <Input
                     label="Start date and time of the activity"
