@@ -39,7 +39,6 @@ export const addCommittee = (committeeData) => (dispatch, getState) => {
 
   if (isExpired(jwt)) return dispatch(logout())
 
-  console.log('committeeData', committeeData)
   request
     .post(`${baseUrl}/committees/`)
     .set("Authorization", `${jwt}`)
@@ -126,8 +125,6 @@ export const editMessage = (updates, committeeId, messageId) => (dispatch, getSt
   const jwt = state.currentUser.token
 
   if (isExpired(jwt)) return dispatch(logout())
-
-  console.log('updates', updates, 'committeeId', committeeId, 'messageId', messageId, 'jwt', jwt)
 
   request
     .put(`${baseUrl}/messages/${committeeId}/${messageId}`)
