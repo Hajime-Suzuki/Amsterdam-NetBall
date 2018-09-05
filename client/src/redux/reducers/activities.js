@@ -1,4 +1,4 @@
-import { GET_ACTIVITIES, ADD_ACTIVITY } from "../actions/activities"
+import { GET_ACTIVITIES, ADD_ACTIVITY } from '../actions/activities'
 
 const initialState = {
   ids: [],
@@ -9,7 +9,8 @@ export default (state = initialState, { type, payload }) => {
     case GET_ACTIVITIES:
       return {
         ids: payload.result,
-        activities: payload.entities.activities
+        activities: payload.entities.activities,
+        ...(payload.entities.members && { members: payload.entities.members })
       }
     case ADD_ACTIVITY:
       return {

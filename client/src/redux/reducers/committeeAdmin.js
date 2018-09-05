@@ -4,7 +4,6 @@ export default (state = [], { type, payload }) => {
   switch (type) {
 
     case GET_ALL_COMMITTEES:
-      console.log('payload', payload)
       return payload
 
     case ADD_COMMITTEE:
