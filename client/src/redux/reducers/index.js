@@ -9,6 +9,7 @@ import committeeAdmin from "./committeeAdmin"
 import filterOption from "./filterOption"
 import singleMember from "./singleMember"
 import activities from "./activities"
+import teams from "./teams"
 
 export default {
   members,
@@ -21,5 +22,6 @@ export default {
   committeeAdmin,
   filterOption,
   singleMember,
-  activities
+  activities,
+  teams
 }
