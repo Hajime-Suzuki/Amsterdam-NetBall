@@ -12,7 +12,6 @@ export const EDIT_MESSAGE = "EDIT_MESSAGE"
 export const DELETE_MESSAGE = "DELETE_MESSAGE"
 
 export const getAllCommittees = () => (dispatch, getState) => {
-
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -28,11 +27,10 @@ export const getAllCommittees = () => (dispatch, getState) => {
         payload: result.body
       })
     })
-    .catch(err => console.error('err'))
-
+    .catch(err => console.error("err"))
 }
 
-export const addCommittee = (committeeData) => (dispatch, getState) => {
+export const addCommittee = committeeData => (dispatch, getState) => {
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -50,11 +48,9 @@ export const addCommittee = (committeeData) => (dispatch, getState) => {
       })
     })
     .catch(err => alert(err))
-
 }
 
 export const deleteCommittee = committeeId => (dispatch, getState) => {
-
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -71,12 +67,9 @@ export const deleteCommittee = committeeId => (dispatch, getState) => {
       })
     })
     .catch(err => alert(err))
-
-
 }
 
 export const getCommittee = committeeId => (dispatch, getState) => {
-
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -93,11 +86,12 @@ export const getCommittee = committeeId => (dispatch, getState) => {
       })
     })
     .catch(err => console.error(err))
-
 }
 
-export const addMessage = (messageBody, committeeId) => (dispatch, getState) => {
-
+export const addMessage = (messageBody, committeeId) => (
+  dispatch,
+  getState
+) => {
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -115,11 +109,12 @@ export const addMessage = (messageBody, committeeId) => (dispatch, getState) => 
       })
     })
     .catch(err => alert(err))
-
 }
 
-export const editMessage = (updates, committeeId, messageId) => (dispatch, getState) => {
-
+export const editMessage = (updates, committeeId, messageId) => (
+  dispatch,
+  getState
+) => {
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -128,7 +123,7 @@ export const editMessage = (updates, committeeId, messageId) => (dispatch, getSt
 
   request
     .put(`${baseUrl}/messages/${committeeId}/${messageId}`)
-    .set('Authorization', `${jwt}`)
+    .set("Authorization", `${jwt}`)
     .send(updates)
     .then(response => {
       dispatch({
@@ -137,11 +132,12 @@ export const editMessage = (updates, committeeId, messageId) => (dispatch, getSt
       })
     })
     .catch(err => alert(err))
-
 }
 
-export const deleteMessage = (committeeId, messageId) => (dispatch, getState) => {
-
+export const deleteMessage = (committeeId, messageId) => (
+  dispatch,
+  getState
+) => {
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -158,9 +154,4 @@ export const deleteMessage = (committeeId, messageId) => (dispatch, getState) =>
       })
     })
     .catch(err => alert(err))
-
 }
-
-
-
-
