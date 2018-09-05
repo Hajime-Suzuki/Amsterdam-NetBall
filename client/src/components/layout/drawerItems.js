@@ -80,6 +80,20 @@ const drawerItems = ({
         <ListItem
           button
           onClick={() => {
+            history.push("/activities")
+            handleDrawerClose()
+          }}
+        >
+          <ListItemIcon>
+            <Icon className="fa fa-calendar" />
+          </ListItemIcon>
+
+          <ListItemText primary="Volunteer activities" />
+        </ListItem>
+
+        <ListItem
+          button
+          onClick={() => {
             history.push("/events")
             handleDrawerClose()
           }}

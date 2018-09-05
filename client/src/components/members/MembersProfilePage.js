@@ -35,6 +35,7 @@ function getModalStyle() {
 const styles = theme => ({
   paper: {
     position: "absolute",
+    overflowY: "scroll",
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
@@ -279,7 +280,7 @@ class MemberProfilePage extends PureComponent {
     return (
       <Container className="container-fluid mt-1">
         <Row className="justify-content-md-center">
-          <Col md="6" className="mt-5 mb-5">
+          <Col md="6" className="mt-2 mb-2">
             {member.id && (
               <div className="jumbotron text-center">
                 <h4 className="card-title font-bold pb-2">
@@ -391,7 +392,12 @@ class MemberProfilePage extends PureComponent {
 
                 <div />
 
-                <h5 className="indigo-text font-bold mb-4">Your activities</h5>
+                <h5
+                  className="indigo-text font-bold mb-4"
+                  id="personal-activities"
+                >
+                  Your activities
+                </h5>
 
                 <div className="list-group mb-4">
                   {this.renderActivities(
