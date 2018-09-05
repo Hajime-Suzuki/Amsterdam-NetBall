@@ -1,10 +1,15 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { Container, Row, Col, Input, Button } from "mdbreact"
-import { getCommittee, deleteMessage, editMessage, addMessage } from "../../redux/actions/committees"
-import AddMessageForm from './AddMessageForm.js'
-import './CommitteePage.css'
-import dateFormat from 'dateformat'
+import {
+  getCommittee,
+  deleteMessage,
+  editMessage,
+  addMessage
+} from "../../redux/actions/committees"
+import AddMessageForm from "./AddMessageForm.js"
+import "./CommitteePage.css"
+import dateFormat from "dateformat"
 // import { userId } from "../../jwt"
 
 class CommitteePage extends PureComponent {
@@ -27,28 +32,53 @@ class CommitteePage extends PureComponent {
   }
 
   renderMessages = (messages, pendingEdit) => {
-
     const _this = this
-    console.log('pendingEdit', pendingEdit)
+    console.log("pendingEdit", pendingEdit)
     return messages.map(message => {
       if (pendingEdit === message.id) {
-        return <AddMessageForm key={message.id} committeeId={this.props.match.params.id} submitFunction={this.editTheMessage} initialValues={message} messageId={message.id} />
-      }
-      else {
+        return (
+          <AddMessageForm
+            key={message.id}
+            committeeId={this.props.match.params.id}
+            submitFunction={this.editTheMessage}
+            initialValues={message}
+            messageId={message.id}
+          />
+        )
+      } else {
         const messageDate = new Date(message.created_at)
         const messageTimestamp = dateFormat(messageDate, "m/d/yy H:MM")
         return (
-          <div key={message.id} className={'committee-message mt-0 p-3 border border-light rounded'}>
-          <p className="committee-message-member mb-1">
-            {`${message.member.firstName} ${message.member.lastName}`} 
-            <span className="message-timestamp">{ `${messageTimestamp}` }</span>
-            { this.props.currentUser.id === message.member.id &&
-              <span>
-                <button onClick={ ()=>this.editInPlace(message.id) } className="edit-message">&#9998;</button><button onClick={ ()=>this.props.deleteMessage(this.props.match.params.id, message.id) } className="delete-message">&#10060;</button>
-              </span>
-            }
-          </p>
-          <p className="committee-message-body mb-1">{message.body}</p>
+          <div
+            key={message.id}
+            className={"committee-message mt-0 p-3 border border-light rounded"}
+          >
+            <p className="committee-message-member mb-1">
+              {`${message.member.firstName} ${message.member.lastName}`}
+              <span className="message-timestamp">{`${messageTimestamp}`}</span>
+              {this.props.currentUser.id === message.member.id && (
+                <span>
+                  <button
+                    onClick={() => this.editInPlace(message.id)}
+                    className="edit-message"
+                  >
+                    &#9998;
+                  </button>
+                  <button
+                    onClick={() =>
+                      this.props.deleteMessage(
+                        this.props.match.params.id,
+                        message.id
+                      )
+                    }
+                    className="delete-message"
+                  >
+                    &#10060;
+                  </button>
+                </span>
+              )}
+            </p>
+            <p className="committee-message-body mb-1">{message.body}</p>
           </div>
         )
       }
@@ -62,13 +92,17 @@ class CommitteePage extends PureComponent {
 
     return (
       <Container>
-        <div id={'committee-container'}>
+        <div id={"committee-container"}>
           <h1>{committee.name}</h1>
           <div>
-            {committee.messages && this.renderMessages(committee.messages, this.state.pendingEdit) }
+            {committee.messages &&
+              this.renderMessages(committee.messages, this.state.pendingEdit)}
           </div>
         </div>
-        <AddMessageForm committeeId={this.props.match.params.id} submitFunction={addMessage} />
+        <AddMessageForm
+          committeeId={this.props.match.params.id}
+          submitFunction={addMessage}
+        />
       </Container>
     )
   }
