@@ -41,8 +41,6 @@ export const addActivityToMember = (memberId, activityId) => (
 
   if (isExpired(jwt)) return dispatch(logout())
 
-  console.log(memberId, activityId)
-
   request
     .patch(`${baseUrl}/members/${memberId}/${activityId}`)
     .set("Authorization", `${jwt}`)
