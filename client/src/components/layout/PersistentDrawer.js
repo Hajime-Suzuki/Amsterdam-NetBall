@@ -22,6 +22,7 @@ import MemberListComponent from "../members/MembersListComponent"
 import MembersProfilePage from "../members/MembersProfilePage"
 import SignupPage from "../signup/SignupPage"
 import Dashboard from "../admin/Dashboard"
+import ActivityList from "../activities/ActivityList"
 import drawerItems from "./drawerItems"
 import drawerStyle from "./styles/drawerStyle"
 
@@ -123,6 +124,7 @@ class PersistentDrawer extends PureComponent {
                 component={MemberListComponent}
               />
               <Route exact path="/events" component={EventsCalendar} />
+              <Route exact path="/activities" component={ActivityList} />
               <Route exact path="/members/:id" component={MembersProfilePage} />
               <Route exact path="/members" component={MemberLandingPage} />
               <Route exact path="/committees/:id" component={CommitteePage} />
