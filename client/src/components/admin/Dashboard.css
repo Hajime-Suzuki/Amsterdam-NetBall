@@ -1,5 +1,5 @@
-div.dashboard-component h4 {
-  font-weight: bold;
+div.dashboard-component h3, h4, h5, h6 {
+  font-weight: 700;
 }
 
 div.dashboard-component ul {
@@ -28,13 +28,13 @@ div.dashboard-component li {
 div.dashboard-component input {
   width: 100%;
   max-width: 400px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 div.dashboard-component form button {
   box-shadow: none !important;
   border: 1px solid #DDD;
-  width: 100%;
-  max-width: 400px;
+  width: 80%;
   padding: 1px 0;
+  margin: 0 auto;
 }

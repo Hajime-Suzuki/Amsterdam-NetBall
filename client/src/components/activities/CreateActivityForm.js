@@ -68,7 +68,7 @@ export default class CreateActivityForm extends PureComponent {
         <Row className="justify-content-md-center">
           <Col md="6">
             <form onSubmit={this.handleSubmit}>
-              <h1 className=" text-center mb-4 mt-4">Create an activity</h1>
+              <h3 className=" text-center mb-4 mt-4">Create an activity</h3>
               <div className="card card-body">
                 <div className="grey-text">
                   <Input
