@@ -42,3 +42,14 @@
   margin-left: 0em;
   padding-left: 0;
 }
+
+.committee-message button.edit-message:hover, .committee-message button.delete-message:hover {
+  cursor: pointer;
+}
+
+.message-timestamp {
+  display: inline-block;
+  color: #999999;
+  margin-left: 1em;
+  float: right;
+}
