@@ -20,9 +20,20 @@ import { Divider } from '@material-ui/core'
 import styled from 'styled-components'
 import { getTeams } from '../../redux/actions/teams'
 
+const top = 50
+const left = 50
+
+// return {
+//   top: `${top}%`,
+//   left: `${left}%`,
+//   transform: `translate(-${top}%, -${left}%)`,
+//   overflowY: 'scroll'
+// }
 const StyledModal = styled(Modal)`
   && {
-    overflow-y: scroll;
+    overflow-y: auto;
+    /* left: ${left}%;
+    transform: translate(-${top} %, -${left} %); */
   }
 `
 
@@ -784,10 +795,7 @@ class MemberProfilePage extends PureComponent {
                   open={this.state.editProfileModalOpen}
                   onClose={this.handleEditProfileClose}
                 >
-                  <div
-                    // style={getModalStyle()}
-                    className={classes.paper}
-                  >
+                  <div style={getModalStyle()} className={classes.paper}>
                     <div className="modal-content">
                       <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">

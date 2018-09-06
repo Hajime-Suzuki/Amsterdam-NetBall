@@ -108,7 +108,6 @@ class MemberListComponent extends PureComponent {
             {members.map(m => {
               const attendanceRate =
                 m.attendanceRate === null ? '-' : `${m.attendanceRate * 100}%`
-              console.log(m)
               const activityPoints =
                 m.activityPoints === null ? '-' : m.activityPoints
               return (
