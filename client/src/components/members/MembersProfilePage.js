@@ -2,9 +2,6 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Input, Button } from 'mdbreact'
-import { login } from '../../redux/actions/users'
-import { Redirect } from 'react-router-dom'
-import Search from '../search/Search'
 import {
   getMember,
   addActivityToMember,
@@ -15,9 +12,7 @@ import { getTeams } from '../../redux/actions/teams'
 import './MembersProfilePage.css'
 import Modal from '@material-ui/core/Modal'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import { getActivities } from '../../redux/actions/activities'
-import { Divider } from '@material-ui/core'
 import MemberCommitteesModal from './MemberCommitteesModal'
 
 import styled from 'styled-components'
@@ -185,7 +180,7 @@ class MemberProfilePage extends PureComponent {
   renderProfileFields = () => {
     return (
       <div>
-        <button className="list-group-item list-group-item-action waves-effect">
+        <p className="list-group-item list-group-item-action waves-effect">
           <Input
             label="Your first name"
             icon="user"
@@ -272,7 +267,7 @@ class MemberProfilePage extends PureComponent {
           >
             Save updates
           </button>
-        </button>
+        </p>
       </div>
     )
   }
@@ -287,7 +282,7 @@ class MemberProfilePage extends PureComponent {
     } else {
       return activities.map(activity => (
         <div>
-          <button
+          <p
             className="list-group-item list-group-item-action waves-effect"
             key={activity.id}
           >
@@ -324,7 +319,7 @@ class MemberProfilePage extends PureComponent {
             >
               Unsubscribe from activity
             </button>
-          </button>
+          </p>
         </div>
       ))
     }
@@ -335,6 +330,7 @@ class MemberProfilePage extends PureComponent {
       const endTime = new Date(activity.endTime)
       const now = new Date()
       if (now < endTime) return activity
+      else return false
     })
 
   renderModalActivities = activites => {
@@ -547,7 +543,7 @@ class MemberProfilePage extends PureComponent {
                             this.filterOldActivities(activities)
                           )}
 
-                          <div class="modal-footer">
+                          <div className="modal-footer">
                             <Button
                               className="btn btn-info btn-block  btn-blue-grey my-4 "
                               onClick={this.handleClose}
@@ -625,7 +621,7 @@ class MemberProfilePage extends PureComponent {
                               ? `You have already joined this activity`
                               : `Join this activity!`}
                           </button>
-                          <div class="modal-footer">
+                          <div className="modal-footer">
                             <Button
                               className="btn btn-info btn-block  btn-blue-grey my-4 "
                               onClick={this.handleInnerClose}
@@ -816,20 +812,10 @@ class MemberProfilePage extends PureComponent {
                           <h5 className="modal-title" id="exampleModalLabel">
                             Update your info
                           </h5>
-                          {/* <button
-
-                          type="button"
-                          className="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                          onClick={this.handleEditProfileClose}
-                        >
-                          <span aria-hidden="true">&times;</span>
-                        </button> */}
                         </div>
 
                         {this.renderProfileFields()}
-                        <div class="modal-footer">
+                        <div className="modal-footer">
                           <Button
                             className="btn btn-info btn-block  btn-blue-grey my-4 "
                             onClick={this.handleEditProfileClose}
