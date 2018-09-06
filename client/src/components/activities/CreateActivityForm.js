@@ -1,15 +1,14 @@
-import React, { PureComponent } from 'react'
-import { Container, Row, Col, Input, Button } from 'mdbreact'
-// import "./SignupForm.css"
+import React, { PureComponent } from "react"
+import { Container, Row, Col, Input, Button } from "mdbreact"
 
 export default class CreateActivityForm extends PureComponent {
   state = {
-    name: '',
-    location: '',
-    address: '',
-    description: '',
-    startTime: '',
-    endTime: '',
+    name: "",
+    location: "",
+    address: "",
+    description: "",
+    startTime: "",
+    endTime: "",
     submitButton: true
   }
 
@@ -24,12 +23,12 @@ export default class CreateActivityForm extends PureComponent {
       endTime: this.state.endTime
     })
     this.setState({
-      name: '',
-      location: '',
-      address: '',
-      description: '',
-      startTime: '',
-      endTime: '',
+      name: "",
+      location: "",
+      address: "",
+      description: "",
+      startTime: "",
+      endTime: "",
       submitButton: true
     })
   }
@@ -42,11 +41,11 @@ export default class CreateActivityForm extends PureComponent {
     })
 
     if (
-      this.state.name !== '' &&
-      this.state.location !== '' &&
-      this.state.address !== '' &&
-      this.state.startTime !== '' &&
-      this.state.endTime !== ''
+      this.state.name !== "" &&
+      this.state.location !== "" &&
+      this.state.address !== "" &&
+      this.state.startTime !== "" &&
+      this.state.endTime !== ""
     ) {
       this.setState({
         submitButton: false
@@ -55,11 +54,11 @@ export default class CreateActivityForm extends PureComponent {
   }
 
   onFocus = e => {
-    e.currentTarget.type = 'datetime-local'
+    e.currentTarget.type = "datetime-local"
   }
   onBlur = e => {
-    e.currentTarget.type = 'text'
-    e.currentTarget.placeholder = 'Enter a Date'
+    e.currentTarget.type = "text"
+    e.currentTarget.placeholder = "Enter a Date"
   }
 
   render() {
@@ -80,7 +79,7 @@ export default class CreateActivityForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="name"
-                    value={this.state.name || ''}
+                    value={this.state.name || ""}
                     onChange={this.handleChange}
                   />
                   <Input
@@ -92,7 +91,7 @@ export default class CreateActivityForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="location"
-                    value={this.state.location || ''}
+                    value={this.state.location || ""}
                     onChange={this.handleChange}
                   />
 
@@ -105,7 +104,7 @@ export default class CreateActivityForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="address"
-                    value={this.state.address || ''}
+                    value={this.state.address || ""}
                     onChange={this.handleChange}
                   />
 
@@ -115,7 +114,7 @@ export default class CreateActivityForm extends PureComponent {
                     </label>
                     <textarea
                       name="description"
-                      value={this.state.description || ''}
+                      value={this.state.description || ""}
                       onChange={this.handleChange}
                       className="form-control rounded-0"
                       rows="3"
@@ -133,7 +132,7 @@ export default class CreateActivityForm extends PureComponent {
                     type="text"
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
-                    value={this.state.startTime || ''}
+                    value={this.state.startTime || ""}
                     onChange={this.handleChange}
                   />
 
@@ -148,7 +147,7 @@ export default class CreateActivityForm extends PureComponent {
                     type="text"
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
-                    value={this.state.endTime || ''}
+                    value={this.state.endTime || ""}
                     onChange={this.handleChange}
                   />
                 </div>

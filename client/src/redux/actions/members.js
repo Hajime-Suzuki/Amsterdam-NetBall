@@ -90,8 +90,10 @@ export const removeActivityFromMember = (memberId, activityId) => (
     .catch(err => console.error(err))
 }
 
-export const addCommitteeToMember = (memberId, committeeId) => (dispatch, getState) => {
-
+export const addCommitteeToMember = (memberId, committeeId) => (
+  dispatch,
+  getState
+) => {
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -102,12 +104,13 @@ export const addCommitteeToMember = (memberId, committeeId) => (dispatch, getSta
     .patch(`${baseUrl}/committees/join/${memberId}/${committeeId}`)
     .set("Authorization", `${jwt}`)
     .then(result => dispatch(setMember(result.body)))
-    .catch(err => console.error('add err'))
-
+    .catch(err => console.error("add err"))
 }
 
-export const removeCommitteeFromMember = (memberId, committeeId) => (dispatch, getState) => {
-
+export const removeCommitteeFromMember = (memberId, committeeId) => (
+  dispatch,
+  getState
+) => {
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
@@ -118,8 +121,7 @@ export const removeCommitteeFromMember = (memberId, committeeId) => (dispatch, g
     .patch(`${baseUrl}/committees/leave/${memberId}/${committeeId}`)
     .set("Authorization", `${jwt}`)
     .then(result => dispatch(setMember(result.body)))
-    .catch(err => console.error('remove err'))
-
+    .catch(err => console.error("remove err"))
 }
 
 export const getMember = memberId => (dispatch, getState) => {

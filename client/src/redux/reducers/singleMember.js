@@ -1,7 +1,4 @@
-import {
-  GET_MEMBER,
-  EDIT_MEMBER
-} from "../actions/members"
+import { EDIT_MEMBER, GET_MEMBER } from "../actions/members"
 
 export default (state = {}, { type, payload }) => {
   switch (type) {

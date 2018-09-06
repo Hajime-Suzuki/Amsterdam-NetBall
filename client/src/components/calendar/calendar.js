@@ -6,8 +6,7 @@ import "../../../node_modules/react-big-calendar-like-google/lib/css/react-big-c
 import BigCalendar from "react-big-calendar-like-google"
 import { Container, Row, Col } from "mdbreact"
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
-// a localizer for BigCalendar
-// BigCalendar.momentLocalizer(moment)
+
 class EventsCalendar extends PureComponent {
   state = {
     date: new Date(),

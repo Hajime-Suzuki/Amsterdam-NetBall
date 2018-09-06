@@ -1,21 +1,21 @@
-import { createSelector } from 'reselect'
-import { normalize, schema } from 'normalizr'
-import { isExpired } from '../../jwt'
-import { logout } from './users'
-import * as request from 'superagent'
-import { baseUrl } from '../../constants'
+import { createSelector } from "reselect"
+import { normalize, schema } from "normalizr"
+import { isExpired } from "../../jwt"
+import { logout } from "./users"
+import * as request from "superagent"
+import { baseUrl } from "../../constants"
 
-export const GET_ACTIVITIES = 'GET_ACTIVITIES'
-export const ADD_ACTIVITY = 'ADD_ACTIVITY'
-export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY'
+export const GET_ACTIVITIES = "GET_ACTIVITIES"
+export const ADD_ACTIVITY = "ADD_ACTIVITY"
+export const UPDATE_ACTIVITY = "UPDATE_ACTIVITY"
 
-const activity = new schema.Entity('activities')
+const activity = new schema.Entity("activities")
 
-const isAttended = new schema.Entity('attendance')
-const members = new schema.Entity('members', {
+const isAttended = new schema.Entity("attendance")
+const members = new schema.Entity("members", {
   isAttended: [isAttended]
 })
-const activityWithMember = new schema.Entity('activities', {
+const activityWithMember = new schema.Entity("activities", {
   members: [members]
 })
 
@@ -47,7 +47,7 @@ export const getActivities = () => (dispatch, getState) => {
 
   request
     .get(`${baseUrl}/activities`)
-    .set('Authorization', `${jwt}`)
+    .set("Authorization", `${jwt}`)
     .then(result => {
       dispatch(setActivities(result.body))
     })
@@ -59,7 +59,7 @@ export const getActivitiesAndMembers = () => async (dispatch, getState) => {
 
   request
     .get(`${baseUrl}/admin/activity/members`)
-    .set('Authorization', `${jwt}`)
+    .set("Authorization", `${jwt}`)
     .then(result => {
       // console.log(result.body)
       dispatch(setActivitiesWithMembers(result.body))
@@ -72,7 +72,7 @@ export const createActivity = data => (dispatch, getState) => {
 
   request
     .post(`${baseUrl}/admin/activity`)
-    .set('Authorization', `${jwt}`)
+    .set("Authorization", `${jwt}`)
     .send(data)
     .then(result => {
       dispatch(addActivity(result.body))
@@ -84,7 +84,7 @@ export const editAttendance = id => (dispatch, getState) => {
   const jwt = authCheckAndGetJWT(dispatch, getState)
   request
     .patch(`${baseUrl}/admin/activity/attendance/${id}`)
-    .set('Authorization', `${jwt}`)
+    .set("Authorization", `${jwt}`)
     .then(result => {
       dispatch({
         type: UPDATE_ACTIVITY,

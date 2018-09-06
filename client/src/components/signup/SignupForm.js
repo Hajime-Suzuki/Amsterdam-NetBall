@@ -1,22 +1,22 @@
-import React, { PureComponent } from 'react'
-import { Container, Row, Col, Input, Button } from 'mdbreact'
-import './SignupForm.css'
+import React, { PureComponent } from "react"
+import { Container, Row, Col, Input, Button } from "mdbreact"
+import "./SignupForm.css"
 export default class SignupForm extends PureComponent {
   state = {
-    firstName: 'Test',
-    lastName: 'User',
-    streetAddress: 'test address',
-    postalCode: '1181RC',
-    dateOfBirth: '1980-01-01',
-    city: 'Test City',
-    phoneNum: '123123',
-    occupation: 'Nice Job',
-    employer: 'Nice company',
-    skills: 'Netball',
-    email: '',
-    confirmEmail: '',
-    password: '123123',
-    confirmPassword: '123123',
+    firstName: "Test",
+    lastName: "User",
+    streetAddress: "test address",
+    postalCode: "1181RC",
+    dateOfBirth: "1980-01-01",
+    city: "Test City",
+    phoneNum: "123123",
+    occupation: "Nice Job",
+    employer: "Nice company",
+    skills: "Netball",
+    email: "",
+    confirmEmail: "",
+    password: "123123",
+    confirmPassword: "123123",
     submitButton: true
   }
   // state = {
@@ -50,16 +50,16 @@ export default class SignupForm extends PureComponent {
     })
 
     if (
-      this.state.password !== '' &&
+      this.state.password !== "" &&
       this.state.password === this.state.confirmPassword &&
-      this.state.firstName !== '' &&
-      this.state.lastName !== '' &&
-      this.state.streetAddress !== '' &&
-      this.state.postalCode !== '' &&
-      this.state.city !== '' &&
-      this.state.phoneNum !== '' &&
-      this.state.email !== '' &&
-      this.state.confirmEmail !== ''
+      this.state.firstName !== "" &&
+      this.state.lastName !== "" &&
+      this.state.streetAddress !== "" &&
+      this.state.postalCode !== "" &&
+      this.state.city !== "" &&
+      this.state.phoneNum !== "" &&
+      this.state.email !== "" &&
+      this.state.confirmEmail !== ""
     ) {
       this.setState({
         submitButton: false
@@ -72,11 +72,11 @@ export default class SignupForm extends PureComponent {
   }
 
   onFocus = e => {
-    e.currentTarget.type = 'date'
+    e.currentTarget.type = "date"
   }
   onBlur = e => {
-    e.currentTarget.type = 'text'
-    e.currentTarget.placeholder = 'Enter a Date'
+    e.currentTarget.type = "text"
+    e.currentTarget.placeholder = "Enter a Date"
   }
 
   render() {
@@ -97,7 +97,7 @@ export default class SignupForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="firstName"
-                    value={this.state.firstName || ''}
+                    value={this.state.firstName || ""}
                     onChange={this.handleChange}
                   />
                   <Input
@@ -109,7 +109,7 @@ export default class SignupForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="lastName"
-                    value={this.state.lastName || ''}
+                    value={this.state.lastName || ""}
                     onChange={this.handleChange}
                   />
 
@@ -124,7 +124,7 @@ export default class SignupForm extends PureComponent {
                     type="text"
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
-                    value={this.state.dateOfBirth || ''}
+                    value={this.state.dateOfBirth || ""}
                     onChange={this.handleChange}
                   />
 
@@ -137,7 +137,7 @@ export default class SignupForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="streetAddress"
-                    value={this.state.streetAddress || ''}
+                    value={this.state.streetAddress || ""}
                     onChange={this.handleChange}
                   />
 
@@ -150,7 +150,7 @@ export default class SignupForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="postalCode"
-                    value={this.state.postalCode || ''}
+                    value={this.state.postalCode || ""}
                     onChange={this.handleChange}
                   />
                   <Input
@@ -162,7 +162,7 @@ export default class SignupForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="city"
-                    value={this.state.city || ''}
+                    value={this.state.city || ""}
                     onChange={this.handleChange}
                   />
                   <Input
@@ -174,7 +174,7 @@ export default class SignupForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="phoneNum"
-                    value={this.state.phoneNum || ''}
+                    value={this.state.phoneNum || ""}
                     onChange={this.handleChange}
                   />
                   <Input
@@ -186,7 +186,7 @@ export default class SignupForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="occupation"
-                    value={this.state.occupation || ''}
+                    value={this.state.occupation || ""}
                     onChange={this.handleChange}
                   />
                   <Input
@@ -198,7 +198,7 @@ export default class SignupForm extends PureComponent {
                     error="wrong"
                     success="right"
                     name="employer"
-                    value={this.state.employer || ''}
+                    value={this.state.employer || ""}
                     onChange={this.handleChange}
                   />
                   <Input
@@ -206,7 +206,7 @@ export default class SignupForm extends PureComponent {
                     label="Other useful skills"
                     icon="archive"
                     name="skills"
-                    value={this.state.skills || ''}
+                    value={this.state.skills || ""}
                     onChange={this.handleChange}
                   />
                 </div>
@@ -222,7 +222,7 @@ export default class SignupForm extends PureComponent {
                   error="wrong"
                   success="right"
                   name="email"
-                  value={this.state.email || ''}
+                  value={this.state.email || ""}
                   onChange={this.handleChange}
                 />
                 <Input
@@ -234,7 +234,7 @@ export default class SignupForm extends PureComponent {
                   error="wrong"
                   success="right"
                   name="confirmEmail"
-                  value={this.state.confirmEmail || ''}
+                  value={this.state.confirmEmail || ""}
                   onChange={this.handleChange}
                 />
                 <Input
@@ -244,7 +244,7 @@ export default class SignupForm extends PureComponent {
                   type="password"
                   validate
                   name="password"
-                  value={this.state.password || ''}
+                  value={this.state.password || ""}
                   onChange={this.handleChange}
                 />
                 <Input
@@ -254,13 +254,13 @@ export default class SignupForm extends PureComponent {
                   type="password"
                   validate
                   name="confirmPassword"
-                  value={this.state.confirmPassword || ''}
+                  value={this.state.confirmPassword || ""}
                   onChange={this.handleChange}
                 />
               </div>
               {this.state.password !== this.state.confirmPassword &&
               this.state.confirmPassword ? (
-                <p style={{ color: 'red' }}>Password does not match</p>
+                <p style={{ color: "red" }}>Password does not match</p>
               ) : null}
 
               <div className="text-center" id="submit-btn">

@@ -1,10 +1,10 @@
+import { Container, Row } from "mdbreact"
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Container, Row } from "mdbreact"
-import "./SearchBar.css"
-import SearchBar from "./SearchBar"
-import Filters from "./Filters"
 import { searchMembers } from "../../redux/actions/members"
+import Filters from "./Filters"
+import SearchBar from "./SearchBar"
+import "./SearchBar.css"
 
 class Search extends PureComponent {
   state = {

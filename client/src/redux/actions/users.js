@@ -1,17 +1,17 @@
-import * as request from 'superagent'
-import { baseUrl } from '../../constants'
+import * as request from "superagent"
+import { baseUrl } from "../../constants"
 
-export const ADD_USER = 'ADD_USER'
-export const UPDATE_USER = 'UPDATE_USER'
-export const UPDATE_USERS = 'UPDATE_USERS'
+export const ADD_USER = "ADD_USER"
+export const UPDATE_USER = "UPDATE_USER"
+export const UPDATE_USERS = "UPDATE_USERS"
 
-export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
-export const USER_LOGIN_FAILED = 'USER_LOGIN_FAILED'
+export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS"
+export const USER_LOGIN_FAILED = "USER_LOGIN_FAILED"
 
-export const USER_LOGOUT = 'USER_LOGOUT'
+export const USER_LOGOUT = "USER_LOGOUT"
 
-export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS'
-export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED'
+export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS"
+export const USER_SIGNUP_FAILED = "USER_SIGNUP_FAILED"
 
 export const logout = () => ({
   type: USER_LOGOUT
@@ -24,12 +24,12 @@ const userLoginSuccess = login => ({
 
 const userLoginFailed = error => ({
   type: USER_LOGIN_FAILED,
-  payload: error || 'Unknown error'
+  payload: error || "Unknown error"
 })
 
 const userSignupFailed = error => ({
   type: USER_SIGNUP_FAILED,
-  payload: error || 'Unknown error'
+  payload: error || "Unknown error"
 })
 
 const userSignupSuccess = () => ({
@@ -94,12 +94,12 @@ export const signup = (
     .catch(err => {
       console.log(err.response.body)
       const msg = err.response.body.message.startsWith(
-        'duplicate key value violates'
+        "duplicate key value violates"
       )
-        ? 'Email already exists'
+        ? "Email already exists"
         : err.response.body.message ===
           `Invalid body, check 'errors' property for more info.`
-          ? Object.values(err.response.body.errors[0].constraints).join(' ')
+          ? Object.values(err.response.body.errors[0].constraints).join(" ")
           : err.response.body.message
 
       dispatch(userSignupFailed(msg))

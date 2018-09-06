@@ -1,8 +1,8 @@
 import {
-  GET_ACTIVITIES,
   ADD_ACTIVITY,
+  GET_ACTIVITIES,
   UPDATE_ACTIVITY
-} from '../actions/activities'
+} from "../actions/activities"
 
 const initialState = {
   ids: [],

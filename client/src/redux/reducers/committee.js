@@ -1,35 +1,36 @@
-import { GET_COMMITTEE, ADD_MESSAGE, DELETE_MESSAGE, EDIT_MESSAGE } from "../actions/committees"
+import {
+  GET_COMMITTEE,
+  ADD_MESSAGE,
+  DELETE_MESSAGE,
+  EDIT_MESSAGE
+} from "../actions/committees"
 
 export default (state = {}, { type, payload }) => {
   switch (type) {
-
     case GET_COMMITTEE:
       return payload
 
     case ADD_MESSAGE:
-      const {committee, ...message} = payload;
+      const { committee, ...message } = payload
       const newMessages = [...state.messages, message]
-      return {...state, messages: newMessages }
+      return { ...state, messages: newMessages }
 
     case EDIT_MESSAGE:
-      const editedMessages = state.messages.map(
-        message => {
-          if (message.id === payload.id) {
-            return payload
-          }
-          return message
+      const editedMessages = state.messages.map(message => {
+        if (message.id === payload.id) {
+          return payload
         }
-      )
-      return {...state, messages: editedMessages }
+        return message
+      })
+      return { ...state, messages: editedMessages }
 
     case DELETE_MESSAGE:
       const remainingMessages = state.messages.filter(
         message => message.id !== payload
       )
-      return {...state, messages: remainingMessages }
+      return { ...state, messages: remainingMessages }
 
     default:
       return state
-
   }
 }

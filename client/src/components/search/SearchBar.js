@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import './SearchBar.css'
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import "./SearchBar.css"
 
 // import { userId } from "../../jwt"
 
 class SearchBar extends PureComponent {
   state = {
-    name: ''
+    name: ""
   }
 
   handleChange = async event => {
