@@ -20,6 +20,7 @@ import LogoutPage from "../logout/LogoutPage"
 import MemberLandingPage from "../MemberLanding/MemberLandingPage"
 import MemberListComponent from "../members/MembersListComponent"
 import MembersProfilePage from "../members/MembersProfilePage"
+import TeamList from "../teams/TeamList"
 import SignupPage from "../signup/SignupPage"
 import Dashboard from "../admin/Dashboard"
 import ActivityList from "../activities/ActivityList"
@@ -125,6 +126,7 @@ class PersistentDrawer extends PureComponent {
               />
               <Route exact path="/events" component={EventsCalendar} />
               <Route exact path="/activities" component={ActivityList} />
+              <Route exact path="/teams" component={TeamList} />
               <Route exact path="/members/:id" component={MembersProfilePage} />
               <Route exact path="/members" component={MemberLandingPage} />
               <Route exact path="/committees/:id" component={CommitteePage} />
