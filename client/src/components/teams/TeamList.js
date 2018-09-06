@@ -1,6 +1,6 @@
+import { Col, Container, Row } from "mdbreact"
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Container, Row, Col } from "mdbreact"
 import { getTeams } from "../../redux/actions/teams"
 
 class TeamList extends PureComponent {
@@ -17,7 +17,7 @@ class TeamList extends PureComponent {
       )
     } else {
       return teams.map(team => (
-        <div className="text-center mb-4">
+        <div className="text-center mb-4" key={team.id}>
           <h3
             className="list-group-item list-group-item-action waves-effect "
             style={{ backgroundColor: "#fff" }}
