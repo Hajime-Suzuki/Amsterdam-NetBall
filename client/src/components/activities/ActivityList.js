@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
+import { Container, Row, Col } from "mdbreact"
 import { getActivities } from "../../redux/actions/activities"
 
 class ActivityList extends PureComponent {
@@ -14,6 +13,7 @@ class ActivityList extends PureComponent {
       const endTime = new Date(activity.endTime)
       const now = new Date()
       if (now < endTime) return activity
+      return false
     })
 
   renderActivities = activities => {

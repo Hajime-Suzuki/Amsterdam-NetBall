@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Container, Row, Col, Input, Button } from 'mdbreact'
-import { login } from '../../redux/actions/users'
-import { Redirect } from 'react-router-dom'
-import Search from '../search/Search'
-import { getMembers } from '../../redux/actions/members'
-import { getActivities } from '../../redux/actions/activities'
-import { Icon } from '@material-ui/core'
-import Divider from '@material-ui/core/Divider'
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import { Container, Row, Col, Input, Button } from "mdbreact"
+import { login } from "../../redux/actions/users"
+import { Redirect } from "react-router-dom"
+import Search from "../search/Search"
+import { getMembers } from "../../redux/actions/members"
+import { getActivities } from "../../redux/actions/activities"
+import { Icon } from "@material-ui/core"
+import Divider from "@material-ui/core/Divider"
 
 // import { userId } from "../../jwt"
 
-import ActivityListComponent from '../admin/ActivityListComponent'
+import ActivityListComponent from "../admin/ActivityListComponent"
 class MemberLandingPage extends PureComponent {
   state = {}
 
@@ -29,12 +29,11 @@ class MemberLandingPage extends PureComponent {
 
     if (!currentUser) return <Redirect to="/" />
 
-    if (!members) return 'Loading'
+    if (!members) return "Loading"
 
     if (members) {
-
-      const currentMember = members.find( member => member.id === currentUser.id)
-      console.log('currentMember', currentMember)
+      const currentMember = members.find(member => member.id === currentUser.id)
+      console.log("currentMember", currentMember)
       return (
         <Container className="container-fluid mt-1">
           <Row className="justify-content-md-center">
@@ -58,6 +57,11 @@ class MemberLandingPage extends PureComponent {
                     Check all members
                   </Button>
                 </Link>
+                <Link to="/teams">
+                  <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
+                    Check all teams
+                  </Button>
+                </Link>
 
                 <h5 className=" font-bold mb-4">Events</h5>
                 <Divider />
@@ -73,26 +77,38 @@ class MemberLandingPage extends PureComponent {
                   </Button>
                 </Link>
 
-                { currentMember && currentMember.committees && currentMember.committees.length > 0 &&
-                <div>
-                <h5 className=" font-bold mb-4">Your Committees</h5>
-                <Divider />
-                  { currentMember.committees.map( committee => 
-                    <Link to={ `/committees/${committee.id}` }>
+                {this.props.currentUser.role === "admin" && (
+                  <div>
+                    <h5 className=" font-bold mb-4">Admin pages</h5>
+                    <Divider />
+                    <Link to="/admin">
                       <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
-                        { committee.name }
+                        Admin dashboard
                       </Button>
                     </Link>
-                  ) }
-                </div>
-                }
+                  </div>
+                )}
 
+                {currentMember &&
+                  currentMember.committees &&
+                  currentMember.committees.length > 0 && (
+                    <div>
+                      <h5 className=" font-bold mb-4">Your Committees</h5>
+                      <Divider />
+                      {currentMember.committees.map(committee => (
+                        <Link to={`/committees/${committee.id}`}>
+                          <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
+                            {committee.name}
+                          </Button>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
               </div>
             </Col>
           </Row>
         </Container>
       )
-
     }
   }
 }

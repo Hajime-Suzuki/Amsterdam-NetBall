@@ -34,7 +34,6 @@ export default (state = initialState, { type, payload }) => {
         members: { ...state.members },
         attendance: { ...state.attendance, [payload.id]: payload }
       }
-      return state
     }
     default:
       return state
