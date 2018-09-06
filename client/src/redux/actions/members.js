@@ -90,6 +90,38 @@ export const removeActivityFromMember = (memberId, activityId) => (
     .catch(err => console.error(err))
 }
 
+export const addCommitteeToMember = (memberId, committeeId) => (dispatch, getState) => {
+
+  const state = getState()
+  if (!state.currentUser) return null
+  const jwt = state.currentUser.token
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .patch(`${baseUrl}/committees/join/${memberId}/${committeeId}`)
+    .set("Authorization", `${jwt}`)
+    .then(result => dispatch(setMember(result.body)))
+    .catch(err => console.error('add err'))
+
+}
+
+export const removeCommitteeFromMember = (memberId, committeeId) => (dispatch, getState) => {
+
+  const state = getState()
+  if (!state.currentUser) return null
+  const jwt = state.currentUser.token
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .patch(`${baseUrl}/committees/leave/${memberId}/${committeeId}`)
+    .set("Authorization", `${jwt}`)
+    .then(result => dispatch(setMember(result.body)))
+    .catch(err => console.error('remove err'))
+
+}
+
 export const getMember = memberId => (dispatch, getState) => {
   dispatch({ type: FETCHING_MEMBERS })
 

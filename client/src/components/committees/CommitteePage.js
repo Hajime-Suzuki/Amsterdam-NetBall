@@ -47,38 +47,21 @@ class CommitteePage extends PureComponent {
         )
       } else {
         const messageDate = new Date(message.created_at)
-        const messageTimestamp = dateFormat(messageDate, "m/d/yy H:MM")
+        const correctedMessageDate = messageDate.setHours(messageDate.getHours()+4)
+        const messageTimestamp = dateFormat(correctedMessageDate, "m/d/yy H:MM")
+        const canEdit = this.props.currentUser.id === message.member.id
+        const canDelete = canEdit || this.props.currentUser.role === 'admin'
         return (
-          <div
-            key={message.id}
-            className={"committee-message mt-0 p-3 border border-light rounded"}
-          >
-            <p className="committee-message-member mb-1">
-              {`${message.member.firstName} ${message.member.lastName}`}
-              <span className="message-timestamp">{`${messageTimestamp}`}</span>
-              {this.props.currentUser.id === message.member.id && (
-                <span>
-                  <button
-                    onClick={() => this.editInPlace(message.id)}
-                    className="edit-message"
-                  >
-                    &#9998;
-                  </button>
-                  <button
-                    onClick={() =>
-                      this.props.deleteMessage(
-                        this.props.match.params.id,
-                        message.id
-                      )
-                    }
-                    className="delete-message"
-                  >
-                    &#10060;
-                  </button>
-                </span>
-              )}
-            </p>
-            <p className="committee-message-body mb-1">{message.body}</p>
+          <div key={message.id} className={'committee-message mt-0 p-3 border border-light rounded'}>
+          <p className="committee-message-member mb-1">
+            {`${message.member.firstName} ${message.member.lastName}`} 
+            <span className="message-timestamp">{ `${messageTimestamp}` }</span>
+            { canEdit &&
+              <span><button onClick={ ()=>this.editInPlace(message.id) } className="edit-message">&#9998;</button></span> }
+            { canDelete &&
+              <span><button onClick={ ()=>this.props.deleteMessage(this.props.match.params.id, message.id) } className="delete-message">&#10060;</button></span> }
+          </p>
+          <p className="committee-message-body mb-1">{message.body}</p>
           </div>
         )
       }
