@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Container, Row, Col, Input, Button } from "mdbreact"
+import { Container } from "mdbreact"
 import {
   getCommittee,
   deleteMessage,
@@ -10,7 +10,6 @@ import {
 import AddMessageForm from "./AddMessageForm.js"
 import "./CommitteePage.css"
 import dateFormat from "dateformat"
-// import { userId } from "../../jwt"
 
 class CommitteePage extends PureComponent {
   state = {

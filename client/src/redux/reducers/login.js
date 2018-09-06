@@ -1,5 +1,4 @@
-import { USER_LOGIN_FAILED, USER_LOGIN_SUCCESS } from "../actions/users"
-import { userId } from "../../jwt"
+import { USER_LOGIN_FAILED } from "../actions/users"
 
 export default function(state = {}, { type, payload }) {
   switch (type) {

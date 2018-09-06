@@ -2,7 +2,7 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import { getAllCommittees, addCommittee, deleteCommittee } from "../../redux/actions/committees"
-import { Container, Row, Col, Input, Button } from "mdbreact"
+import { Container, Row, Col } from "mdbreact"
 import './Dashboard.css'
 
 class CommitteeAdmin extends PureComponent {
@@ -40,17 +40,14 @@ class CommitteeAdmin extends PureComponent {
                   committees.map(committee =>
                     <li>
                     <Link  to={`/committees/${committee.id}`}><span className="committee-name">{ committee.name }</span></Link>
-                    <span className="committee-description">{ committee.description }</span>
                     <button className="committee-delete" onClick={ ()=>deleteCommittee(committee.id) }>&#10060;</button>
                     </li>
                   )
                 }
               </ul>
-              <h5 className=" text-center mt-5 mb-3">Add a committee</h5>
+              <h5 className=" text-center mt-3 mb-3">Add a committee</h5>
               <form onSubmit={this.handleSubmit} >
                 <input type="text" name="name" id="committee-name" className="form-control" value={ this.state.name !== undefined ? this.state.name : ''} placeholder="Committee Name" onChange={ this.handleChange } /><br/>
-                <input type="text" name="description" id="committee-description" className="form-control" value={ this.state.description !== undefined ? this.state.description : ''} placeholder="Committee Description" onChange={ this.handleChange } /><br/>
-
                 <div style={{ textAlign: 'center' }}>
                   <button type="submit" className="btn btn-blue-grey btn-lg ml-4 mr-4 mb-3">Submit</button>
                 </div>

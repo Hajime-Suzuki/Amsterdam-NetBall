@@ -2,6 +2,10 @@ div.dashboard-component h3, h4, h5, h6 {
   font-weight: 700;
 }
 
+div.dashboard-component a {
+  color: black;
+}
+
 div.dashboard-component ul {
   padding: 0 0 0 2px;
 }
@@ -9,20 +13,26 @@ div.dashboard-component ul {
 div.dashboard-component li {
   list-style: none;
   border-bottom: 1px solid #ddd;
+  line-height: 1.8em
 }
 
 .committee-name, .committee-description, .committee-delete {
   display: inline-block;
-  margin-right: 1em;
+}
+
+.committee-name, .committee-description, .committee-delete {
+  display: inline-block;
 }
 
 .committee-delete {
   text-align: right;
   border: none;
   background-color: transparent;
-  margin-left: 0.5em;
   margin-right: 0;
   box-shadow: none !important;
+  line-height: 1em;
+  position: relative;
+  top: 2px;
 }
 
 div.dashboard-component input {

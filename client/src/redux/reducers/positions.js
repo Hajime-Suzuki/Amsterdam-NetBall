@@ -1,7 +1,6 @@
 import {
   GET_MEMBERS,
-  FILTER_MEMBERS,
-  FETCHING_MEMBERS
+  FILTER_MEMBERS
 } from "../actions/members"
 
 export default (state = {}, { type, payload }) => {
