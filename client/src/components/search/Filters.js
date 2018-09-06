@@ -8,14 +8,16 @@ import './SearchBar.css'
 import { baseUrl } from '../../constants'
 import { getFilterOption } from '../../redux/actions/filterOption'
 
+const initialFilterOption = {
+  positions: {},
+  clubRoles: {},
+  roles: {},
+  teams: {},
+  currentMemberOption: 'currentMemberOnly'
+}
 class Filters extends PureComponent {
-  state = {
-    positions: {},
-    clubRoles: {},
-    roles: {},
-    teams: {},
-    currentMemberOption: 'currentMemberOnly'
-  }
+  state = initialFilterOption
+
   componentDidMount() {
     this.props.getFilterOption()
   }
@@ -89,6 +91,12 @@ class Filters extends PureComponent {
     )
   }
 
+  clearFilter = () => {
+    this.setState(initialFilterOption, () => {
+      this.props.handleSearch(this.state)
+    })
+  }
+
   render() {
     const { filterOption } = this.props
     if (!this.props.filterOption.positions) return null
@@ -139,6 +147,15 @@ class Filters extends PureComponent {
             'Expired Member Only'
           )}
           {this.renderCurrentMemberCheckboxes('All', 'All')}
+        </Col>
+
+        <Col>
+          <button
+            className="list-group-item list-group-item-action waves-effect"
+            onClick={this.clearFilter}
+          >
+            Clear Filter
+          </button>
         </Col>
       </Row>
     )

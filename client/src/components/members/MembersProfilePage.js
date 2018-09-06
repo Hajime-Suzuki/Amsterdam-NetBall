@@ -8,6 +8,17 @@ import Search from "../search/Search"
 import {
   getMember,
   addActivityToMember,
+<<<<<<< HEAD
+  removeActivityFromMember,
+  editProfile
+} from '../../redux/actions/members'
+import './MembersProfilePage.css'
+import Modal from '@material-ui/core/Modal'
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import { getActivities } from '../../redux/actions/activities'
+import { Divider } from '@material-ui/core'
+=======
   editProfile,
   removeActivityFromMember
 } from "../../redux/actions/members"
@@ -19,11 +30,28 @@ import Typography from "@material-ui/core/Typography"
 import { getActivities } from "../../redux/actions/activities"
 import { Divider } from "@material-ui/core"
 import MemberCommitteesModal from "./MemberCommitteesModal"
+<<<<<<< HEAD
+>>>>>>> 09d13c9c7634eebf53a46318fa39db78303c9998
+import styled from 'styled-components'
+import { getTeams } from '../../redux/actions/teams'
+=======
 import styled from "styled-components"
+>>>>>>> 500cfa3f0eb9a0058090d2506539d09f1cf9731e
 
+const top = 50
+const left = 50
+
+// return {
+//   top: `${top}%`,
+//   left: `${left}%`,
+//   transform: `translate(-${top}%, -${left}%)`,
+//   overflowY: 'scroll'
+// }
 const StyledModal = styled(Modal)`
   && {
-    overflow-y: scroll;
+    overflow-y: auto;
+    /* left: ${left}%;
+    transform: translate(-${top} %, -${left} %); */
   }
 `
 
@@ -42,7 +70,7 @@ function getModalStyle() {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
-    overflowY: "scroll"
+    overflowY: 'scroll'
   }
 }
 
@@ -146,27 +174,27 @@ class MemberProfilePage extends PureComponent {
   updateProfile = () => {
     const updates = {}
 
-    if (this.state.firstName !== "") {
+    if (this.state.firstName !== '') {
       updates.firstName = this.state.firstName
     }
 
-    if (this.state.lastName !== "") {
+    if (this.state.lastName !== '') {
       updates.lastName = this.state.lastName
     }
 
-    if (this.state.streetAddress !== "") {
+    if (this.state.streetAddress !== '') {
       updates.streetAddress = this.state.streetAddress
     }
 
-    if (this.state.city !== "") {
+    if (this.state.city !== '') {
       updates.city = this.state.city
     }
 
-    if (this.state.email !== "") {
+    if (this.state.email !== '') {
       updates.email = this.state.email
     }
 
-    if (this.state.team !== "") {
+    if (this.state.team !== '') {
       updates.team = this.state.team
     }
 
@@ -175,12 +203,12 @@ class MemberProfilePage extends PureComponent {
     this.props.editProfile(updates, this.props.currentUser.id)
 
     this.setState({
-      firstName: "",
-      lastName: "",
-      streetAddress: "",
-      city: "",
-      email: "",
-      team: ""
+      firstName: '',
+      lastName: '',
+      streetAddress: '',
+      city: '',
+      email: '',
+      team: ''
     })
   }
 
@@ -432,8 +460,13 @@ class MemberProfilePage extends PureComponent {
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default1"
                     disabled
+<<<<<<< HEAD
+                    style={{ textAlign: 'right' }}
+                    value={(member.team && member.team.name) || ''}
+=======
                     style={{ textAlign: "right" }}
                     value={member.team.name}
+>>>>>>> 500cfa3f0eb9a0058090d2506539d09f1cf9731e
                   />
                 </div>
 
@@ -806,6 +839,21 @@ class MemberProfilePage extends PureComponent {
                   )}
 
                 <div>
+<<<<<<< HEAD
+                <StyledModal
+                  aria-labelledby="simple-modal-title"
+                  aria-describedby="simple-modal-description"
+                  open={this.state.editProfileModalOpen}
+                  onClose={this.handleEditProfileClose}
+                >
+                  <div style={getModalStyle()} className={classes.paper}>
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">
+                          Update your info
+                        </h5>
+                        {/* <button
+=======
                   <StyledModal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
@@ -822,6 +870,7 @@ class MemberProfilePage extends PureComponent {
                             Update your info
                           </h5>
                           {/* <button
+>>>>>>> 500cfa3f0eb9a0058090d2506539d09f1cf9731e
                           type="button"
                           className="close"
                           data-dismiss="modal"

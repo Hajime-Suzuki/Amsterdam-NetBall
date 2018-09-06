@@ -1,36 +1,36 @@
-import AppBar from "@material-ui/core/AppBar"
-import Button from "@material-ui/core/Button"
-import IconButton from "@material-ui/core/IconButton"
-import { withStyles } from "@material-ui/core/styles"
-import Toolbar from "@material-ui/core/Toolbar"
-import Typography from "@material-ui/core/Typography"
-import MenuIcon from "@material-ui/icons/Menu"
-import classNames from "classnames"
-import PropTypes from "prop-types"
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { withRouter } from "react-router"
-import { Redirect, Route, Switch } from "react-router-dom"
-import AdminRoute from "../../private/Admin"
-import EventsCalendar from "../calendar/calendar"
-import CommitteePage from "../committees/CommitteePage"
-import HomePage from "../home/HomePage"
-import LoginPage from "../login/LoginPage"
-import LogoutPage from "../logout/LogoutPage"
-import MemberLandingPage from "../MemberLanding/MemberLandingPage"
-import MemberListComponent from "../members/MembersListComponent"
-import MembersProfilePage from "../members/MembersProfilePage"
-import TeamList from "../teams/TeamList"
-import SignupPage from "../signup/SignupPage"
-import Dashboard from "../admin/Dashboard"
-import ActivityList from "../activities/ActivityList"
-import drawerItems from "./drawerItems"
-import drawerStyle from "./styles/drawerStyle"
+import AppBar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import { withStyles } from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import MenuIcon from '@material-ui/icons/Menu'
+import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { Redirect, Route, Switch } from 'react-router-dom'
+import AdminRoute from '../../private/Admin'
+import EventsCalendar from '../calendar/calendar'
+import CommitteePage from '../committees/CommitteePage'
+import HomePage from '../home/HomePage'
+import LoginPage from '../login/LoginPage'
+import LogoutPage from '../logout/LogoutPage'
+import MemberLandingPage from '../MemberLanding/MemberLandingPage'
+import MemberListComponent from '../members/MembersListComponent'
+import MembersProfilePage from '../members/MembersProfilePage'
+import TeamList from '../teams/TeamList'
+import SignupPage from '../signup/SignupPage'
+import Dashboard from '../admin/Dashboard'
+import ActivityList from '../activities/ActivityList'
+import drawerItems from './drawerItems'
+import drawerStyle from './styles/drawerStyle'
 
 class PersistentDrawer extends PureComponent {
   state = {
     open: false,
-    anchor: "left"
+    anchor: 'left'
   }
 
   handleDrawerOpen = () => {
@@ -67,7 +67,7 @@ class PersistentDrawer extends PureComponent {
       currentUser
     })
 
-    if (anchor === "left") {
+    if (anchor === 'left') {
       before = drawer
     } else {
       after = drawer
@@ -75,13 +75,13 @@ class PersistentDrawer extends PureComponent {
 
     return (
       <div className={classes.root}>
-        <div className={classes.appFrame}>
+        <div className={classes.appFrame} style={{ minHeight: '100vh' }}>
           <AppBar
             className={classNames(classes.appBar, {
               [classes.appBarShift]: open,
               [classes[`appBarShift-${anchor}`]]: open
             })}
-            style={{ backgroundColor: "#000" }}
+            style={{ backgroundColor: '#000' }}
           >
             <Toolbar disableGutters={!open}>
               <IconButton
@@ -103,7 +103,7 @@ class PersistentDrawer extends PureComponent {
               )}
             </Toolbar>
           </AppBar>
-          {before}{" "}
+          {before}{' '}
           <main
             className={classNames(
               classes.content,
