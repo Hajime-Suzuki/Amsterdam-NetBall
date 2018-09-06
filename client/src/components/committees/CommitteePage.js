@@ -33,6 +33,13 @@ class CommitteePage extends PureComponent {
   renderMessages = (messages, pendingEdit) => {
     const _this = this
     console.log("pendingEdit", pendingEdit)
+
+    messages.sort(function(a, b) {
+        var timestampA = a.created_at
+        var timestampB = b.created_at
+        return (timestampA < timestampB) ? -1 : (timestampA > timestampB) ? 1 : 0;
+    })
+
     return messages.map(message => {
       if (pendingEdit === message.id) {
         return (
@@ -46,7 +53,7 @@ class CommitteePage extends PureComponent {
         )
       } else {
         const messageDate = new Date(message.created_at)
-        const correctedMessageDate = messageDate.setHours(messageDate.getHours()+4)
+        const correctedMessageDate = messageDate.setHours(messageDate.getHours()+2)
         const messageTimestamp = dateFormat(correctedMessageDate, "m/d/yy H:MM")
         const canEdit = this.props.currentUser.id === message.member.id
         const canDelete = canEdit || this.props.currentUser.role === 'admin'
