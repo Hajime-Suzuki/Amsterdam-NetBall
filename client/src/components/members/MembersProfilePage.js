@@ -372,14 +372,44 @@ class MemberProfilePage extends PureComponent {
                   Member information
                 </h5>
 
-                <div className="md-form input-group mt-0 mb-3">
+                {/* <div className="list-group mb-4">
+                  <div className="d-flex justify-content-around">
+                    <button
+                      className="list-group-item list-group-item-action waves-effect"
+                      style={{ backgroundColor: "#fff" }}
+                    >
+                      <b>Team:</b>
+                    </button>
+                    <button className="list-group-item list-group-item-action waves-effect">
+                      {member.team.name}
+                    </button>
+                  </div>
+                </div> */}
+
+                {/* <div className="list-group mb-4">
+                  <div className="d-flex justify-content-around">
+                    <button
+                      className="list-group-item list-group-item-action waves-effect"
+                      style={{ backgroundColor: "#fff" }}
+                    >
+                      <b>Positions:</b>
+                    </button>
+                    <button className="list-group-item list-group-item-action waves-effect">
+                      {member.positions.map(position => {
+                        return position.positionName + " "
+                      })}
+                    </button>
+                  </div>
+                </div> */}
+
+                <div className="md-form input-group mt-0 mb-3 d-flex justify-content-around">
                   <div className="input-group-prepend">
                     <span
                       className="input-group-text"
                       id="inputGroup-sizing-default1"
                       style={{ backgroundColor: "#fff" }}
                     >
-                      Plays in team:
+                      Team:
                     </span>
                   </div>
                   <input
@@ -393,14 +423,14 @@ class MemberProfilePage extends PureComponent {
                   />
                 </div>
 
-                <div className="md-form input-group mt-0 mb-3">
+                <div className="md-form input-group mt-0 mb-3 d-flex justify-content-around">
                   <div className="input-group-prepend">
                     <span
                       className="input-group-text"
                       id="inputGroup-sizing-default1"
                       style={{ backgroundColor: "#fff" }}
                     >
-                      Plays at positions:
+                      Positions:
                     </span>
                   </div>
                   <input
@@ -416,14 +446,14 @@ class MemberProfilePage extends PureComponent {
                   />
                 </div>
 
-                <div className="md-form input-group mt-0 mb-3">
+                <div className="md-form input-group mt-0 mb-3 d-flex justify-content-around">
                   <div className="input-group-prepend">
                     <span
                       className="input-group-text"
                       id="inputGroup-sizing-default1"
                       style={{ backgroundColor: "#fff" }}
                     >
-                      Email address:
+                      Email:
                     </span>
                   </div>
                   <input
@@ -444,7 +474,7 @@ class MemberProfilePage extends PureComponent {
                       id="inputGroup-sizing-default1"
                       style={{ backgroundColor: "#fff" }}
                     >
-                      Lives in:
+                      City:
                     </span>
                   </div>
                   <input
