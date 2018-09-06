@@ -22,12 +22,13 @@ export const getAllCommittees = () => (dispatch, getState) => {
     .get(`${baseUrl}/allcommittees/`)
     .set("Authorization", `${jwt}`)
     .then(result => {
+      console.log('result', result)
       dispatch({
         type: GET_ALL_COMMITTEES,
         payload: result.body
       })
     })
-    .catch(err => console.error("err"))
+    .catch(err => console.error(err))
 }
 
 export const addCommittee = committeeData => (dispatch, getState) => {
@@ -36,6 +37,9 @@ export const addCommittee = committeeData => (dispatch, getState) => {
   const jwt = state.currentUser.token
 
   if (isExpired(jwt)) return dispatch(logout())
+
+  console.log('committeeData', committeeData)
+  committeeData.description = 'a committee'
 
   request
     .post(`${baseUrl}/committees/`)
