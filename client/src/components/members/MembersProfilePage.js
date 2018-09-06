@@ -8,8 +8,8 @@ import Search from '../search/Search'
 import {
   getMember,
   addActivityToMember,
-
-  removeActivityFromMember
+  removeActivityFromMember,
+  editProfile
 } from '../../redux/actions/members'
 import './MembersProfilePage.css'
 import Modal from '@material-ui/core/Modal'
@@ -18,6 +18,7 @@ import Typography from '@material-ui/core/Typography'
 import { getActivities } from '../../redux/actions/activities'
 import { Divider } from '@material-ui/core'
 import styled from 'styled-components'
+import { getTeams } from '../../redux/actions/teams'
 
 const StyledModal = styled(Modal)`
   && {
@@ -37,7 +38,7 @@ function getModalStyle() {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
-    overflowY: "scroll"
+    overflowY: 'scroll'
   }
 }
 
@@ -132,27 +133,27 @@ class MemberProfilePage extends PureComponent {
   updateProfile = () => {
     const updates = {}
 
-    if (this.state.firstName !== "") {
+    if (this.state.firstName !== '') {
       updates.firstName = this.state.firstName
     }
 
-    if (this.state.lastName !== "") {
+    if (this.state.lastName !== '') {
       updates.lastName = this.state.lastName
     }
 
-    if (this.state.streetAddress !== "") {
+    if (this.state.streetAddress !== '') {
       updates.streetAddress = this.state.streetAddress
     }
 
-    if (this.state.city !== "") {
+    if (this.state.city !== '') {
       updates.city = this.state.city
     }
 
-    if (this.state.email !== "") {
+    if (this.state.email !== '') {
       updates.email = this.state.email
     }
 
-    if (this.state.team !== "") {
+    if (this.state.team !== '') {
       updates.team = this.state.team
     }
 
@@ -161,12 +162,12 @@ class MemberProfilePage extends PureComponent {
     this.props.editProfile(updates, this.props.currentUser.id)
 
     this.setState({
-      firstName: "",
-      lastName: "",
-      streetAddress: "",
-      city: "",
-      email: "",
-      team: ""
+      firstName: '',
+      lastName: '',
+      streetAddress: '',
+      city: '',
+      email: '',
+      team: ''
     })
   }
 
@@ -386,10 +387,8 @@ class MemberProfilePage extends PureComponent {
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default1"
                     disabled
-
-                    style={{ textAlign: "right" }}
-                    value={member.team.name}
-
+                    style={{ textAlign: 'right' }}
+                    value={(member.team && member.team.name) || ''}
                   />
                 </div>
 
