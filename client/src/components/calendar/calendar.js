@@ -1,10 +1,9 @@
-import React, { PureComponent } from "react"
-import Calendar from "react-calendar"
-import { getEvents } from "./gcal"
+import { Col, Container, Row } from "mdbreact"
 import moment from "moment"
-import "../../../node_modules/react-big-calendar-like-google/lib/css/react-big-calendar.css"
+import React, { PureComponent } from "react"
 import BigCalendar from "react-big-calendar-like-google"
-import { Container, Row, Col } from "mdbreact"
+import "../../../node_modules/react-big-calendar-like-google/lib/css/react-big-calendar.css"
+import { getEvents } from "./gcal"
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
 
 class EventsCalendar extends PureComponent {

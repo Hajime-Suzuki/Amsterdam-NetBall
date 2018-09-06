@@ -23,10 +23,6 @@ const StyledModal = styled(Modal)`
   }
 `
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10
-}
-
 function getModalStyle() {
   const top = 50
   const left = 50

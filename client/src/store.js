@@ -14,7 +14,4 @@ const enhancer = compose(
 
 const store = createStore(reducer, enhancer)
 
-// when JWT was coming from localStorage, connect via websockets
-const initialCurrentUser = store.getState().currentUser
-
 export default store
