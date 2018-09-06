@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import { Typography, Icon, Checkbox } from '@material-ui/core'
 import styled from 'styled-components'
