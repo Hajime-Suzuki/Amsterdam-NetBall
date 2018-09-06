@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Typography, Icon, Checkbox } from '@material-ui/core'
-import Paper from '@material-ui/core/Paper'
-import styled from 'styled-components'
-import { StyledNameLink } from '../members/MembersListComponent'
+import React from "react"
+import { Link } from "react-router-dom"
+import { Typography, Icon, Checkbox } from "@material-ui/core"
+import Paper from "@material-ui/core/Paper"
+import styled from "styled-components"
+import { StyledNameLink } from "../members/MembersListComponent"
 
 const CustomCheckbox = styled(Checkbox)`
   &&& {
@@ -12,7 +12,7 @@ const CustomCheckbox = styled(Checkbox)`
 `
 
 const formatTiem = time => {
-  return time.replace(/(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2}).*/, '$4 $3/$2')
+  return time.replace(/(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2}).*/, "$4 $3/$2")
 }
 
 const ActivityList = ({ activities, attendances, changeAttendance }) => {
@@ -30,7 +30,7 @@ const ActivityList = ({ activities, attendances, changeAttendance }) => {
           <div className="mb-2" key={m.id}>
             <CustomCheckbox
               checked={thisAttendance.isAttended}
-              checkbox_color="lightblue"
+              c="lightblue"
               onChange={() => changeAttendance(thisAttendance.id)}
             />
             {/* <p style={{ display: 'inline' }}> */}
@@ -49,17 +49,17 @@ const ActivityList = ({ activities, attendances, changeAttendance }) => {
       <div className="mb-4" key={act.id}>
         <h3
           className="list-group-item list-group-item-action waves-effect "
-          style={{ backgroundColor: '#fff' }}
+          style={{ backgroundColor: "#fff" }}
         >
           {act.name}
         </h3>
         <p className="list-group-item list-group-item-action waves-effect">
-          {' '}
-          <Icon className="fa fa-clock-o" /> {formatTiem(act.startTime)} -{' '}
+          {" "}
+          <Icon className="fa fa-clock-o" /> {formatTiem(act.startTime)} -{" "}
           {formatTiem(act.endTime)}
         </p>
         <p className="list-group-item list-group-item-action waves-effect">
-          {' '}
+          {" "}
           <Icon className="fa fa-map-marker" />
           {act.address} - {act.location}
         </p>

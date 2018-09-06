@@ -33,7 +33,6 @@ class MemberLandingPage extends PureComponent {
 
     if (members) {
       const currentMember = members.find(member => member.id === currentUser.id)
-      console.log("currentMember", currentMember)
       return (
         <Container className="container-fluid mt-1">
           <Row className="justify-content-md-center">

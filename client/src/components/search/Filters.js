@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Row, Col } from 'mdbreact'
-import './SearchBar.css'
-import { getFilterOption } from '../../redux/actions/filterOption'
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Row, Col } from "mdbreact"
+import "./SearchBar.css"
+import { getFilterOption } from "../../redux/actions/filterOption"
 
 const initialFilterOption = {
   positions: {},
   clubRoles: {},
   roles: {},
   teams: {},
-  currentMemberOption: 'currentMemberOnly'
+  currentMemberOption: "currentMemberOnly"
 }
 class Filters extends PureComponent {
   state = initialFilterOption
@@ -31,7 +31,6 @@ class Filters extends PureComponent {
         }
       },
       () => {
-        console.log(this.state)
         this.props.handleSearch(this.state)
       }
     )
@@ -49,8 +48,6 @@ class Filters extends PureComponent {
   }
 
   renderCheckboxes = (items, sectionName, keyName) => {
-    // item[keyName] = positionName
-    // sectionName = positoins
     return items.map(item => (
       <div className="custom-control custom-checkbox" key={item.id}>
         <input
@@ -104,8 +101,8 @@ class Filters extends PureComponent {
           </p>
           {this.renderCheckboxes(
             filterOption.positions,
-            'positions',
-            'positionName'
+            "positions",
+            "positionName"
           )}
         </Col>
 
@@ -113,21 +110,21 @@ class Filters extends PureComponent {
           <p>
             <b>Committee Roles</b>
           </p>
-          {this.renderCheckboxes(filterOption.comittees, 'clubRoles', 'name')}
+          {this.renderCheckboxes(filterOption.comittees, "clubRoles", "name")}
         </Col>
 
         <Col>
           <p>
             <b>Club Roles</b>
           </p>
-          {this.renderCheckboxes(filterOption.roles, 'roles', 'roleName')}
+          {this.renderCheckboxes(filterOption.roles, "roles", "roleName")}
         </Col>
 
         <Col>
           <p>
             <b>Teams</b>
           </p>
-          {this.renderCheckboxes(filterOption.teams, 'teams', 'name')}
+          {this.renderCheckboxes(filterOption.teams, "teams", "name")}
         </Col>
 
         <Col>
@@ -135,14 +132,14 @@ class Filters extends PureComponent {
             <b>Current Member</b>
           </p>
           {this.renderCurrentMemberCheckboxes(
-            'currentMemberOnly',
-            'Current Member Only'
+            "currentMemberOnly",
+            "Current Member Only"
           )}
           {this.renderCurrentMemberCheckboxes(
-            'expiredMemberOnly',
-            'Expired Member Only'
+            "expiredMemberOnly",
+            "Expired Member Only"
           )}
-          {this.renderCurrentMemberCheckboxes('All', 'All')}
+          {this.renderCurrentMemberCheckboxes("All", "All")}
         </Col>
 
         <Col>

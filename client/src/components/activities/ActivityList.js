@@ -26,10 +26,6 @@ class ActivityList extends PureComponent {
     } else {
       return activities.map(activity => (
         <div className="text-center mb-4" key={activity.id}>
-          {/* <p
-            className="list-group-item list-group-item-action waves-effect"
-            key={activity.id}
-          > */}
           <h3
             className="list-group-item list-group-item-action waves-effect "
             style={{ backgroundColor: "#fff" }}
@@ -60,7 +56,6 @@ class ActivityList extends PureComponent {
             {new Date(activity.endTime).toLocaleTimeString()} on{" "}
             {new Date(activity.endTime).toLocaleDateString()}
           </p>
-          {/* </p> */}
         </div>
       ))
     }

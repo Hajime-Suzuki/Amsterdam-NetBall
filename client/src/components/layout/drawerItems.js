@@ -1,14 +1,14 @@
-import React from 'react'
-import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import Icon from '@material-ui/core/Icon'
+import React from "react"
+import Drawer from "@material-ui/core/Drawer"
+import List from "@material-ui/core/List"
+import Divider from "@material-ui/core/Divider"
+import IconButton from "@material-ui/core/IconButton"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
+import ChevronRightIcon from "@material-ui/icons/ChevronRight"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
+import Icon from "@material-ui/core/Icon"
 
 const drawerItems = ({
   anchor,
@@ -29,10 +29,9 @@ const drawerItems = ({
         paper: classes.drawerPaper
       }}
     >
-      {console.log(handleDrawerClose)}
       <div className={classes.drawerHeader}>
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'rtl' ? (
+          {theme.direction === "rtl" ? (
             <ChevronRightIcon />
           ) : (
             <ChevronLeftIcon />
@@ -45,7 +44,7 @@ const drawerItems = ({
           <ListItem
             button
             onClick={() => {
-              history.push('/members')
+              history.push("/members")
               handleDrawerClose()
             }}
           >
@@ -90,7 +89,7 @@ const drawerItems = ({
           <ListItem
             button
             onClick={() => {
-              history.push('/teams')
+              history.push("/teams")
               handleDrawerClose()
             }}
           >
@@ -106,7 +105,7 @@ const drawerItems = ({
           <ListItem
             button
             onClick={() => {
-              history.push('/activities')
+              history.push("/activities")
               handleDrawerClose()
             }}
           >
@@ -121,7 +120,7 @@ const drawerItems = ({
         <ListItem
           button
           onClick={() => {
-            history.push('/events')
+            history.push("/events")
             handleDrawerClose()
           }}
         >
@@ -133,7 +132,7 @@ const drawerItems = ({
         </ListItem>
 
         {currentUser &&
-          currentUser.role === 'admin' && (
+          currentUser.role === "admin" && (
             <div>
               <Divider />
               <ListItem
@@ -155,7 +154,7 @@ const drawerItems = ({
           <ListItem
             button
             onClick={() => {
-              history.push('/logout')
+              history.push("/logout")
               handleDrawerClose()
             }}
           >
@@ -168,7 +167,7 @@ const drawerItems = ({
           <ListItem
             button
             onClick={() => {
-              history.push('/signup')
+              history.push("/signup")
               handleDrawerClose()
             }}
           >
@@ -197,9 +196,5 @@ const drawerItems = ({
     </Drawer>
   )
 }
-
-// const mapStateToProps = state => ({
-//   currentUser: state.currentUser
-// })
 
 export default drawerItems
