@@ -1,6 +1,15 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { Typography, Icon, Checkbox } from "@material-ui/core"
+import Paper from "@material-ui/core/Paper"
+import styled from "styled-components"
+import { StyledNameLink } from "../members/MembersListComponent"
+
+const CustomCheckbox = styled(Checkbox)`
+  &&& {
+    color: ${({ checkbox_color }) => checkbox_color};
+  }
+`
 
 const formatTiem = time => {
   return time.replace(/(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2}).*/, "$4 $3/$2")
@@ -19,16 +28,16 @@ const ActivityList = ({ activities, attendances, changeAttendance }) => {
 
         return (
           <div className="mb-2" key={m.id}>
-            <Checkbox
+            <CustomCheckbox
               checked={thisAttendance.isAttended}
-              color="#d3d3d3"
+              c="lightblue"
               onChange={() => changeAttendance(thisAttendance.id)}
             />
-            <p style={{ display: "inline" }}>
-              <Link to={`/members/${m.id}`}>
-                {m.firstName} {m.lastName}
-              </Link>
-            </p>
+            {/* <p style={{ display: 'inline' }}> */}
+            <Link to={`/members/${m.id}`}>
+              {m.firstName} {m.lastName}
+            </Link>
+            {/* </p> */}
           </div>
         )
       })
@@ -37,7 +46,7 @@ const ActivityList = ({ activities, attendances, changeAttendance }) => {
     )
 
     return (
-      <div className="mb-4">
+      <div className="mb-4" key={act.id}>
         <h3
           className="list-group-item list-group-item-action waves-effect "
           style={{ backgroundColor: "#fff" }}
@@ -60,9 +69,9 @@ const ActivityList = ({ activities, attendances, changeAttendance }) => {
           </p>
         )}
 
-        <p className="list-group-item list-group-item-action waves-effect">
+        <div className="list-group-item list-group-item-action waves-effect">
           {members}
-        </p>
+        </div>
       </div>
     )
   })
