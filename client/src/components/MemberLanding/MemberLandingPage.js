@@ -1,18 +1,18 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { login } from "../../redux/actions/users"
-import { Redirect } from "react-router-dom"
-import Search from "../search/Search"
-import { getMembers } from "../../redux/actions/members"
-import { getActivities } from "../../redux/actions/activities"
-import { Icon } from "@material-ui/core"
-import Divider from "@material-ui/core/Divider"
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Input, Button } from 'mdbreact'
+import { login } from '../../redux/actions/users'
+import { Redirect } from 'react-router-dom'
+import Search from '../search/Search'
+import { getMembers } from '../../redux/actions/members'
+import { getActivities } from '../../redux/actions/activities'
+import { Icon } from '@material-ui/core'
+import Divider from '@material-ui/core/Divider'
 
 // import { userId } from "../../jwt"
 
-import ActivityListComponent from "../admin/ActivityListComponent"
+import ActivityListComponent from '../admin/ActivityListComponent'
 class MemberLandingPage extends PureComponent {
   state = {}
 
@@ -29,7 +29,7 @@ class MemberLandingPage extends PureComponent {
 
     if (!currentUser) return <Redirect to="/" />
 
-    if (!members) return "Loading"
+    if (!members) return 'Loading'
 
     if (members) {
 
@@ -90,7 +90,6 @@ class MemberLandingPage extends PureComponent {
               </div>
             </Col>
           </Row>
-          <ActivityListComponent />
         </Container>
       )
 
