@@ -1,12 +1,12 @@
+import { Col, Container, Row } from "mdbreact"
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import {
-  getAllCommittees,
   addCommittee,
-  deleteCommittee
+  deleteCommittee,
+  getAllCommittees
 } from "../../redux/actions/committees"
-import { Container, Row, Col } from "mdbreact"
 import "./Dashboard.css"
 
 class CommitteeAdmin extends PureComponent {

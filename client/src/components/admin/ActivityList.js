@@ -1,9 +1,7 @@
+import { Checkbox, Icon, Typography } from "@material-ui/core"
 import React from "react"
 import { Link } from "react-router-dom"
-import { Typography, Icon, Checkbox } from "@material-ui/core"
-import Paper from "@material-ui/core/Paper"
 import styled from "styled-components"
-import { StyledNameLink } from "../members/MembersListComponent"
 
 const CustomCheckbox = styled(Checkbox)`
   &&& {

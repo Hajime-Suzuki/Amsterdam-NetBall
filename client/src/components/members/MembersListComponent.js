@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { getMembers } from '../../redux/actions/members'
-import { allMemberInfoSelector } from '../../redux/actions/members'
-import Search from '../search/Search'
-import styled from 'styled-components'
+import React, { PureComponent } from "react"
+import { Link } from "react-router-dom"
+import { connect } from "react-redux"
+import { getMembers } from "../../redux/actions/members"
+import { allMemberInfoSelector } from "../../redux/actions/members"
+import Search from "../search/Search"
+import styled from "styled-components"
 
 export const StyledNameLink = styled(Link)`
   && {
     color: ${({ ismember }) =>
-      ismember || ismember === undefined ? 'teal' : 'rgb(128,128,128)'};
+      ismember || ismember === undefined ? "teal" : "rgb(128,128,128)"};
     text-decoration: ${({ ismember }) =>
-      ismember || ismember === undefined ? 'inherit' : 'line-through'};
+      ismember || ismember === undefined ? "inherit" : "line-through"};
     transition: 0.5s;
     &:hover {
       color: lightgreen;
@@ -46,14 +46,14 @@ class MemberListComponent extends PureComponent {
         <i
           className="fa fa-arrow-up"
           aria-hidden="true"
-          onClick={() => this.changeSortCondition(type, 'ASC')}
-          style={{ margin: '0 0.5em', cursor: 'pointer' }}
+          onClick={() => this.changeSortCondition(type, "ASC")}
+          style={{ margin: "0 0.5em", cursor: "pointer" }}
         />
         <i
           className="fa fa-arrow-down"
           aria-hidden="true"
-          onClick={() => this.changeSortCondition(type, 'DESC')}
-          style={{ cursor: 'pointer' }}
+          onClick={() => this.changeSortCondition(type, "DESC")}
+          style={{ cursor: "pointer" }}
         />
       </span>
     )
@@ -61,13 +61,13 @@ class MemberListComponent extends PureComponent {
 
   render() {
     const { members, fetching, currentUserRole } = this.props
-    if (fetching.members) return 'loading...'
+    if (fetching.members) return "loading..."
 
-    const isAdmin = () => currentUserRole === 'admin'
+    const isAdmin = () => currentUserRole === "admin"
     const ifSelected = type => {
       if (type === this.state.order.orderType) {
         return {
-          backgroundColor: 'rgba(255, 213, 249, 0.3)'
+          backgroundColor: "rgba(255, 213, 249, 0.3)"
         }
       }
       return {}
@@ -80,26 +80,26 @@ class MemberListComponent extends PureComponent {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col" style={ifSelected('name')}>
+              <th scope="col" style={ifSelected("name")}>
                 Name
-                {this.renderIcons('name')}
+                {this.renderIcons("name")}
               </th>
               {isAdmin() && (
-                <th scope="col" style={ifSelected('expiration')}>
+                <th scope="col" style={ifSelected("expiration")}>
                   Expiration
-                  {this.renderIcons('expiration')}
+                  {this.renderIcons("expiration")}
                 </th>
               )}
               {isAdmin() && (
-                <th scope="col" style={ifSelected('points')}>
+                <th scope="col" style={ifSelected("points")}>
                   Activity Points
-                  {this.renderIcons('points')}
+                  {this.renderIcons("points")}
                 </th>
               )}
               {isAdmin() && (
-                <th scope="col" style={ifSelected('activityRate')}>
+                <th scope="col" style={ifSelected("activityRate")}>
                   Attendance Rate
-                  {this.renderIcons('activityRate')}
+                  {this.renderIcons("activityRate")}
                 </th>
               )}
               {<th scope="col">Team</th>}
@@ -107,12 +107,12 @@ class MemberListComponent extends PureComponent {
 
             {members.map(m => {
               const attendanceRate =
-                m.attendanceRate === null ? '-' : `${m.attendanceRate * 100}%`
+                m.attendanceRate === null ? "-" : `${m.attendanceRate * 100}%`
               const activityPoints =
-                m.activityPoints === null ? '-' : m.activityPoints
+                m.activityPoints === null ? "-" : m.activityPoints
               return (
                 <tr key={m.id}>
-                  <th scope="row" style={ifSelected('name')}>
+                  <th scope="row" style={ifSelected("name")}>
                     <StyledNameLink
                       to={`/members/${m.id}`}
                       ismember={m.isCurrentMember}
@@ -121,15 +121,15 @@ class MemberListComponent extends PureComponent {
                     </StyledNameLink>
                   </th>
                   {isAdmin() && (
-                    <th style={ifSelected('expiration')}>{m.endDate}</th>
+                    <th style={ifSelected("expiration")}>{m.endDate}</th>
                   )}
                   {isAdmin() && (
-                    <th style={ifSelected('points')}>{activityPoints}</th>
+                    <th style={ifSelected("points")}>{activityPoints}</th>
                   )}
                   {isAdmin() && (
-                    <th style={ifSelected('activityRate')}>{attendanceRate}</th>
+                    <th style={ifSelected("activityRate")}>{attendanceRate}</th>
                   )}
-                  {<th>{m.team ? m.team.name : '-'}</th>}
+                  {<th>{m.team ? m.team.name : "-"}</th>}
                 </tr>
               )
             })}

@@ -1,15 +1,15 @@
+import dateFormat from "dateformat"
+import { Container } from "mdbreact"
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Container } from "mdbreact"
 import {
-  getCommittee,
+  addMessage,
   deleteMessage,
   editMessage,
-  addMessage
+  getCommittee
 } from "../../redux/actions/committees"
 import AddMessageForm from "./AddMessageForm.js"
 import "./CommitteePage.css"
-import dateFormat from "dateformat"
 
 class CommitteePage extends PureComponent {
   state = {
@@ -35,9 +35,9 @@ class CommitteePage extends PureComponent {
     console.log("pendingEdit", pendingEdit)
 
     messages.sort(function(a, b) {
-        var timestampA = a.created_at
-        var timestampB = b.created_at
-        return (timestampA < timestampB) ? -1 : (timestampA > timestampB) ? 1 : 0;
+      var timestampA = a.created_at
+      var timestampB = b.created_at
+      return timestampA < timestampB ? -1 : timestampA > timestampB ? 1 : 0
     })
 
     return messages.map(message => {
@@ -53,21 +53,47 @@ class CommitteePage extends PureComponent {
         )
       } else {
         const messageDate = new Date(message.created_at)
-        const correctedMessageDate = messageDate.setHours(messageDate.getHours()+2)
+        const correctedMessageDate = messageDate.setHours(
+          messageDate.getHours() + 2
+        )
         const messageTimestamp = dateFormat(correctedMessageDate, "m/d/yy H:MM")
         const canEdit = this.props.currentUser.id === message.member.id
-        const canDelete = canEdit || this.props.currentUser.role === 'admin'
+        const canDelete = canEdit || this.props.currentUser.role === "admin"
         return (
-          <div key={message.id} className={'committee-message mt-0 p-3 border border-light rounded'}>
-          <p className="committee-message-member mb-1">
-            {`${message.member.firstName} ${message.member.lastName}`} 
-            <span className="message-timestamp">{ `${messageTimestamp}` }</span>
-            { canEdit &&
-              <span><button onClick={ ()=>this.editInPlace(message.id) } className="edit-message">&#9998;</button></span> }
-            { canDelete &&
-              <span><button onClick={ ()=>this.props.deleteMessage(this.props.match.params.id, message.id) } className="delete-message">&#10060;</button></span> }
-          </p>
-          <p className="committee-message-body mb-1">{message.body}</p>
+          <div
+            key={message.id}
+            className={"committee-message mt-0 p-3 border border-light rounded"}
+          >
+            <p className="committee-message-member mb-1">
+              {`${message.member.firstName} ${message.member.lastName}`}
+              <span className="message-timestamp">{`${messageTimestamp}`}</span>
+              {canEdit && (
+                <span>
+                  <button
+                    onClick={() => this.editInPlace(message.id)}
+                    className="edit-message"
+                  >
+                    &#9998;
+                  </button>
+                </span>
+              )}
+              {canDelete && (
+                <span>
+                  <button
+                    onClick={() =>
+                      this.props.deleteMessage(
+                        this.props.match.params.id,
+                        message.id
+                      )
+                    }
+                    className="delete-message"
+                  >
+                    &#10060;
+                  </button>
+                </span>
+              )}
+            </p>
+            <p className="committee-message-body mb-1">{message.body}</p>
           </div>
         )
       }

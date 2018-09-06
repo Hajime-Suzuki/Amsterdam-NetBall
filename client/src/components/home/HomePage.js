@@ -1,9 +1,8 @@
+import { Button, Col, Container, Row } from "mdbreact"
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Button } from "mdbreact"
+import { Link, Redirect } from "react-router-dom"
 import { login } from "../../redux/actions/users"
-import { Redirect } from "react-router-dom"
 import "./HomePage.css"
 
 class Homepage extends PureComponent {

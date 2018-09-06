@@ -1,6 +1,6 @@
+import { Col, Container, Row } from "mdbreact"
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Container, Row, Col } from "mdbreact"
 import { getActivities } from "../../redux/actions/activities"
 
 class ActivityList extends PureComponent {

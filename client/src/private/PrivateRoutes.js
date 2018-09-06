@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
-import MemberListComponent from '../components/members/MembersListComponent'
-import { connect } from 'react-redux'
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { Redirect, Route } from "react-router-dom"
 class PrivateRoutes extends Component {
   render() {
     const { component: Component, path } = this.props
-    console.log('iaoshent a')
 
     return (
       <Route
