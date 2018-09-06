@@ -18,6 +18,7 @@ import { withStyles } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import { getActivities } from "../../redux/actions/activities"
 import { Divider } from "@material-ui/core"
+import MemberCommitteesModal from "./MemberCommitteesModal"
 import styled from "styled-components"
 
 const StyledModal = styled(Modal)`
@@ -60,6 +61,7 @@ class MemberProfilePage extends PureComponent {
     open: false,
     editProfileModalOpen: false,
     innerModalOpen: false,
+    committeesModalOpen: false,
     currentActivity: "",
     firstName: "",
     lastName: "",
@@ -100,6 +102,14 @@ class MemberProfilePage extends PureComponent {
 
   handleInnerClose = () => {
     this.setState({ innerModalOpen: false })
+  }
+
+  handleCommitteesModalOpen = () => {
+    this.setState({ committeesModalOpen: true })
+  }
+
+  handleCommitteesModalClose = () => {
+    this.setState({ committeesModalOpen: false })
   }
 
   componentDidMount() {
@@ -776,29 +786,42 @@ class MemberProfilePage extends PureComponent {
                 <a className="fa-lg p-2 m-2 fb-ic">
                   <i className="fa fa-facebook grey-text"> </i>
                 </a>
-                <Button
-                  className="btn btn-info btn-block  btn-blue-grey my-4 "
-                  onClick={this.handleEditProfileOpen}
-                >
-                  Edit your profile
-                </Button>
 
-                <StyledModal
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                  open={this.state.editProfileModalOpen}
-                  onClose={this.handleEditProfileClose}
-                >
-                  <div
-                    // style={getModalStyle()}
-                    className={classes.paper}
+                {currentUser.id === parseInt(this.props.match.params.id) && (
+                  <Button
+                    className="btn btn-info btn-block  btn-blue-grey my-4 "
+                    onClick={this.handleEditProfileOpen}
                   >
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">
-                          Update your info
-                        </h5>
-                        {/* <button
+                    Edit your profile
+                  </Button>
+                )}
+                {currentUser.role === "admin" &&
+                  currentUser.id !== parseInt(this.props.match.params.id) && (
+                    <Button
+                      className="btn btn-info btn-block  btn-blue-grey my-4 "
+                      onClick={this.handleEditProfileOpen}
+                    >
+                      Edit this profile
+                    </Button>
+                  )}
+
+                <div>
+                  <StyledModal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.editProfileModalOpen}
+                    onClose={this.handleEditProfileClose}
+                  >
+                    <div
+                      // style={getModalStyle()}
+                      className={classes.paper}
+                    >
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title" id="exampleModalLabel">
+                            Update your info
+                          </h5>
+                          {/* <button
                           type="button"
                           className="close"
                           data-dismiss="modal"
@@ -807,20 +830,39 @@ class MemberProfilePage extends PureComponent {
                         >
                           <span aria-hidden="true">&times;</span>
                         </button> */}
-                      </div>
+                        </div>
 
-                      {this.renderProfileFields()}
-                      <div class="modal-footer">
-                        <Button
-                          className="btn btn-info btn-block  btn-blue-grey my-4 "
-                          onClick={this.handleEditProfileClose}
-                        >
-                          Close
-                        </Button>
+                        {this.renderProfileFields()}
+                        <div class="modal-footer">
+                          <Button
+                            className="btn btn-info btn-block  btn-blue-grey my-4 "
+                            onClick={this.handleEditProfileClose}
+                          >
+                            Close
+                          </Button>
+                        </div>
                       </div>
                     </div>
+                  </StyledModal>
+                </div>
+
+                {currentUser.role === "admin" && (
+                  <div>
+                    <Button
+                      className="btn btn-info btn-block  btn-blue-grey my-4 "
+                      onClick={this.handleCommitteesModalOpen}
+                    >
+                      Add this member to Committees
+                    </Button>
+                    <MemberCommitteesModal
+                      committeesModalOpen={this.state.committeesModalOpen}
+                      handleClose={this.handleCommitteesModalClose}
+                      member={member}
+                      getModalStyle={getModalStyle}
+                      classes={classes}
+                    />
                   </div>
-                </StyledModal>
+                )}
 
                 <Link to="/members">
                   <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
