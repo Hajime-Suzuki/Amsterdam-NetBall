@@ -6,11 +6,12 @@ import { allMemberInfoSelector } from '../../redux/actions/members'
 import Search from '../search/Search'
 import styled from 'styled-components'
 
-const StyledNameLink = styled(Link)`
+export const StyledNameLink = styled(Link)`
   && {
-    color: ${({ ismember }) => (ismember ? 'teal' : 'rgb(128,128,128)')};
+    color: ${({ ismember }) =>
+      ismember || ismember === undefined ? 'teal' : 'rgb(128,128,128)'};
     text-decoration: ${({ ismember }) =>
-      ismember ? 'inherit' : 'line-through'};
+      ismember || ismember === undefined ? 'inherit' : 'line-through'};
     transition: 0.5s;
     &:hover {
       color: lightgreen;

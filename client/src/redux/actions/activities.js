@@ -7,10 +7,14 @@ import { baseUrl } from '../../constants'
 
 export const GET_ACTIVITIES = 'GET_ACTIVITIES'
 export const ADD_ACTIVITY = 'ADD_ACTIVITY'
+export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY'
 
 const activity = new schema.Entity('activities')
 
-const members = new schema.Entity('members')
+const isAttended = new schema.Entity('attendance')
+const members = new schema.Entity('members', {
+  isAttended: [isAttended]
+})
 const activityWithMember = new schema.Entity('activities', {
   members: [members]
 })
@@ -30,12 +34,16 @@ const addActivity = data => ({
   payload: normalize(data, [activity])
 })
 
-export const getActivities = () => (dispatch, getState) => {
+const authCheckAndGetJWT = (dispatch, getState) => {
   const state = getState()
   if (!state.currentUser) return null
   const jwt = state.currentUser.token
-
   if (isExpired(jwt)) return dispatch(logout())
+  return jwt
+}
+
+export const getActivities = () => (dispatch, getState) => {
+  const jwt = authCheckAndGetJWT(dispatch, getState)
 
   request
     .get(`${baseUrl}/activities`)
@@ -47,27 +55,20 @@ export const getActivities = () => (dispatch, getState) => {
 }
 
 export const getActivitiesAndMembers = () => async (dispatch, getState) => {
-  const state = getState()
-  if (!state.currentUser) return null
-  const jwt = state.currentUser.token
-
-  if (isExpired(jwt)) return dispatch(logout())
+  const jwt = authCheckAndGetJWT(dispatch, getState)
 
   request
     .get(`${baseUrl}/admin/activity/members`)
     .set('Authorization', `${jwt}`)
     .then(result => {
+      // console.log(result.body)
       dispatch(setActivitiesWithMembers(result.body))
     })
     .catch(err => console.error(err))
 }
 
 export const createActivity = data => (dispatch, getState) => {
-  const state = getState()
-  if (!state.currentUser) return null
-  const jwt = state.currentUser.token
-
-  if (isExpired(jwt)) return dispatch(logout())
+  const jwt = authCheckAndGetJWT(dispatch, getState)
 
   request
     .post(`${baseUrl}/admin/activity`)
@@ -75,6 +76,20 @@ export const createActivity = data => (dispatch, getState) => {
     .send(data)
     .then(result => {
       dispatch(addActivity(result.body))
+    })
+    .catch(err => console.error(err))
+}
+
+export const editAttendance = id => (dispatch, getState) => {
+  const jwt = authCheckAndGetJWT(dispatch, getState)
+  request
+    .patch(`${baseUrl}/admin/activity/attendance/${id}`)
+    .set('Authorization', `${jwt}`)
+    .then(result => {
+      dispatch({
+        type: UPDATE_ACTIVITY,
+        payload: result.body
+      })
     })
     .catch(err => console.error(err))
 }
@@ -89,7 +104,8 @@ export const activitiesArraySelector = createSelector(
   (acts = {}, ids = [], members = []) => {
     return ids.map(id => ({
       ...acts[id],
-      members: acts[id].members.map(memberId => members[memberId])
+      members:
+        acts[id].members && acts[id].members.map(memberId => members[memberId])
     }))
   }
 )
