@@ -103,7 +103,3 @@ export default connect(
   mapStateToProps,
   { getActivities }
 )(ActivityList)
-
-{
-  /* <h5 className="indigo-text font-bold mb-4">Your activities</h5> */
-}
