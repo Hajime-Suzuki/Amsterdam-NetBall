@@ -16,6 +16,8 @@ import { withStyles } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import { getActivities } from "../../redux/actions/activities"
 import { Divider } from "@material-ui/core"
+import MemberCommitteesModal from "./MemberCommitteesModal"
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10
@@ -48,6 +50,7 @@ class MemberProfilePage extends PureComponent {
     open: false,
     editProfileModalOpen: false,
     innerModalOpen: false,
+    committeesModalOpen: false,
     currentActivity: "",
     firstName: "",
     lastName: "",
@@ -89,6 +92,14 @@ class MemberProfilePage extends PureComponent {
 
   handleInnerClose = () => {
     this.setState({ innerModalOpen: false })
+  }
+
+  handleCommitteesModalOpen = () => {
+    this.setState({ committeesModalOpen: true })
+  }
+
+  handleCommitteesModalClose = () => {
+    this.setState({ committeesModalOpen: false })
   }
 
   componentDidMount() {
@@ -674,12 +685,24 @@ class MemberProfilePage extends PureComponent {
                 <a className="fa-lg p-2 m-2 fb-ic">
                   <i className="fa fa-facebook grey-text"> </i>
                 </a>
-                <Button
-                  className="btn btn-info btn-block  btn-blue-grey my-4 "
-                  onClick={this.handleEditProfileOpen}
-                >
-                  Edit your profile
-                </Button>
+
+                { currentUser.id === parseInt(this.props.match.params.id) &&
+                  <Button
+                    className="btn btn-info btn-block  btn-blue-grey my-4 "
+                    onClick={this.handleEditProfileOpen}
+                  >
+                    Edit your profile
+                  </Button>
+                }
+                { currentUser.role === 'admin' && currentUser.id !== parseInt(this.props.match.params.id) &&
+                  <Button
+                    className="btn btn-info btn-block  btn-blue-grey my-4 "
+                    onClick={this.handleEditProfileOpen}
+                  >
+                    Edit this profile
+                  </Button>
+                }
+
                 <div>
                   <Modal
                     aria-labelledby="simple-modal-title"
@@ -717,6 +740,19 @@ class MemberProfilePage extends PureComponent {
                     </div>
                   </Modal>
                 </div>
+
+                { currentUser.role === 'admin' &&
+                  <div>
+                    <Button
+                      className="btn btn-info btn-block  btn-blue-grey my-4 "
+                      onClick={this.handleCommitteesModalOpen}
+                    >
+                      Add this member to Committees
+                    </Button>
+                    <MemberCommitteesModal committeesModalOpen={this.state.committeesModalOpen} handleClose={this.handleCommitteesModalClose} member={member} getModalStyle={getModalStyle} classes={classes} />                    
+                  </div>
+                }
+
                 <Link to="/members">
                   <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
                     Back to all members

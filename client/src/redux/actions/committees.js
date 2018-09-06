@@ -50,7 +50,6 @@ export const addCommittee = (committeeData) => (dispatch, getState) => {
       })
     })
     .catch(err => alert(err))
-
 }
 
 export const deleteCommittee = committeeId => (dispatch, getState) => {
@@ -71,8 +70,6 @@ export const deleteCommittee = committeeId => (dispatch, getState) => {
       })
     })
     .catch(err => alert(err))
-
-
 }
 
 export const getCommittee = committeeId => (dispatch, getState) => {

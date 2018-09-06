@@ -1,3 +1,26 @@
 .input-group-text {
   background-color: #fff;
 }
+
+#member-committees-modal li:hover {
+  background-color: #DDDDDD;
+  cursor: pointer;
+}
+
+.committee-assignments {
+  padding: 1rem 0 0 1rem;
+}
+
+.on-committee .committee-name {
+  margin-right: 0.2rem;
+}
+
+.not-on-committee {
+  color: #999;
+}
+
+.committee-check {
+  color: red;
+  font-size: 125%;
+  line-height: 1em;
+}
