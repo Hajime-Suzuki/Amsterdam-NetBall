@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
+import { Container, Row, Col } from "mdbreact"
 import { getTeams } from "../../redux/actions/teams"
 
 class TeamList extends PureComponent {

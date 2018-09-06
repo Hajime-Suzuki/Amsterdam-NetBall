@@ -1,6 +1,5 @@
 import React, { Component } from "react"
-import { Route, Switch, Redirect } from "react-router-dom"
-import MemberListComponent from "../components/members/MembersListComponent"
+import { Route, Redirect } from "react-router-dom"
 import { connect } from "react-redux"
 class AdminRoute extends Component {
   render() {

@@ -64,7 +64,7 @@ export default class CreateActivityForm extends PureComponent {
 
   render() {
     return (
-      <Container className="mt-5">
+      <Container className="mt-2">
         <Row className="justify-content-md-center">
           <Col md="6">
             <form onSubmit={this.handleSubmit}>

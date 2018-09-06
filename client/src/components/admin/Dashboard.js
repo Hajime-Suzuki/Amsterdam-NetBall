@@ -15,7 +15,7 @@ class Dashboard extends PureComponent {
     if (!this.props.currentUser) return <Redirect to="/home" />
 
     // if isn't admin
-    if (!this.props.currentUser.role === 'admin') return <Redirect to="/home" />
+    if (this.props.currentUser.role !== 'admin') return <Redirect to="/home" />
 
     return (
       <div>

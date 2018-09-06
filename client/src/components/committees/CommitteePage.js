@@ -21,7 +21,7 @@ class CommitteePage extends PureComponent {
   }
 
   editInPlace = messageId => {
-    this.state.pendingEdit = messageId
+    this.setState({ pendingEdit: messageId })
     this.forceUpdate()
   }
 
