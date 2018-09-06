@@ -1,21 +1,28 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { login } from "../../redux/actions/users"
-import { Redirect } from "react-router-dom"
-import Search from "../search/Search"
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Input, Button } from 'mdbreact'
+import { login } from '../../redux/actions/users'
+import { Redirect } from 'react-router-dom'
+import Search from '../search/Search'
 import {
   getMember,
   addActivityToMember,
   removeActivityFromMember
-} from "../../redux/actions/members"
-import "./MembersProfilePage.css"
-import Modal from "@material-ui/core/Modal"
-import { withStyles } from "@material-ui/core/styles"
-import Typography from "@material-ui/core/Typography"
-import { getActivities } from "../../redux/actions/activities"
-import { Divider } from "@material-ui/core"
+} from '../../redux/actions/members'
+import './MembersProfilePage.css'
+import Modal from '@material-ui/core/Modal'
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import { getActivities } from '../../redux/actions/activities'
+import { Divider } from '@material-ui/core'
+import styled from 'styled-components'
+
+const StyledModal = styled(Modal)`
+  && {
+    overflow-y: scroll;
+  }
+`
 
 function rand() {
   return Math.round(Math.random() * 20) - 10
@@ -34,7 +41,7 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: "absolute",
+    position: 'absolute',
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
@@ -47,18 +54,18 @@ class MemberProfilePage extends PureComponent {
     open: false,
     editProfileModalOpen: false,
     innerModalOpen: false,
-    currentActivity: "",
-    firstName: "",
-    lastName: "",
-    streetAddress: "",
-    postalCode: "",
-    dateOfBirth: "",
-    city: "",
-    phoneNum: "",
-    occupation: "",
-    employer: "",
-    skills: "",
-    email: ""
+    currentActivity: '',
+    firstName: '',
+    lastName: '',
+    streetAddress: '',
+    postalCode: '',
+    dateOfBirth: '',
+    city: '',
+    phoneNum: '',
+    occupation: '',
+    employer: '',
+    skills: '',
+    email: ''
   }
 
   handleOpen = () => {
@@ -133,7 +140,7 @@ class MemberProfilePage extends PureComponent {
             error="wrong"
             success="right"
             name="firstName"
-            value={this.state.firstName || ""}
+            value={this.state.firstName || ''}
             onChange={this.handleChange}
           />
 
@@ -146,7 +153,7 @@ class MemberProfilePage extends PureComponent {
             error="wrong"
             success="right"
             name="lastName"
-            value={this.state.lastName || ""}
+            value={this.state.lastName || ''}
             onChange={this.handleChange}
           />
           <Input
@@ -158,7 +165,7 @@ class MemberProfilePage extends PureComponent {
             error="wrong"
             success="right"
             name="streetAddress"
-            value={this.state.streetAddress || ""}
+            value={this.state.streetAddress || ''}
             onChange={this.handleChange}
           />
 
@@ -171,7 +178,7 @@ class MemberProfilePage extends PureComponent {
             error="wrong"
             success="right"
             name="city"
-            value={this.state.city || ""}
+            value={this.state.city || ''}
             onChange={this.handleChange}
           />
           <Input
@@ -183,7 +190,7 @@ class MemberProfilePage extends PureComponent {
             error="wrong"
             success="right"
             name="email"
-            value={this.state.email || ""}
+            value={this.state.email || ''}
             onChange={this.handleChange}
           />
 
@@ -213,27 +220,27 @@ class MemberProfilePage extends PureComponent {
             key={activity.id}
           >
             <p className="list-group-item list-group-item-action waves-effect">
-              {" "}
+              {' '}
               <b>Activity name: </b> {activity.name}
             </p>
 
             <p className="list-group-item list-group-item-action waves-effect">
-              {" "}
-              <b> Activity address: </b> {activity.address} |{" "}
+              {' '}
+              <b> Activity address: </b> {activity.address} |{' '}
               {activity.location}
             </p>
 
             <p className="list-group-item list-group-item-action waves-effect">
-              {" "}
-              <b> Activity starts at: </b>{" "}
-              {new Date(activity.startTime).toLocaleDateString()} |{" "}
+              {' '}
+              <b> Activity starts at: </b>{' '}
+              {new Date(activity.startTime).toLocaleDateString()} |{' '}
               {new Date(activity.startTime).toLocaleTimeString()}
             </p>
 
             <p className="list-group-item list-group-item-action waves-effect">
-              {" "}
-              <b>Activity ends at: </b>{" "}
-              {new Date(activity.endTime).toLocaleDateString()} |{" "}
+              {' '}
+              <b>Activity ends at: </b>{' '}
+              {new Date(activity.endTime).toLocaleDateString()} |{' '}
               {new Date(activity.endTime).toLocaleTimeString()}
             </p>
 
@@ -308,7 +315,7 @@ class MemberProfilePage extends PureComponent {
                     <span
                       className="input-group-text"
                       id="inputGroup-sizing-default1"
-                      style={{ backgroundColor: "#fff" }}
+                      style={{ backgroundColor: '#fff' }}
                     >
                       Plays in team:
                     </span>
@@ -319,7 +326,7 @@ class MemberProfilePage extends PureComponent {
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default1"
                     disabled
-                    style={{ textAlign: "right" }}
+                    style={{ textAlign: 'right' }}
                     value={member.team}
                   />
                 </div>
@@ -329,7 +336,7 @@ class MemberProfilePage extends PureComponent {
                     <span
                       className="input-group-text"
                       id="inputGroup-sizing-default1"
-                      style={{ backgroundColor: "#fff" }}
+                      style={{ backgroundColor: '#fff' }}
                     >
                       Plays at positions:
                     </span>
@@ -340,9 +347,9 @@ class MemberProfilePage extends PureComponent {
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default1"
                     disabled
-                    style={{ textAlign: "right" }}
+                    style={{ textAlign: 'right' }}
                     value={member.positions.map(position => {
-                      return position.positionName + " "
+                      return position.positionName + ' '
                     })}
                   />
                 </div>
@@ -352,7 +359,7 @@ class MemberProfilePage extends PureComponent {
                     <span
                       className="input-group-text"
                       id="inputGroup-sizing-default1"
-                      style={{ backgroundColor: "#fff" }}
+                      style={{ backgroundColor: '#fff' }}
                     >
                       Email address:
                     </span>
@@ -363,7 +370,7 @@ class MemberProfilePage extends PureComponent {
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default1"
                     disabled
-                    style={{ textAlign: "right" }}
+                    style={{ textAlign: 'right' }}
                     value={member.email}
                   />
                 </div>
@@ -373,7 +380,7 @@ class MemberProfilePage extends PureComponent {
                     <span
                       className="input-group-text"
                       id="inputGroup-sizing-default1"
-                      style={{ backgroundColor: "#fff" }}
+                      style={{ backgroundColor: '#fff' }}
                     >
                       Lives in:
                     </span>
@@ -384,7 +391,7 @@ class MemberProfilePage extends PureComponent {
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default1"
                     disabled
-                    style={{ textAlign: "right" }}
+                    style={{ textAlign: 'right' }}
                     value={member.city}
                   />
                 </div>
@@ -467,27 +474,27 @@ class MemberProfilePage extends PureComponent {
                             </button>
                           </div>
                           <button className="list-group-item list-group-item-action waves-effect">
-                            Activity address:{" "}
+                            Activity address:{' '}
                             {this.state.currentActivity.address}
                           </button>
                           <button className="list-group-item list-group-item-action waves-effect">
-                            Activity location:{" "}
+                            Activity location:{' '}
                             {this.state.currentActivity.location}
                           </button>
                           <button className="list-group-item list-group-item-action waves-effect">
-                            Starts at:{" "}
+                            Starts at:{' '}
                             {new Date(
                               this.state.currentActivity.startTime
                             ).toLocaleTimeString()}
                           </button>
                           <button className="list-group-item list-group-item-action waves-effect">
-                            End:{" "}
+                            End:{' '}
                             {new Date(
                               this.state.currentActivity.endTime
                             ).toLocaleTimeString()}
                           </button>
                           <button className="list-group-item list-group-item-action waves-effect">
-                            Points for this activity:{" "}
+                            Points for this activity:{' '}
                             {this.state.currentActivity.points}
                           </button>
 
@@ -523,8 +530,8 @@ class MemberProfilePage extends PureComponent {
                   </div>
                 </div>
 
-                {(currentUser.role === "admin" ||
-                  currentUser.role === "member") && (
+                {(currentUser.role === 'admin' ||
+                  currentUser.role === 'member') && (
                   <div>
                     <h5 className="indigo-text font-bold mb-4">
                       Extra information
@@ -535,7 +542,7 @@ class MemberProfilePage extends PureComponent {
                         <span
                           className="input-group-text"
                           id="inputGroup-sizing-default1"
-                          style={{ backgroundColor: "#fff" }}
+                          style={{ backgroundColor: '#fff' }}
                         >
                           Street address:
                         </span>
@@ -546,7 +553,7 @@ class MemberProfilePage extends PureComponent {
                         aria-label="Default"
                         aria-describedby="inputGroup-sizing-default1"
                         disabled
-                        style={{ textAlign: "right" }}
+                        style={{ textAlign: 'right' }}
                         value={member.streetAddress}
                       />
                     </div>
@@ -555,7 +562,7 @@ class MemberProfilePage extends PureComponent {
                         <span
                           className="input-group-text"
                           id="inputGroup-sizing-default1"
-                          style={{ backgroundColor: "#fff" }}
+                          style={{ backgroundColor: '#fff' }}
                         >
                           Postal code:
                         </span>
@@ -566,7 +573,7 @@ class MemberProfilePage extends PureComponent {
                         aria-label="Default"
                         aria-describedby="inputGroup-sizing-default1"
                         disabled
-                        style={{ textAlign: "right" }}
+                        style={{ textAlign: 'right' }}
                         value={member.postalCode}
                       />
                     </div>
@@ -576,7 +583,7 @@ class MemberProfilePage extends PureComponent {
                         <span
                           className="input-group-text"
                           id="inputGroup-sizing-default1"
-                          style={{ backgroundColor: "#fff" }}
+                          style={{ backgroundColor: '#fff' }}
                         >
                           Date of birth
                         </span>
@@ -587,7 +594,7 @@ class MemberProfilePage extends PureComponent {
                         aria-label="Default"
                         aria-describedby="inputGroup-sizing-default1"
                         disabled
-                        style={{ textAlign: "right" }}
+                        style={{ textAlign: 'right' }}
                         value={new Date(
                           member.dateOfBirth
                         ).toLocaleDateString()}
@@ -599,7 +606,7 @@ class MemberProfilePage extends PureComponent {
                         <span
                           className="input-group-text"
                           id="inputGroup-sizing-default1"
-                          style={{ backgroundColor: "#fff" }}
+                          style={{ backgroundColor: '#fff' }}
                         >
                           Membership start date:
                         </span>
@@ -610,7 +617,7 @@ class MemberProfilePage extends PureComponent {
                         aria-label="Default"
                         aria-describedby="inputGroup-sizing-default1"
                         disabled
-                        style={{ textAlign: "right" }}
+                        style={{ textAlign: 'right' }}
                         value={new Date(member.startDate).toLocaleDateString()}
                       />
                     </div>
@@ -619,7 +626,7 @@ class MemberProfilePage extends PureComponent {
                         <span
                           className="input-group-text"
                           id="inputGroup-sizing-default1"
-                          style={{ backgroundColor: "#fff" }}
+                          style={{ backgroundColor: '#fff' }}
                         >
                           Membership end date:
                         </span>
@@ -630,18 +637,18 @@ class MemberProfilePage extends PureComponent {
                         aria-label="Default"
                         aria-describedby="inputGroup-sizing-default1"
                         disabled
-                        style={{ textAlign: "right" }}
+                        style={{ textAlign: 'right' }}
                         value={new Date(member.endDate).toLocaleDateString()}
                       />
                     </div>
 
-                    {currentUser.role === "admin" && (
+                    {currentUser.role === 'admin' && (
                       <div className="md-form input-group mt-0 mb-3">
                         <div className="input-group-prepend">
                           <span
                             className="input-group-text"
                             id="inputGroup-sizing-default1"
-                            style={{ backgroundColor: "#fff" }}
+                            style={{ backgroundColor: '#fff' }}
                           >
                             Is currently an active member:
                           </span>
@@ -652,8 +659,8 @@ class MemberProfilePage extends PureComponent {
                           aria-label="Default"
                           aria-describedby="inputGroup-sizing-default1"
                           disabled
-                          style={{ textAlign: "right" }}
-                          value={member.isCurrentMember ? "Yes" : "No"}
+                          style={{ textAlign: 'right' }}
+                          value={member.isCurrentMember ? 'Yes' : 'No'}
                         />
                       </div>
                     )}
@@ -674,43 +681,46 @@ class MemberProfilePage extends PureComponent {
                 >
                   Edit your profile
                 </Button>
-                <div>
-                  <Modal
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
-                    open={this.state.editProfileModalOpen}
-                    onClose={this.handleEditProfileClose}
-                  >
-                    <div style={getModalStyle()} className={classes.paper}>
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h5 className="modal-title" id="exampleModalLabel">
-                            Update your info
-                          </h5>
-                          <button
-                            type="button"
-                            className="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                            onClick={this.handleEditProfileClose}
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
 
-                        {this.renderProfileFields()}
-                        <div class="modal-footer">
-                          <Button
-                            className="btn btn-info btn-block  btn-blue-grey my-4 "
-                            onClick={this.handleEditProfileClose}
-                          >
-                            Close
-                          </Button>
-                        </div>
+                <StyledModal
+                  aria-labelledby="simple-modal-title"
+                  aria-describedby="simple-modal-description"
+                  open={this.state.editProfileModalOpen}
+                  onClose={this.handleEditProfileClose}
+                >
+                  <div
+                    // style={getModalStyle()}
+                    className={classes.paper}
+                  >
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">
+                          Update your info
+                        </h5>
+                        {/* <button
+                          type="button"
+                          className="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                          onClick={this.handleEditProfileClose}
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button> */}
+                      </div>
+
+                      {this.renderProfileFields()}
+                      <div class="modal-footer">
+                        <Button
+                          className="btn btn-info btn-block  btn-blue-grey my-4 "
+                          onClick={this.handleEditProfileClose}
+                        >
+                          Close
+                        </Button>
                       </div>
                     </div>
-                  </Modal>
-                </div>
+                  </div>
+                </StyledModal>
+
                 <Link to="/members">
                   <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
                     Back to all members

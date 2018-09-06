@@ -20,9 +20,11 @@ const ActivityList = ({ activities, attendances, changeAttendance }) => {
     // console.log('===', act)
     const members = act.members ? (
       act.members.map(m => {
-        const thisAttendance = Object.values(attendances).find(
-          att => att.memberId === m.id && att.activityId === act.id
-        )
+        const thisAttendance =
+          Object.values(attendances).find(
+            att => att.memberId === m.id && att.activityId === act.id
+          ) || {}
+
         return (
           <div key={m.id}>
             <Checkbox
