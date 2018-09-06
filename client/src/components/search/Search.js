@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { Container, Row } from 'mdbreact'
-import './SearchBar.css'
-import SearchBar from './SearchBar'
-import Filters from './Filters'
-import { searchMembers } from '../../redux/actions/members'
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Container, Row } from "mdbreact"
+import "./SearchBar.css"
+import SearchBar from "./SearchBar"
+import Filters from "./Filters"
+import { searchMembers } from "../../redux/actions/members"
 
 class Search extends PureComponent {
   state = {
-    name: '',
-    positions: '',
-    roles: '',
-    currentMemberOption: ''
+    name: "",
+    positions: "",
+    roles: "",
+    currentMemberOption: ""
   }
 
   handleSearch = async data => {
@@ -19,20 +19,20 @@ class Search extends PureComponent {
     const checkedItemToQueryString = (data, itemName) => {
       return Object.keys(data[itemName])
         .filter(key => data[itemName][key])
-        .join(',')
+        .join(",")
     }
 
     if (data.name !== undefined) updatedItems.name = data.name
 
     if (data.positions)
-      updatedItems.positions = checkedItemToQueryString(data, 'positions')
+      updatedItems.positions = checkedItemToQueryString(data, "positions")
 
-    if (data.roles) updatedItems.roles = checkedItemToQueryString(data, 'roles')
+    if (data.roles) updatedItems.roles = checkedItemToQueryString(data, "roles")
 
-    if (data.teams) updatedItems.teams = checkedItemToQueryString(data, 'teams')
+    if (data.teams) updatedItems.teams = checkedItemToQueryString(data, "teams")
 
     if (data.clubRoles)
-      updatedItems.clubRoles = checkedItemToQueryString(data, 'clubRoles')
+      updatedItems.clubRoles = checkedItemToQueryString(data, "clubRoles")
 
     if (data.currentMemberOption) {
       updatedItems.currentMemberOption = data.currentMemberOption
@@ -74,11 +74,7 @@ class Search extends PureComponent {
   }
 }
 
-const mapStateToProps = function(state) {
-  return {}
-}
-
 export default connect(
-  mapStateToProps,
+  null,
   { searchMembers }
 )(Search)

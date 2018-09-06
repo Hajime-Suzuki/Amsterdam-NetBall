@@ -109,7 +109,7 @@ export default class CreateActivityForm extends PureComponent {
                     onChange={this.handleChange}
                   />
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label htmlFor="exampleFormControlTextarea2">
                       Provide a description of the activity
                     </label>
