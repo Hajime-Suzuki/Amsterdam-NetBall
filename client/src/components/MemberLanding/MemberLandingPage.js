@@ -31,7 +31,10 @@ class MemberLandingPage extends PureComponent {
 
     if (!members) return "Loading"
 
-    if (members)
+    if (members) {
+
+      const currentMember = members.find( member => member.id === currentUser.id)
+      console.log('currentMember', currentMember)
       return (
         <Container className="container-fluid mt-1">
           <Row className="justify-content-md-center">
@@ -55,6 +58,7 @@ class MemberLandingPage extends PureComponent {
                     Check all members
                   </Button>
                 </Link>
+
                 <h5 className=" font-bold mb-4">Events</h5>
                 <Divider />
                 <Link to="/events">
@@ -68,12 +72,29 @@ class MemberLandingPage extends PureComponent {
                     Volunteer activities
                   </Button>
                 </Link>
+
+                { currentMember && currentMember.committees && currentMember.committees.length > 0 &&
+                <div>
+                <h5 className=" font-bold mb-4">Your Committees</h5>
+                <Divider />
+                  { currentMember.committees.map( committee => 
+                    <Link to={ `/committees/${committee.id}` }>
+                      <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
+                        { committee.name }
+                      </Button>
+                    </Link>
+                  ) }
+                </div>
+                }
+
               </div>
             </Col>
           </Row>
           <ActivityListComponent />
         </Container>
       )
+
+    }
   }
 }
 
