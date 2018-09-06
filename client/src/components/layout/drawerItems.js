@@ -25,7 +25,8 @@ const drawerItems = ({
   theme,
   history,
   handleDrawerClose,
-  handleDrawerOpen
+  handleDrawerOpen,
+  currentUser
 }) => {
   return (
     <Drawer
@@ -60,6 +61,36 @@ const drawerItems = ({
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
+
+        {currentUser && (
+          <ListItem
+            button
+            onClick={() => {
+              history.push(`/members/${currentUser.id}`)
+              handleDrawerClose()
+            }}
+          >
+            <ListItemIcon>
+              <Icon className="fa fa-user" />
+            </ListItemIcon>
+            <ListItemText primary="Personal profile" />
+          </ListItem>
+        )}
+
+        <ListItem
+          button
+          onClick={() => {
+            history.push("/activities")
+            handleDrawerClose()
+          }}
+        >
+          <ListItemIcon>
+            <Icon className="fa fa-calendar" />
+          </ListItemIcon>
+
+          <ListItemText primary="Volunteer activities" />
+        </ListItem>
+
         <ListItem
           button
           onClick={() => {
@@ -73,6 +104,25 @@ const drawerItems = ({
 
           <ListItemText primary="Upcoming events" />
         </ListItem>
+
+        {currentUser &&
+          currentUser.role === "admin" && (
+            <div>
+              <Divider />
+              <ListItem
+                button
+                onClick={() => {
+                  history.push(`/admin/`)
+                  handleDrawerClose()
+                }}
+              >
+                <ListItemIcon>
+                  <Icon className="fa fa-user-secret" />
+                </ListItemIcon>
+                <ListItemText primary="Admin dashboard" />
+              </ListItem>
+            </div>
+          )}
         <Divider />
         <ListItem
           button

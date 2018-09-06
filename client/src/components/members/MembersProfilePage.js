@@ -8,6 +8,7 @@ import Search from '../search/Search'
 import {
   getMember,
   addActivityToMember,
+
   removeActivityFromMember
 } from '../../redux/actions/members'
 import './MembersProfilePage.css'
@@ -35,7 +36,8 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
+    transform: `translate(-${top}%, -${left}%)`,
+    overflowY: "scroll"
   }
 }
 
@@ -90,7 +92,6 @@ class MemberProfilePage extends PureComponent {
 
   handleEditProfileClose = () => {
     this.setState({ editProfileModalOpen: false })
-    // this.handleUpdateProfile(this.props.currentUser.id, activity.id)
   }
 
   handleInnerClose = () => {
@@ -100,6 +101,7 @@ class MemberProfilePage extends PureComponent {
   componentDidMount() {
     this.props.getMember(this.props.match.params.id)
     this.props.getActivities()
+    this.props.getTeams()
   }
 
   handleChange = async event => {
@@ -125,6 +127,47 @@ class MemberProfilePage extends PureComponent {
   handleUnsubscribe = (memberId, activityId) => {
     this.props.removeActivityFromMember(memberId, activityId)
     this.props.getMember(this.props.match.params.id)
+  }
+
+  updateProfile = () => {
+    const updates = {}
+
+    if (this.state.firstName !== "") {
+      updates.firstName = this.state.firstName
+    }
+
+    if (this.state.lastName !== "") {
+      updates.lastName = this.state.lastName
+    }
+
+    if (this.state.streetAddress !== "") {
+      updates.streetAddress = this.state.streetAddress
+    }
+
+    if (this.state.city !== "") {
+      updates.city = this.state.city
+    }
+
+    if (this.state.email !== "") {
+      updates.email = this.state.email
+    }
+
+    if (this.state.team !== "") {
+      updates.team = this.state.team
+    }
+
+    console.log(updates)
+
+    this.props.editProfile(updates, this.props.currentUser.id)
+
+    this.setState({
+      firstName: "",
+      lastName: "",
+      streetAddress: "",
+      city: "",
+      email: "",
+      team: ""
+    })
   }
 
   renderProfileFields = () => {
@@ -194,9 +237,26 @@ class MemberProfilePage extends PureComponent {
             onChange={this.handleChange}
           />
 
+          <select
+            id="team"
+            onChange={this.handleChange}
+            name="team"
+            value={this.state.value}
+          >
+            <option value="select">Assign member to a team</option>
+            {this.props.teams.map(team => (
+              <option value={team.id}>{team.name}</option>
+            ))}
+          </select>
+          <p />
+          <p>{this.state.value}</p>
+
           <button
             className="btn btn-warning my-4"
-            onClick={this.handleEditProfileClose}
+            onClick={() => {
+              this.handleEditProfileClose()
+              this.updateProfile()
+            }}
           >
             Save updates
           </button>
@@ -286,7 +346,7 @@ class MemberProfilePage extends PureComponent {
     return (
       <Container className="container-fluid mt-1">
         <Row className="justify-content-md-center">
-          <Col md="6" className="mt-5 mb-5">
+          <Col md="6" className="mt-2 mb-2">
             {member.id && (
               <div className="jumbotron text-center">
                 <h4 className="card-title font-bold pb-2">
@@ -326,8 +386,10 @@ class MemberProfilePage extends PureComponent {
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default1"
                     disabled
-                    style={{ textAlign: 'right' }}
-                    value={member.team}
+
+                    style={{ textAlign: "right" }}
+                    value={member.team.name}
+
                   />
                 </div>
 
@@ -398,7 +460,12 @@ class MemberProfilePage extends PureComponent {
 
                 <div />
 
-                <h5 className="indigo-text font-bold mb-4">Your activities</h5>
+                <h5
+                  className="indigo-text font-bold mb-4"
+                  id="personal-activities"
+                >
+                  Your activities
+                </h5>
 
                 <div className="list-group mb-4">
                   {this.renderActivities(
@@ -739,13 +806,21 @@ const mapStateToProps = function(state) {
   return {
     member: state.singleMember.member,
     currentUser: state.currentUser,
-    activities: Object.values(state.activities.activities)
+    activities: Object.values(state.activities.activities),
+    teams: Object.values(state.teams.teams)
   }
 }
 
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { getMember, getActivities, addActivityToMember, removeActivityFromMember }
+    {
+      getMember,
+      getActivities,
+      addActivityToMember,
+      removeActivityFromMember,
+      editProfile,
+      getTeams
+    }
   )(MemberProfilePage)
 )
