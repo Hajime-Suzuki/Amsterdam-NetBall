@@ -93,7 +93,7 @@ class PersistentDrawer extends PureComponent {
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" noWrap>
-                Netball App
+                Amsterdam Netball
               </Typography>
               {currentUser && (
                 <Button color="inherit">

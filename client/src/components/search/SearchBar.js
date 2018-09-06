@@ -1,9 +1,5 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Container, Row, Col, Input, Button } from 'mdbreact'
-import { login } from '../../redux/actions/users'
-import { Redirect } from 'react-router-dom'
 import './SearchBar.css'
 
 // import { userId } from "../../jwt"

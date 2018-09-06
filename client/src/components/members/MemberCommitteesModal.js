@@ -1,14 +1,11 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { Container, Row, Col, Input, Button } from "mdbreact"
-import { Redirect } from "react-router-dom"
+import { Button } from "mdbreact"
 import { getAllCommittees } from "../../redux/actions/committees"
 import { addCommitteeToMember, removeCommitteeFromMember } from "../../redux/actions/members"
 import "./MembersProfilePage.css"
 import Modal from "@material-ui/core/Modal"
 import { withStyles } from "@material-ui/core/styles"
-import Typography from "@material-ui/core/Typography"
 
 class MemberCommitteesModal extends PureComponent {
 
