@@ -40,7 +40,7 @@ class CommitteeAdmin extends PureComponent {
             <div className="dashboard-component card card-body border-light border rounded-2 p-3">
               <ul>
                 {committees.map(committee => (
-                  <li>
+                  <li key={committee.id}>
                     <Link to={`/committees/${committee.id}`}>
                       <span className="committee-name">{committee.name}</span>
                     </Link>
