@@ -20,24 +20,6 @@ class MemberLandingPage extends PureComponent {
     this.props.getMembers()
   }
 
-  componentWillReceiveProps() {
-    // this.props.getMembers()
-  }
-
-  // renderMembers = members => {
-  //   return members.map(member => (
-  //     <ul key={member.id}>
-  //       <li>
-  //         {member.firstName} {member.lastName}
-  //       </li>
-  //       <li>{member.streetAddress}</li>
-  //       <li>{member.postalCode}</li>
-  //       <li>{member.city}</li>
-  //       <hr />
-  //     </ul>
-  //   ))
-  // }
-
   handleSubmit = data => {
     this.props.createActivity(data)
   }
@@ -53,7 +35,7 @@ class MemberLandingPage extends PureComponent {
       return (
         <Container className="container-fluid mt-1">
           <Row className="justify-content-md-center">
-            <Col md="6" className="mt-5 mb-5">
+            <Col md="6" className="mb-5">
               <div className="jumbotron text-center">
                 <img
                   src={require(`../../lib/images/amsterdam-netball-logo.png`)}
@@ -81,7 +63,7 @@ class MemberLandingPage extends PureComponent {
                   </Button>
                 </Link>
 
-                <Link to="/events">
+                <Link to="/activities">
                   <Button className="btn btn-info btn-block  btn-blue-grey my-4 ">
                     Volunteer activities
                   </Button>

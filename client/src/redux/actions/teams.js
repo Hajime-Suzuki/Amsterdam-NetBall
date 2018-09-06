@@ -25,6 +25,7 @@ export const getTeams = () => (dispatch, getState) => {
     .get(`${baseUrl}/teams`)
     .set("Authorization", `${jwt}`)
     .then(result => {
+      console.log(result)
       dispatch(setTeams(result.body))
     })
     .catch(err => console.error(err))

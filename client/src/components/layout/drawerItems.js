@@ -95,6 +95,20 @@ const drawerItems = ({
         <ListItem
           button
           onClick={() => {
+            history.push('/teams')
+            handleDrawerClose()
+          }}
+        >
+          <ListItemIcon>
+            <Icon className="fa fa-users" />
+          </ListItemIcon>
+
+          <ListItemText primary="Teams overview" />
+        </ListItem>
+
+        <ListItem
+          button
+          onClick={() => {
             history.push('/activities')
             handleDrawerClose()
           }}
