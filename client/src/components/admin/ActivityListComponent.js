@@ -1,27 +1,35 @@
-import React, { Component } from 'react'
-import ActivityList from './ActivityList'
-import { connect } from 'react-redux'
+import React, { Component } from "react"
+import ActivityList from "./ActivityList"
+import { connect } from "react-redux"
 import {
   getActivitiesAndMembers,
   activitiesArraySelector,
   editAttendance
-} from '../../redux/actions/activities'
+} from "../../redux/actions/activities"
+import { Container, Row, Col, Input, Button } from "mdbreact"
 
 class AcivityListComponent extends Component {
   componentDidMount() {
     this.props.getActivitiesAndMembers()
   }
   changeAttendance = attendanceId => {
-    // console.log(attendanceId)
     this.props.editAttendance(attendanceId)
   }
   render() {
     return (
-      <ActivityList
-        activities={this.props.activities}
-        attendances={this.props.attendances}
-        changeAttendance={this.changeAttendance}
-      />
+      <Container className="container-fluid mt-1">
+        <Row className="justify-content-md-center">
+          <Col className="">
+            <h2 className=" text-center">Attendance per activity</h2>
+
+            <ActivityList
+              activities={this.props.activities}
+              attendances={this.props.attendances}
+              changeAttendance={this.changeAttendance}
+            />
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }
