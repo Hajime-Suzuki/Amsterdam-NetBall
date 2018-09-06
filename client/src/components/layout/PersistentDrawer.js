@@ -26,6 +26,7 @@ import Dashboard from '../admin/Dashboard'
 import ActivityList from '../activities/ActivityList'
 import drawerItems from './drawerItems'
 import drawerStyle from './styles/drawerStyle'
+import PrivateRoutes from '../../private/PrivateRoutes'
 
 class PersistentDrawer extends PureComponent {
   state = {
@@ -119,26 +120,42 @@ class PersistentDrawer extends PureComponent {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/logout" component={LogoutPage} />
               <Route exact path="/signup" component={SignupPage} />
-              <Route
+              <PrivateRoutes
                 exact
                 path="/members/list"
                 component={MemberListComponent}
               />
               <Route exact path="/events" component={EventsCalendar} />
-              <Route exact path="/activities" component={ActivityList} />
-              <Route exact path="/teams" component={TeamList} />
-              <Route exact path="/members/:id" component={MembersProfilePage} />
-              <Route exact path="/members" component={MemberLandingPage} />
-              <Route exact path="/committees/:id" component={CommitteePage} />
-              <Route exact path="/admin" component={Dashboard} />
+              <PrivateRoutes
+                exact
+                path="/activities"
+                component={ActivityList}
+              />
+              <PrivateRoutes exact path="/teams" component={TeamList} />
+              <PrivateRoutes
+                exact
+                path="/members/:id"
+                component={MembersProfilePage}
+              />
+              <PrivateRoutes
+                exact
+                path="/members"
+                component={MemberLandingPage}
+              />
+              <PrivateRoutes
+                exact
+                path="/committees/:id"
+                component={CommitteePage}
+              />
+              <AdminRoute exact path="/admin" component={Dashboard} />
               <Route exact path="/" render={() => <Redirect to="/home" />} />
             </Switch>
-            <Switch>
+            {/* <Switch>
               <AdminRoute
                 path="/admin/members"
                 component={MemberListComponent}
               />
-            </Switch>
+            </Switch> */}
             {/* <MemberLandingPage /> */}
             {/* <Typography>
               {"You think water moves fast? You should see ice."}

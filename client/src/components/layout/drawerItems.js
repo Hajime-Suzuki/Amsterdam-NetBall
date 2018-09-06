@@ -49,18 +49,20 @@ const drawerItems = ({
       </div>
       <Divider />
       <List>
-        <ListItem
-          button
-          onClick={() => {
-            history.push('/members')
-            handleDrawerClose()
-          }}
-        >
-          <ListItemIcon>
-            <Icon className="fa fa-home" />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
+        {currentUser && (
+          <ListItem
+            button
+            onClick={() => {
+              history.push('/members')
+              handleDrawerClose()
+            }}
+          >
+            <ListItemIcon>
+              <Icon className="fa fa-home" />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+        )}
 
         {currentUser && (
           <ListItem
@@ -92,33 +94,37 @@ const drawerItems = ({
           </ListItem>
         )}
 
-        <ListItem
-          button
-          onClick={() => {
-            history.push('/teams')
-            handleDrawerClose()
-          }}
-        >
-          <ListItemIcon>
-            <Icon className="fa fa-users" />
-          </ListItemIcon>
+        {currentUser && (
+          <ListItem
+            button
+            onClick={() => {
+              history.push('/teams')
+              handleDrawerClose()
+            }}
+          >
+            <ListItemIcon>
+              <Icon className="fa fa-users" />
+            </ListItemIcon>
 
-          <ListItemText primary="Teams overview" />
-        </ListItem>
+            <ListItemText primary="Teams overview" />
+          </ListItem>
+        )}
 
-        <ListItem
-          button
-          onClick={() => {
-            history.push('/activities')
-            handleDrawerClose()
-          }}
-        >
-          <ListItemIcon>
-            <Icon className="fa fa-calendar" />
-          </ListItemIcon>
+        {currentUser && (
+          <ListItem
+            button
+            onClick={() => {
+              history.push('/activities')
+              handleDrawerClose()
+            }}
+          >
+            <ListItemIcon>
+              <Icon className="fa fa-calendar" />
+            </ListItemIcon>
 
-          <ListItemText primary="Volunteer activities" />
-        </ListItem>
+            <ListItemText primary="Volunteer activities" />
+          </ListItem>
+        )}
 
         <ListItem
           button
@@ -153,22 +159,55 @@ const drawerItems = ({
             </div>
           )}
         <Divider />
+        {currentUser ? (
+          <ListItem
+            button
+            onClick={() => {
+              history.push('/logout')
+              handleDrawerClose()
+            }}
+          >
+            <ListItemIcon>
+              <Icon className="fa fa-sign-out" />
+            </ListItemIcon>
+            <ListItemText primary="Log out" />
+          </ListItem>
+        ) : (
+          <ListItem
+            button
+            onClick={() => {
+              history.push('/signup')
+              handleDrawerClose()
+            }}
+          >
+            <ListItemIcon>
+              <Icon className="fas fa-user-plus" />
+            </ListItemIcon>
+            <ListItemText primary="Sign up" />
+          </ListItem>
+        )}
+      </List>
+      {!currentUser && (
         <ListItem
           button
           onClick={() => {
-            history.push('/logout')
+            history.push(`/home`)
             handleDrawerClose()
           }}
         >
           <ListItemIcon>
-            <Icon className="fa fa-sign-out" />
+            <Icon className="fas fa-user-plus" />
           </ListItemIcon>
-          <ListItemText primary="Log out" />
+          <ListItemText primary="Log in" />
         </ListItem>
-      </List>
+      )}
       <Divider />
     </Drawer>
   )
 }
+
+// const mapStateToProps = state => ({
+//   currentUser: state.currentUser
+// })
 
 export default drawerItems
