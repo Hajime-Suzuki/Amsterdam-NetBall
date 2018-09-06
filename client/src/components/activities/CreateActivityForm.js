@@ -22,13 +22,8 @@ export default class CreateActivityForm extends PureComponent {
       startTime: this.state.startTime,
       endTime: this.state.endTime
     })
+    this.setState({})
     this.setState({
-      name: "",
-      location: "",
-      address: "",
-      description: "",
-      startTime: "",
-      endTime: "",
       submitButton: true
     })
   }

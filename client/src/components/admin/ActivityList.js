@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 const CustomCheckbox = styled(Checkbox)`
   &&& {
-    color: ${({ checkbox_color }) => checkbox_color};
+    color: ${({ c }) => c};
   }
 `
 
