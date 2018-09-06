@@ -1,18 +1,13 @@
-<<<<<<< HEAD
 import React from "react"
 import { Link } from "react-router-dom"
 import { Typography, Icon, Checkbox } from "@material-ui/core"
-=======
-import React from 'react'
 import Paper from '@material-ui/core/Paper'
-import { Typography, Icon, Checkbox } from '@material-ui/core'
 import styled from 'styled-components'
 import { StyledNameLink } from '../members/MembersListComponent'
 
 const ActivityCard = styled(Paper)`
   margin: 2em 0;
 `
->>>>>>> 66481f43c652b5b7cb21cb9764236355cb5240d9
 
 const formatTiem = time => {
   return time.replace(/(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2}).*/, "$4 $3/$2")
