@@ -1,10 +1,15 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { Container, Row, Col, Input, Button } from "mdbreact"
-import { getCommittee, deleteMessage, editMessage, addMessage } from "../../redux/actions/committees"
-import AddMessageForm from './AddMessageForm.js'
-import './CommitteePage.css'
-import dateFormat from 'dateformat'
+import {
+  getCommittee,
+  deleteMessage,
+  editMessage,
+  addMessage
+} from "../../redux/actions/committees"
+import AddMessageForm from "./AddMessageForm.js"
+import "./CommitteePage.css"
+import dateFormat from "dateformat"
 // import { userId } from "../../jwt"
 
 class CommitteePage extends PureComponent {
@@ -27,14 +32,20 @@ class CommitteePage extends PureComponent {
   }
 
   renderMessages = (messages, pendingEdit) => {
-
     const _this = this
-    console.log('pendingEdit', pendingEdit)
+    console.log("pendingEdit", pendingEdit)
     return messages.map(message => {
       if (pendingEdit === message.id) {
-        return <AddMessageForm key={message.id} committeeId={this.props.match.params.id} submitFunction={this.editTheMessage} initialValues={message} messageId={message.id} />
-      }
-      else {
+        return (
+          <AddMessageForm
+            key={message.id}
+            committeeId={this.props.match.params.id}
+            submitFunction={this.editTheMessage}
+            initialValues={message}
+            messageId={message.id}
+          />
+        )
+      } else {
         const messageDate = new Date(message.created_at)
         const correctedMessageDate = messageDate.setHours(messageDate.getHours()+4)
         const messageTimestamp = dateFormat(correctedMessageDate, "m/d/yy H:MM")
@@ -64,13 +75,17 @@ class CommitteePage extends PureComponent {
 
     return (
       <Container>
-        <div id={'committee-container'}>
+        <div id={"committee-container"}>
           <h1>{committee.name}</h1>
           <div>
-            {committee.messages && this.renderMessages(committee.messages, this.state.pendingEdit) }
+            {committee.messages &&
+              this.renderMessages(committee.messages, this.state.pendingEdit)}
           </div>
         </div>
-        <AddMessageForm committeeId={this.props.match.params.id} submitFunction={addMessage} />
+        <AddMessageForm
+          committeeId={this.props.match.params.id}
+          submitFunction={addMessage}
+        />
       </Container>
     )
   }

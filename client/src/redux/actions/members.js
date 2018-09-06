@@ -9,6 +9,7 @@ export const GET_MEMBERS = "GET_MEMBERS"
 export const GET_MEMBER = "GET_MEMBER"
 export const FETCHING_MEMBERS = "FETCHING_MEMBERS"
 export const FILTER_MEMBERS = "FILTER_MEMBERS"
+export const EDIT_MEMBER = "EDIT_MEMBER"
 
 const position = new schema.Entity("positions")
 const acitivity = new schema.Entity("activities")
@@ -25,6 +26,30 @@ const filterAndSetMembers = data => ({
   type: FILTER_MEMBERS,
   payload: normalize(data, [member])
 })
+
+export const editProfile = (updates, memberId) => (dispatch, getState) => {
+  const state = getState()
+  if (!state.currentUser) return null
+  const jwt = state.currentUser.token
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  console.log("updates", updates)
+  console.log("member id", memberId)
+
+  request
+    .put(`${baseUrl}/members/${memberId}`)
+    .set("Authorization", `${jwt}`)
+    .send(updates)
+    .then(response => {
+      console.log(response)
+      dispatch({
+        type: EDIT_MEMBER,
+        payload: response.body
+      })
+    })
+    .catch(err => alert(err))
+}
 
 const setMember = member => ({
   type: GET_MEMBER,
